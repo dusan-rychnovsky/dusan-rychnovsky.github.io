@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document properties and packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[a4paper,11pt,final]{memoir}
+\documentclass[a4paper,11pt,final,oneside]{memoir}
 
 % misc
 \renewcommand{\familydefault}{bch}	% font
@@ -43,10 +43,13 @@
 
 % frame setup (flowfram package)
 % left frame
-\newflowframe{0.24\textwidth}{\textheight}{0pt}{0pt}[left]
-	\newlength{\LeftMainSep}
-	\setlength{\LeftMainSep}{0.24\textwidth}
-	\addtolength{\LeftMainSep}{2\columnsep}
+\newdynamicframe{0.24\textwidth}{\textheight}{0pt}{0pt}[left]
+    \newlength{\LeftMainSep}
+    \setlength{\LeftMainSep}{0.24\textwidth}
+    \addtolength{\LeftMainSep}{2\columnsep}
+
+\setdynamicframe*{left}{clear}
+
 % right frame
 \newflowframe{0.7\textwidth}{\textheight}{\LeftMainSep}{0pt}[main01]
 
@@ -57,7 +60,7 @@
 	\draw[loosely dotted,color=RoyalBlue,line width=1.5pt,yshift=-#1] 
 	(0,0) -- (0pt,#3);}%
 \hfill\mbox{}}
-\insertvrule{flow}{1}{flow}{2}
+\insertvrule*{dynamic}{left}{flow}{main01}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -85,11 +88,10 @@
 
 % Left frame
 %%%%%%%%%%%%%%%%%%%%
-\begin{figure}
-	\hfill
-	\includegraphics[width=0.7\columnwidth]{photo.jpg}
-	\vspace{-7.5cm}
-\end{figure}
+\begin{dynamiccontents*}{left}
+	{\hfill
+		\includegraphics[width=0.7\linewidth]{photo.jpg}
+	}
 
 \begin{flushright}\small
 	Dušan Rychnovský \\
@@ -97,7 +99,7 @@
 	\url{www.dusanrychnovsky.cz} \\
 	(+420) 705 224 922
 \end{flushright}\normalsize
-\framebreak
+\end{dynamiccontents*}
 
 
 % Right frame
