@@ -1,0 +1,27 @@
+body {
+  background-color: rgb(230, 230, 230);
+}
+
+div#content {
+  width: 1024px;
+  margin: 0px auto;
+  margin-top: 100px;
+}
+
+img#photo {
+  width: 280px;
+  float: left;
+}
+
+p {
+  font-size: 18px;
+  line-height: 150%;
+  text-align: justify;
+  width: 700px;
+  margin: 8px 0px 8px 0px;
+  float: right;
+}
+
+a {
+  color: black;
+}
