@@ -2,6 +2,10 @@ body {
   background-color: rgb(230, 230, 230);
 }
 
+a {
+  color: black;
+}
+
 .clear {
 	margin: 0px;
 	padding: 0px;
@@ -34,9 +38,6 @@ div#index img#photo {
   float: left;
 }
 
-div#index a {
-  color: black;
-}
 
 /* BOOKS */
 
@@ -59,10 +60,18 @@ div#books div.recommendation {
   margin: 30px 0px 30px 0px;
 }
 
-div.recommendation h2, div.recommendation p {
+div.recommendation h2, div.recommendation p, div.recommendation ul {
   width: 850px;
   margin: 0px 0px 10px 0px;
   float: right;
+}
+
+div.recommendation ul {
+  margin-top: -5px;
+}
+
+div.recommendation li {
+  margin: 0px 0px 5px 25px;
 }
 
 div.recommendation img {
