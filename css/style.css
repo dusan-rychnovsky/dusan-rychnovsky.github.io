@@ -185,13 +185,14 @@ body.offcanvas-open .site-wrap {
   right: 20px;
   text-transform: uppercase;
   letter-spacing: .1em;
-  font-size: 13px;
+  font-size: 15px;
   top: 20px;
-  color: #000;
+  color: #F75B74;
+  font-weight: bold;
 }
 
 .offcanvas-toggle:hover {
-  color: #000;
+  border-color: #f96982;
   opacity: .7;
 }
 
