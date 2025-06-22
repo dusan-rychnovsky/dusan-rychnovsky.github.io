@@ -3,7 +3,7 @@ body {
   font-weight: 400;
   font-size: 15px;
   line-height: 1.8;
-  color: #b3b3b3;
+  color: #9E9E9E;
   background: #fff;
 }
 
@@ -22,9 +22,14 @@ a:hover {
   text-decoration: none;
 }
 
-h1, h2, h3 {
+h1, h3 {
   color: #000;
   font-family: "Playfair Display", times, serif;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
 .btn, .form-control {
