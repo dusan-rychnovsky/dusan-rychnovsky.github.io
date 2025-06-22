@@ -1,0 +1,104 @@
+body {
+	background-color: LightGray;
+	font-family:Georgia,Utopia,Charter,serif;
+}
+
+div#top {
+	border-bottom: 3px black dotted;
+	text-align: right;
+	padding: 0px 3px 3px 0px;
+}
+
+div#container {
+	background-color: White;
+	border: 3px black solid;
+	margin: 0px auto;
+	margin-top: 20px;
+	padding: 40px;
+	width: 1050px;
+}
+
+div#left-column {
+	text-align: right;
+	padding-right: 25px;
+	width: 201px;
+	height: 100%;
+	float: left;
+}
+
+div#left-column div {
+	font-size: 120%;
+	margin-top: 10px;
+}
+
+img#photo {
+	width: 180px;
+	height: 232px;
+}
+
+div#right-column {
+	border-left: 3px rgb(40, 80, 200) dotted;
+	padding-left: 20px;
+	float: right;
+	width: 780px;
+}
+
+h1 {
+	font-size: 300%;
+	margin: 0px;
+	color: rgb(40, 80, 200);
+}
+
+h2 {
+	margin: 0px;
+}
+
+h3 {
+	color: rgb(40, 80, 200);
+    margin-top: 20px;
+	margin-bottom: 8px;
+}
+
+p, li {
+	font-size: 120%;
+	text-align: justify;
+	margin: 0px;
+	line-height: 150%;
+}
+
+ul {
+	padding: 0px;
+}
+
+li {
+	list-style-type: none;
+}
+
+em {
+	color: rgb(40, 80, 200);
+	font-style: normal;
+	font-weight: bold;
+}
+
+div.section {
+	margin-top: 30px;
+}
+
+.clear {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 0px;
+	clear: both;
+	float: none;
+}
+
+.top-gap {
+	margin-top: 10px;
+}
+
+p.technologies {
+	font-style: italic;
+        margin-top: 5px;
+}
+

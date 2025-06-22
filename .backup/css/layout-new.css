@@ -1,0 +1,92 @@
+body {
+  background-color: rgb(230, 230, 230);
+}
+
+a {
+  color: black;
+}
+
+.clear {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 0px;
+	clear: both;
+	float: none;
+}
+
+/* INDEX */
+
+div#index {
+  width: 1024px;
+  margin: 0px auto;
+  margin-top: 100px;
+}
+
+div#index p {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 18px;
+  line-height: 160%;
+  text-align: justify;
+  width: 700px;
+  margin: 0px 0px 15px 0px;
+  float: right;
+}
+
+div#index img#photo {
+  width: 280px;
+  float: left;
+}
+
+
+/* BOOKS */
+
+div#books {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  width: 1024px;
+  margin: 0px auto;
+  margin-top: 100px;
+}
+
+div#books h1 {
+  text-align: center;
+}
+
+div#books #intro {
+  margin: 30px 0px 30px 0px;
+}
+
+div#books div.recommendation {
+  margin: 30px 0px 30px 0px;
+}
+
+div.recommendation h2, div.recommendation p, div.recommendation ul {
+  width: 850px;
+  margin: 0px 0px 10px 0px;
+  float: right;
+}
+
+div.recommendation ul {
+  margin-top: -5px;
+}
+
+div.recommendation li {
+  margin: 0px 0px 5px 25px;
+}
+
+div.recommendation img {
+  width: 150px;
+  margin-left: 5px;
+  float: left;
+}
+
+div#books h2 {
+  font-size: 20px;
+}
+
+div#books p {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 16px;
+  line-height: 160%;
+  text-align: justify;
+}
