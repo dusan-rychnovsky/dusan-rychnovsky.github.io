@@ -1,0 +1,181 @@
+template: ../template.html
+title: Čaj
+crumbs:
+  - label: Domů
+    url: /
+  - label: Zdroje
+    url: '#'
+  - label: Čaj
+    url: '#'
+sections:
+  - title: Mei Leaf
+    labels: ENG. YouTube.
+    img: img/meileaf.jpg
+    paragraphs:
+      - '*Don Mei* je obchodník s čajem z Londýna, který toho pro rozvoj čajové komunity udělal tolik, co málokdo. Jeho YouTube kanál je bohatým zdrojem informací o čaji, jeho zpracování, původu a přípravě. Od videí pro úplné začátečníky, po detailní informace o pokročilých tématech.'
+    links:
+      - label: Web
+        text: Mei Leaf - Eshop
+        url: https://meileaf.com/
+      - label: YouTube
+        text: Mei Leaf - YouTube
+        url: https://www.youtube.com/user/meileaf
+  - title: Meetea
+    labels: CZ. Časopis. Kurzy.
+    img: img/meetea.png
+    paragraphs:
+      - '*Tomáš*, *Jakub* a *Kryštof*. A jejich čajová oáza v centru Prahy. Čajovníci z Meetea jsou možná největší kapacitou na čínský/vietnamský čaj v České republice.'
+    subsections:
+      - title: Čajové studio ve Vodičkové
+        text: Místo, kde se můžete kdykoliv zastavit, dát si čaj, odpočinout si a dozvědět se o čaji něco nového.
+      - title: Čajové předplatné
+        text: Každý měsíc tři zajímavé vzorky čaje spolu s tištěnou brožurkou o jejich historii a zpracování.
+      - title: Kurzy na chatě na jihu Čech
+        text: Několkadenní intenzivní workshopy na různá čajová témata v malebné přírodě jižních Čech. Ideální příležitost se dozvědět spoustu informací o čaji, poznat nové přátele se stejnou zálibou a odpočinout si na chalupě s krásnou zahradou i okolím.
+    links:
+      - label: Web
+        text: Meetea - Eshop
+        url: https://www.meetea.cz/
+      - label: Časopis
+        text: Meetea - Čajové předplatné
+        url: https://www.meetea.cz/cajove-predplatne
+  - title: Global Tea Hut
+    labels: ENG. Časopis. YouTube. Podcast.
+    img: img/global-tea-hut.png
+    paragraphs:
+      - Global Tea Hut je nezisková organizace, která se věnuje prohlubování a šíření moudrosti a praxe čaje jako cesty k sebepěstování a harmonii. Zaměřují se na čaj nejen jako nápoj, ale i jako nástroj pro meditaci, uvědomění a spojení s přírodou a sebou samým. Často se odkazují na východní filozofie jako je buddhismus a taoismus.
+      - Jádro veškeré činnosti tvoří učení Wu Dea (vlastním jménem Aaron Fisher), bývalého zenového mnicha, který zasvětil svůj život studiu čaje a jeho duchovnímu významu.</p>
+      - 'Jejich volně dostupné vzdělávací materiály jsou opravdu bohaté:'
+    subsections:
+      - title: Časopis “Tea & Tao Magazine”
+        text: Studnice vědomostí o ryze praktických i duchovních a filozofických aspektech čaje. Starší čísla jsou zdarma ke stažení ve formátu PDF na webu Global Tea Hut.
+      - title: YouTube kanál
+        text: .
+      - title: Podcast “Life Of Tea”
+        text: Orientovaný na spirituální stránku čaje. Obsahuje detailní rozbory na témata jako jsou historie čaje, zenový buddhismus, atd.
+    links:
+      - label: Web
+        text: Global Tea Hut
+        url: https://globalteahut.org/
+      - label: Časopis
+        text: Global Tea Hut - Magazine
+        url: https://globalteahut.org/pages/magazine
+      - label: YouTube
+        text: Global Tea Hut - YouTube
+        url: https://www.youtube.com/@globalteahut
+      - label: Spotify
+        text: Life of Tea Podcast
+        url: https://open.spotify.com/show/5P4T2Y0K7G4R5L2Q3P7D9D
+  - title: Tekutá krajina
+    labels: CZ. Podcast.
+    img: img/tekutakrajina.png
+    paragraphs:
+      - 'Podcast mého kamaráda *Petra Soukupa ml.*, který je primárně zaměřený na duchovní rozvoj a objevování, ale zároveň obsahuje spoustu rozhovorů s osobnostmi čaje a keramiky.'
+    links:
+      - label: YouTube
+        text: Tekutá Krajina - Youtube
+        url: https://www.youtube.com/channel/UCE7XhE9Wzi9YuRlNeTKyAkg
+      - label: Spotify
+        text: Tekutá Krajina - Podcast
+        url: https://open.spotify.com/show/6eurePyBZNBbTOL6UXBNSQ?si=ffe078f880fe4ab5
+    favourites:
+      - text: Keramika, Čaj a lidskost… Václav Dušek
+        url: https://open.spotify.com/episode/2ZH5rZ7WLXVdhluLZzqrJ1?si=a1df28d1719c440f
+      - text: Čajová setkání a rituály s Tomášem Rajnochem
+        url: https://open.spotify.com/episode/6ALWltYGZ4CY8jwQJA2xwe?si=f2c42c5f18634fb0
+      - text: Čajovat jak Jaroslav Rejcha
+        url: https://open.spotify.com/episode/0ou5SV1AMwHaJ4V59LVTD0?si=620570be0574415f
+      - text: Nad čajem s čajem o čaji s Filipem Rychetským
+        url: https://open.spotify.com/episode/3SgSg9J1GpB6KX3uSviol3?si=087a58f780d94b77
+      - text: O povaze toulek s Filipem Rabochem
+        url: https://open.spotify.com/episode/4ZFGybjq0XWanldvgrMGTC?si=4fe463768b5a4f27
+      - text: Nepálský speciál
+        url: https://open.spotify.com/episode/2z0bIBNePt93wJ7fBK0mEo?si=paruVvZ2SbW0upYzRtteCg
+  - title: Dokumentární tvorba Petra Soukupa ml.
+    labels: CZ. Film.
+    img: img/nejsmetadynadovoleny.jpg
+    paragraphs:
+      - 'Můj kamarád a dokumentarista *Petr Soukup ml.* podnikl spolu s Jakubem a Kryštofem z Meetea několik výprav za čajem do Vietnamu a Laosu. Výsledkem jsou dva dokumentární filmy, které poutavým stylem přibližují život a kulturu obyvatel čajových hor, pěstování a výrobu čaje a práci obchodníků na výpravách za čajem.'
+    links:
+      - label: Film
+        text: Nejsme tady na dovolený!
+        url: https://youtu.be/JNTz0pIlwU0?si=hSGE3shCD3oYiu7l
+      - label: Film
+        text: Děj se vůle Boží!
+        url: '#'
+  - title: Asie | Linda Mannelová
+    labels: CZ. Podcast.
+    img: img/asielindamannelova.png
+    paragraphs:
+      - 'Podcast o čaji a zemích dálného východu. Formou rozhovorů *Lindy Mannelové* s *Hubertem Hátle*, majitelem Dobré čajovny na Václavském náměstí v Praze. Pan Hátle je velkým odborníkem na čaj a ve svém vyprávění jde hodně do hloubky.'
+    links:
+      - label: YouTube
+        text: Asie | Linda Mannelová - Youtube
+        url: https://www.youtube.com/channel/UCE7XhE9Wzi9YuRlNeTKyAkg
+      - label: Spotify
+        text: Asie | Linda Mannelová - Podcast
+        url: https://open.spotify.com/show/2fx35F2IcZ49GDKKrbgnwA?si=5ba73eaa80bd49a0
+    favourites: 
+      - text: Indie a Darjeeling
+        url: https://open.spotify.com/episode/4dQ6Irw48ICkDlrlH8ah1A?si=tFuQFG3iQpGfNHaiDgDLfA
+      - text: 'Čína: Provincie Če-ťiang a Dračí studna'
+        url: https://open.spotify.com/episode/091oUpx9DWNtGB0xa0fYHI?si=e1ca370ebf834d59
+      - text: 'Čína: Provincie Ťiang-su a Modrozelené spirálky jara od jezera Tai'
+        url: https://open.spotify.com/episode/0pAUfLZyYq9DnI9CaSLLX4?si=LsMNeHrLSieSFw6umL5Yyw
+  - title: S čajem o čaji
+    labels: CZ. Podcast.
+    img: img/scajemocaji.png
+    paragraphs:
+      - 'Podcast mého kamaráda *Filipa Rychetského*, formou rozhovorů s osobnostmi (nejen) české čajové scény.'
+    links:
+      - label: YouTube
+        text: S čajem o čaji - Youtube
+        url: https://www.youtube.com/@Scajemocaji
+      - label: Spotify
+        text: S čajem o čaji - Podcast
+        url: https://open.spotify.com/show/2MJhwv3eSvAeSaKZlTCQxM?si=6c87bb29fe834e75
+    favourites:
+      - text: Alex Zeryk z Yunnancraftu
+        url: https://open.spotify.com/episode/6UddwYJ7prsEwqirWnRHRJ?si=PO8MAxP0SiytID7urXlnfQ
+      - text: O puerhu od A do Z s Alexem
+        url: https://open.spotify.com/episode/5B7gsf2KLrhRW3iPI43HSN?si=c04a93229a8342d1
+      - text: Petr Soukup ml. a čajový dokument
+        url: https://open.spotify.com/episode/2kHpOWJYc7BY7JyKMHoluO?si=5e6d45265baa4a3f
+      - text: Michal Lacina a liubao
+        url: https://open.spotify.com/episode/1otlJvYk6JBsk34ZYG1qAo?si=a-rz3PuPT8upH9DTagITDw
+  - title: Putování čajového prince
+    labels: CZ. Podcast.
+    img: img/putovanicajovehoprince.png
+    paragraphs:
+      - 'Starší podcast *Lukáše Vídeňského*, který nás formou zajímavých rozhovorů přenese zpět do začátků české čajové scény. Je velmi zajímavé vrátit se v čase a poslechnout si, jak vypadaly začátky mnoha dnes již známých a zaběhnutých osobností.'
+    links:
+      - label: YouTube
+        text: Putování čajového prince
+        url: https://youtube.com/playlist?list=PLpkx-YAB3lw3ziX8Vgn1aZfjHYMOT8Gvt&si=eoO0S2pBp7premEB
+    favourites:
+      - text: Čajový altán Plující oblaka, Ivana Hladká
+        url: https://youtu.be/nMzQAHVmxt0?si=GKT7N0D822vNVdkN
+      - text: Vojta Mistr
+        url: https://youtu.be/GkOzHdHpgw4?si=ts5ZyPgSphc-dBBJ
+      - text: Wu De
+        url: https://youtu.be/Q3XyPgRn3xQ?si=_tL7ObBo0vzXVnno
+      - text: Petr Sič
+        url: https://youtu.be/jMJ4IxWJ9LA?si=ZsYnQK0FBk5uSvBD
+      - text: Tomáš Sur Pukšic
+        url: https://youtu.be/Q_sj2YI5wfk?si=dQl0M6Ff7wUgsZIw
+      - text: Jakub Zeman
+        url: https://youtu.be/twMhIHRrE-o?si=B2xVmLOUEYQgpQ8Y
+      - text: Čajomír fest 2012
+        url: https://youtu.be/BQdhplU2nqU?si=Rotr1uzx7cTLe28L
+      - text: Alenka
+        url: https://youtu.be/0yvmoVT1yW0?si=Oh32-VWbI0DAqGLI
+  - title: 'Lisa See: Čajová dívka z Kolibříkové ulice'
+    labels: CZ. Kniha.
+    img: img/cajova-divka-z-kolibrikove-ulice.jpg
+    paragraphs:
+      - Nenáročný romantický příběh s neskutečně věrohodným a detailně propracovaným pozadím Jihočínských čajových hor, života a tradic tamních kmenů a čajové kultury.
+      - Yunnan. Thajsko. Zlatý trojúhelník. Historie a zpracování čaje Pu-erh. Nannuo. Menghai. Yiwu. Čajová koňská stezka. Technika přípravy a degustace čaje.
+    links:
+      - label: Kniha
+        text: Databazeknih.cz
+        url: https://www.databazeknih.cz/knihy/cajova-divka-z-kolibrikove-ulice-6260

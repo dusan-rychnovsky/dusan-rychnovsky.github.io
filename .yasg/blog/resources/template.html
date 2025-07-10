@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mé oblíbené zdroje informací na téma: [title]</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin=" crossorigin="anonymous">
+  <link href="../css/resources.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <nav aria-label="breadcrumb" class="py-2 px-3">
+    <div class="container">
+      <ol class="breadcrumb mb-0">
+      [for crumb in crumbs]
+        <li class="breadcrumb-item"><a href="[crumb.url]">[crumb.label]</a></li>
+      [endfor crumb]
+      <!-- TODO: support active crumb
+        <li class="breadcrumb-item active" aria-current="page">Go</li>
+      -->
+      </ol>
+    </div>
+  </nav>
+  <header class="py-4 bg-light mb-4">
+    <div class="container">
+      <div class="header-container">
+        <p class="header-subtitle">Mé oblíbené zdroje informací na téma:</p>
+        <h1 class="main-title">[title]</h1>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <div class="row">
+      <div class="col-12">
+      [for section in sections]
+        <section class="source-item">
+          <div class="row align-items-center">
+            <div class="col-md-4 text-center">
+              <img src="[section.img]" class="img-fluid rounded source-image" alt="[section.title]">
+            </div>
+            <div class="col-md-8">
+              <h2>[section.title]</h2>
+              <p>[section.labels]</p>
+              [for paragraph in section.paragraphs]
+                <p>[paragraph]</p>
+              [endfor paragraph]
+              [if exists section.subsections]
+                <ul>
+                [for subsection in section.subsections]
+                  <li class="mb-1">
+                    <em>[subsection.title]</em> - [subsection.text]
+                  </li>
+                [endfor subsection]
+                </ul>
+              [endif]
+              <h3>Odkazy:</h3>
+              <ul>
+                [for link in section.links]
+                  <li>
+                    [link.label]:
+                    <a href="[link.url]" class="resource-link" target="_blank" rel="noopener">
+                      [link.text]
+                    </a>
+                  </li>
+                [endfor link]
+              </ul>
+              [if exists section.favourites]
+                <h3>Oblíbené epizody:</h3>
+                <ul>
+                [for favourite in section.favourites]
+                  <li>
+                    <a href="[favourite.url]" class="resource-link" target="_blank" rel="noopener">
+                      [favourite.text]
+                    </a>
+                  </li>
+                [endfor favourite]
+                </ul>
+              [endif]
+            </div>
+          </div>
+        </section>
+      [endfor section]
+      </div>
+    </div>
+  </main>
+  <footer class="py-4 bg-light mt-4">
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
