@@ -1,0 +1,88 @@
+template: ../template.html
+title: Vaření
+crumbs:
+  - label: Domů
+    url: /
+  - label: Zdroje
+    url: '#'
+  - label: Vaření
+    url: '#'
+sections:
+  - title: 'Tamar Adler - An Everlasting Meal'
+    labels: ENG. Kniha.
+    img: img/an-everlasting-meal.jpg
+    paragraphs:
+      - |
+        Má nejoblíbenější kniha o vaření, která zcela ovlivnila způsob, jak o něm přemýšlím.
+        Nejedná se o soubor receptů, ale o filozofickou úvahu o tom, jak vařit jednoduše,
+        hospodárně (finančně i časově) a beze zbytků.
+        *Tamar Adler* popisuje vaření jako nepřetržitý proces, který je součástí každodenního života,
+        kdy neustále využíváme to, co nám zbylo od minule, spolu se surovinami, které máme zrovna k dispozici.
+    links:
+      - label: Kniha
+        text: Amazon.com
+        url: https://www.amazon.com/Everlasting-Meal-Cooking-Economy-Grace/dp/1439181888
+  - title: Mary's Nest
+    labels: ENG. YouTube. Knihy. Blog.
+    img: img/marys-nest.jpg
+    paragraphs:
+      - |
+        *Mary Bryant Shrader* se věnuje popularizaci tradičních postupů při vaření,
+        a to zejména (ale zdaleka ne jen) vývarům, kváskovému pečivu a kvašení zeleniny.
+        Známý je především její YouTube kanál, ale je také autorkou (prozatím) dvou knih,
+        v nichž svůj přístup shrnuje.
+    links:
+      - label: YouTube
+        text: Mary's Nest
+        url: https://www.youtube.com/c/MarysNest
+      - label: Kniha
+        text: The Modern Pioneer Cookbook
+        url: https://www.amazon.com/Modern-Pioneer-Cookbook-Nourishing-Traditional/dp/0744077427
+      - label: Kniha
+        text: The Modern Pioneer Pantry
+        url: https://www.amazon.com/Modern-Pioneer-Pantry-Complete-Preserving/dp/0593965116
+      - label: Blog
+        text: Mary's Nest
+        url: https://marysnest.com/
+  - title: Pro Home Cooks
+    labels: ENG. YouTube.
+    img: img/pro-home-cooks.jpg
+    paragraphs:
+      - |
+        *Mike Greenfield* na svém YouTube kanále ukazuje, že v domácích podmínkách můžeme vařit
+        chutně a zdravě, a zároveň levně a jednoduše. Neuznává recepty a přesné instrukce. Místo toho
+        klade důraz na důkladné pochopení kulinářských technik a principů a schopnost improvizace.
+        Mezi jeho nejlepší materiál patří videa o kváskovém pečivu, kvašení zeleniny, asijské kuchyni,
+        rychlých a jednoduchých večeřích.
+    links:
+      - label: YouTube
+        text: Pro Home Cooks
+        url: https://www.youtube.com/c/ProHomeCooks
+  - title: (Cook Well w/) Ethan Chlebowski
+    labels: ENG. YouTube.
+    img: img/ethan-chlebowski.jpg
+    paragraphs:
+      - |
+        Kanál *Ethana Chlebowského* a jeho přístup k vaření je hodně podobný Pro Home Cooks.
+        Zdravě, chutně, jednoduše, efektivně. Ethanův styl je ale hodně precizní a strukturovaný.
+        Na jeho YouTube je k dispozici nespočet užitečných videí, ať už konkretní recepty
+        všech možných stylů nebo detailní informace o surovinách a kulinářských technikách.
+    links:
+      - label: YouTube
+        text: Ethan Chlebowski
+        url: https://www.youtube.com/@EthanChlebowski
+      - label: YouTube
+        text: Cook Well w/ Ethan Chlebowski
+        url: https://www.youtube.com/@CookWellCo
+  - title: Farmhouse on Boone
+    labels: ENG. YouTube.
+    img: img/farmhouse-on-boone.jpg
+    paragraphs:
+      - TODO
+    links:
+      - label: YouTube
+        text: Farmhouse on Boone
+        url: https://www.youtube.com/c/FarmhouseonBoone
+      - label: Blog
+        text: Farmhouseonboone.com
+        url: https://farmhouseonboone.com/
