@@ -80,6 +80,87 @@ function A9(fun, a, b, c, d, e, f, g, h, i) {
 console.warn('Compiled in DEV mode. Follow the advice at https://elm-lang.org/0.19.1/optimize for better performance and smaller assets.');
 
 
+var _List_Nil_UNUSED = { $: 0 };
+var _List_Nil = { $: '[]' };
+
+function _List_Cons_UNUSED(hd, tl) { return { $: 1, a: hd, b: tl }; }
+function _List_Cons(hd, tl) { return { $: '::', a: hd, b: tl }; }
+
+
+var _List_cons = F2(_List_Cons);
+
+function _List_fromArray(arr)
+{
+	var out = _List_Nil;
+	for (var i = arr.length; i--; )
+	{
+		out = _List_Cons(arr[i], out);
+	}
+	return out;
+}
+
+function _List_toArray(xs)
+{
+	for (var out = []; xs.b; xs = xs.b) // WHILE_CONS
+	{
+		out.push(xs.a);
+	}
+	return out;
+}
+
+var _List_map2 = F3(function(f, xs, ys)
+{
+	for (var arr = []; xs.b && ys.b; xs = xs.b, ys = ys.b) // WHILE_CONSES
+	{
+		arr.push(A2(f, xs.a, ys.a));
+	}
+	return _List_fromArray(arr);
+});
+
+var _List_map3 = F4(function(f, xs, ys, zs)
+{
+	for (var arr = []; xs.b && ys.b && zs.b; xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
+	{
+		arr.push(A3(f, xs.a, ys.a, zs.a));
+	}
+	return _List_fromArray(arr);
+});
+
+var _List_map4 = F5(function(f, ws, xs, ys, zs)
+{
+	for (var arr = []; ws.b && xs.b && ys.b && zs.b; ws = ws.b, xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
+	{
+		arr.push(A4(f, ws.a, xs.a, ys.a, zs.a));
+	}
+	return _List_fromArray(arr);
+});
+
+var _List_map5 = F6(function(f, vs, ws, xs, ys, zs)
+{
+	for (var arr = []; vs.b && ws.b && xs.b && ys.b && zs.b; vs = vs.b, ws = ws.b, xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
+	{
+		arr.push(A5(f, vs.a, ws.a, xs.a, ys.a, zs.a));
+	}
+	return _List_fromArray(arr);
+});
+
+var _List_sortBy = F2(function(f, xs)
+{
+	return _List_fromArray(_List_toArray(xs).sort(function(a, b) {
+		return _Utils_cmp(f(a), f(b));
+	}));
+});
+
+var _List_sortWith = F2(function(f, xs)
+{
+	return _List_fromArray(_List_toArray(xs).sort(function(a, b) {
+		var ord = A2(f, a, b);
+		return ord === $elm$core$Basics$EQ ? 0 : ord === $elm$core$Basics$LT ? -1 : 1;
+	}));
+});
+
+
+
 var _JsArray_empty = [];
 
 function _JsArray_singleton(value)
@@ -709,87 +790,6 @@ function _Utils_ap(xs, ys)
 	}
 	return root;
 }
-
-
-
-var _List_Nil_UNUSED = { $: 0 };
-var _List_Nil = { $: '[]' };
-
-function _List_Cons_UNUSED(hd, tl) { return { $: 1, a: hd, b: tl }; }
-function _List_Cons(hd, tl) { return { $: '::', a: hd, b: tl }; }
-
-
-var _List_cons = F2(_List_Cons);
-
-function _List_fromArray(arr)
-{
-	var out = _List_Nil;
-	for (var i = arr.length; i--; )
-	{
-		out = _List_Cons(arr[i], out);
-	}
-	return out;
-}
-
-function _List_toArray(xs)
-{
-	for (var out = []; xs.b; xs = xs.b) // WHILE_CONS
-	{
-		out.push(xs.a);
-	}
-	return out;
-}
-
-var _List_map2 = F3(function(f, xs, ys)
-{
-	for (var arr = []; xs.b && ys.b; xs = xs.b, ys = ys.b) // WHILE_CONSES
-	{
-		arr.push(A2(f, xs.a, ys.a));
-	}
-	return _List_fromArray(arr);
-});
-
-var _List_map3 = F4(function(f, xs, ys, zs)
-{
-	for (var arr = []; xs.b && ys.b && zs.b; xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
-	{
-		arr.push(A3(f, xs.a, ys.a, zs.a));
-	}
-	return _List_fromArray(arr);
-});
-
-var _List_map4 = F5(function(f, ws, xs, ys, zs)
-{
-	for (var arr = []; ws.b && xs.b && ys.b && zs.b; ws = ws.b, xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
-	{
-		arr.push(A4(f, ws.a, xs.a, ys.a, zs.a));
-	}
-	return _List_fromArray(arr);
-});
-
-var _List_map5 = F6(function(f, vs, ws, xs, ys, zs)
-{
-	for (var arr = []; vs.b && ws.b && xs.b && ys.b && zs.b; vs = vs.b, ws = ws.b, xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
-	{
-		arr.push(A5(f, vs.a, ws.a, xs.a, ys.a, zs.a));
-	}
-	return _List_fromArray(arr);
-});
-
-var _List_sortBy = F2(function(f, xs)
-{
-	return _List_fromArray(_List_toArray(xs).sort(function(a, b) {
-		return _Utils_cmp(f(a), f(b));
-	}));
-});
-
-var _List_sortWith = F2(function(f, xs)
-{
-	return _List_fromArray(_List_toArray(xs).sort(function(a, b) {
-		var ord = A2(f, a, b);
-		return ord === $elm$core$Basics$EQ ? 0 : ord === $elm$core$Basics$LT ? -1 : 1;
-	}));
-});
 
 
 
@@ -4370,6 +4370,8 @@ function _Browser_load(url)
 		}
 	}));
 }
+var $elm$core$Basics$EQ = {$: 'EQ'};
+var $elm$core$Basics$LT = {$: 'LT'};
 var $elm$core$List$cons = _List_cons;
 var $elm$core$Elm$JsArray$foldr = _JsArray_foldr;
 var $elm$core$Array$foldr = F3(
@@ -4447,10 +4449,7 @@ var $elm$core$Set$toList = function (_v0) {
 	var dict = _v0.a;
 	return $elm$core$Dict$keys(dict);
 };
-var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
-var $elm$core$Basics$LT = {$: 'LT'};
-var $author$project$Main$boardSize = 19;
 var $elm$core$Result$Err = function (a) {
 	return {$: 'Err', a: a};
 };
@@ -5159,29 +5158,55 @@ var $elm$core$Task$perform = F2(
 			$elm$core$Task$Perform(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
+var $elm$browser$Browser$element = _Browser_element;
+var $author$project$Main$boardSize = 19;
+var $author$project$Main$init = {
+	blackPlayer: '',
+	date: '',
+	goban: {moves: _List_Nil, size: $author$project$Main$boardSize},
+	name: '',
+	whitePlayer: ''
+};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $elm$browser$Browser$sandbox = function (impl) {
-	return _Browser_element(
-		{
-			init: function (_v0) {
-				return _Utils_Tuple2(impl.init, $elm$core$Platform$Cmd$none);
-			},
-			subscriptions: function (_v1) {
-				return $elm$core$Platform$Sub$none;
-			},
-			update: F2(
-				function (msg, model) {
-					return _Utils_Tuple2(
-						A2(impl.update, msg, model),
-						$elm$core$Platform$Cmd$none);
+var $elm$json$Json$Encode$object = function (pairs) {
+	return _Json_wrap(
+		A3(
+			$elm$core$List$foldl,
+			F2(
+				function (_v0, obj) {
+					var k = _v0.a;
+					var v = _v0.b;
+					return A3(_Json_addField, k, v, obj);
 				}),
-			view: impl.view
-		});
+			_Json_emptyObject(_Utils_Tuple0),
+			pairs));
 };
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $author$project$Main$downloadFile = _Platform_outgoingPort(
+	'downloadFile',
+	function ($) {
+		return $elm$json$Json$Encode$object(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(
+					'fileContent',
+					$elm$json$Json$Encode$string($.fileContent)),
+					_Utils_Tuple2(
+					'fileName',
+					$elm$json$Json$Encode$string($.fileName))
+				]));
+	});
 var $author$project$Main$gobanImgSize = 900;
+var $elm$core$List$isEmpty = function (xs) {
+	if (!xs.b) {
+		return true;
+	} else {
+		return false;
+	}
+};
 var $elm$core$Debug$log = _Debug_log;
 var $author$project$Goban$Black = {$: 'Black'};
 var $elm$core$List$head = function (list) {
@@ -5243,22 +5268,255 @@ var $author$project$Goban$posToCoords = F4(
 			$elm$core$Basics$round((y - $author$project$Goban$gobanImg.paddingPx) / step));
 		return _Utils_Tuple2(row, col);
 	});
+var $elm$core$List$takeReverse = F3(
+	function (n, list, kept) {
+		takeReverse:
+		while (true) {
+			if (n <= 0) {
+				return kept;
+			} else {
+				if (!list.b) {
+					return kept;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs,
+						$temp$kept = A2($elm$core$List$cons, x, kept);
+					n = $temp$n;
+					list = $temp$list;
+					kept = $temp$kept;
+					continue takeReverse;
+				}
+			}
+		}
+	});
+var $elm$core$List$takeTailRec = F2(
+	function (n, list) {
+		return $elm$core$List$reverse(
+			A3($elm$core$List$takeReverse, n, list, _List_Nil));
+	});
+var $elm$core$List$takeFast = F3(
+	function (ctr, n, list) {
+		if (n <= 0) {
+			return _List_Nil;
+		} else {
+			var _v0 = _Utils_Tuple2(n, list);
+			_v0$1:
+			while (true) {
+				_v0$5:
+				while (true) {
+					if (!_v0.b.b) {
+						return list;
+					} else {
+						if (_v0.b.b.b) {
+							switch (_v0.a) {
+								case 1:
+									break _v0$1;
+								case 2:
+									var _v2 = _v0.b;
+									var x = _v2.a;
+									var _v3 = _v2.b;
+									var y = _v3.a;
+									return _List_fromArray(
+										[x, y]);
+								case 3:
+									if (_v0.b.b.b.b) {
+										var _v4 = _v0.b;
+										var x = _v4.a;
+										var _v5 = _v4.b;
+										var y = _v5.a;
+										var _v6 = _v5.b;
+										var z = _v6.a;
+										return _List_fromArray(
+											[x, y, z]);
+									} else {
+										break _v0$5;
+									}
+								default:
+									if (_v0.b.b.b.b && _v0.b.b.b.b.b) {
+										var _v7 = _v0.b;
+										var x = _v7.a;
+										var _v8 = _v7.b;
+										var y = _v8.a;
+										var _v9 = _v8.b;
+										var z = _v9.a;
+										var _v10 = _v9.b;
+										var w = _v10.a;
+										var tl = _v10.b;
+										return (ctr > 1000) ? A2(
+											$elm$core$List$cons,
+											x,
+											A2(
+												$elm$core$List$cons,
+												y,
+												A2(
+													$elm$core$List$cons,
+													z,
+													A2(
+														$elm$core$List$cons,
+														w,
+														A2($elm$core$List$takeTailRec, n - 4, tl))))) : A2(
+											$elm$core$List$cons,
+											x,
+											A2(
+												$elm$core$List$cons,
+												y,
+												A2(
+													$elm$core$List$cons,
+													z,
+													A2(
+														$elm$core$List$cons,
+														w,
+														A3($elm$core$List$takeFast, ctr + 1, n - 4, tl)))));
+									} else {
+										break _v0$5;
+									}
+							}
+						} else {
+							if (_v0.a === 1) {
+								break _v0$1;
+							} else {
+								break _v0$5;
+							}
+						}
+					}
+				}
+				return list;
+			}
+			var _v1 = _v0.b;
+			var x = _v1.a;
+			return _List_fromArray(
+				[x]);
+		}
+	});
+var $elm$core$List$take = F2(
+	function (n, list) {
+		return A3($elm$core$List$takeFast, 0, n, list);
+	});
+var $elm$core$Char$fromCode = _Char_fromCode;
+var $elm$core$String$fromList = _String_fromList;
+var $author$project$Sgf$toSgf = function (model) {
+	var sgfChar = function (n) {
+		return $elm$core$Char$fromCode(
+			$elm$core$Char$toCode(
+				_Utils_chr('a')) + n);
+	};
+	var preamble = ';FF[4]GM[1]AP[gopad:0.1]GN[' + (model.name + (']DT[' + (model.date + (']PB[' + (model.blackPlayer + (']PW[' + (model.whitePlayer + (']SZ[' + ($elm$core$String$fromInt(model.goban.size) + ']KM[6.5]')))))))));
+	var coordsToSgf = function (_v1) {
+		var row = _v1.a;
+		var col = _v1.b;
+		return $elm$core$String$fromList(
+			_List_fromArray(
+				[
+					sgfChar(col),
+					sgfChar(row)
+				]));
+	};
+	var colorToSgf = function (color) {
+		if (color.$ === 'Black') {
+			return 'B';
+		} else {
+			return 'W';
+		}
+	};
+	var moveToSgf = function (move) {
+		return ';' + (colorToSgf(move.color) + ('[' + (coordsToSgf(move.coords) + ']')));
+	};
+	var movesSgf = A2(
+		$elm$core$String$join,
+		'\n',
+		A2($elm$core$List$map, moveToSgf, model.goban.moves));
+	var content = '(' + (preamble + ('\n' + (movesSgf + '\n)')));
+	return _Utils_Tuple2('game.sgf', content);
+};
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		var _v1 = msg.a;
-		var posX = _v1.a;
-		var posY = _v1.b;
-		var coords = A4($author$project$Goban$posToCoords, model.goban, posX, posY, $author$project$Main$gobanImgSize);
-		var newGoban = A2($author$project$Goban$placeStone, model.goban, coords);
-		var newModel = _Utils_update(
-			model,
-			{goban: newGoban});
-		return A2($elm$core$Debug$log, 'Model', newModel);
+		switch (msg.$) {
+			case 'GobanClicked':
+				var _v1 = msg.a;
+				var posX = _v1.a;
+				var posY = _v1.b;
+				var coords = A4($author$project$Goban$posToCoords, model.goban, posX, posY, $author$project$Main$gobanImgSize);
+				var newGoban = A2($author$project$Goban$placeStone, model.goban, coords);
+				return _Utils_Tuple2(
+					A2(
+						$elm$core$Debug$log,
+						'Model',
+						_Utils_update(
+							model,
+							{goban: newGoban})),
+					$elm$core$Platform$Cmd$none);
+			case 'UndoMove':
+				var moves = model.goban.moves;
+				var newMoves = $elm$core$List$isEmpty(moves) ? _List_Nil : A2(
+					$elm$core$List$take,
+					$elm$core$List$length(moves) - 1,
+					moves);
+				var goban = model.goban;
+				var newGoban = _Utils_update(
+					goban,
+					{moves: newMoves});
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{goban: newGoban}),
+					$elm$core$Platform$Cmd$none);
+			case 'UpdateName':
+				var name = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{name: name}),
+					$elm$core$Platform$Cmd$none);
+			case 'UpdateDate':
+				var date = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{date: date}),
+					$elm$core$Platform$Cmd$none);
+			case 'UpdateWhitePlayer':
+				var player = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{whitePlayer: player}),
+					$elm$core$Platform$Cmd$none);
+			case 'UpdateBlackPlayer':
+				var player = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{blackPlayer: player}),
+					$elm$core$Platform$Cmd$none);
+			default:
+				var _v2 = $author$project$Sgf$toSgf(model);
+				var fileName = _v2.a;
+				var fileContent = _v2.b;
+				return _Utils_Tuple2(
+					model,
+					$author$project$Main$downloadFile(
+						{fileContent: fileContent, fileName: fileName}));
+		}
 	});
 var $author$project$Main$GobanClicked = function (a) {
 	return {$: 'GobanClicked', a: a};
 };
-var $elm$json$Json$Encode$string = _Json_wrap;
+var $author$project$Main$SaveGame = {$: 'SaveGame'};
+var $author$project$Main$UndoMove = {$: 'UndoMove'};
+var $author$project$Main$UpdateBlackPlayer = function (a) {
+	return {$: 'UpdateBlackPlayer', a: a};
+};
+var $author$project$Main$UpdateDate = function (a) {
+	return {$: 'UpdateDate', a: a};
+};
+var $author$project$Main$UpdateName = function (a) {
+	return {$: 'UpdateName', a: a};
+};
+var $author$project$Main$UpdateWhitePlayer = function (a) {
+	return {$: 'UpdateWhitePlayer', a: a};
+};
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
 		return A2(
@@ -6095,6 +6353,15 @@ var $author$project$Goban$currentSituation = function (goban) {
 		{gobanSize: goban.size, stones: $elm$core$Dict$empty},
 		goban.moves);
 };
+var $elm$json$Json$Encode$bool = _Json_wrap;
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$bool(bool));
+	});
+var $elm$html$Html$Attributes$disabled = $elm$html$Html$Attributes$boolProperty('disabled');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$html$Html$form = _VirtualDom_node('form');
@@ -6114,6 +6381,44 @@ var $elm$html$Html$Events$on = F2(
 			event,
 			$elm$virtual_dom$VirtualDom$Normal(decoder));
 	});
+var $elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'click',
+		$elm$json$Json$Decode$succeed(msg));
+};
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -6126,6 +6431,7 @@ var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Main$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -6173,7 +6479,8 @@ var $author$project$Main$view = function (model) {
 										$elm$html$Html$button,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$type_('button')
+												$elm$html$Html$Attributes$type_('button'),
+												$elm$core$List$isEmpty(model.goban.moves) ? $elm$html$Html$Attributes$disabled(true) : $elm$html$Html$Events$onClick($author$project$Main$UndoMove)
 											]),
 										_List_fromArray(
 											[
@@ -6183,7 +6490,8 @@ var $author$project$Main$view = function (model) {
 										$elm$html$Html$button,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$type_('button')
+												$elm$html$Html$Attributes$type_('button'),
+												$elm$html$Html$Attributes$disabled(true)
 											]),
 										_List_fromArray(
 											[
@@ -6193,7 +6501,8 @@ var $author$project$Main$view = function (model) {
 										$elm$html$Html$button,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$type_('button')
+												$elm$html$Html$Attributes$type_('button'),
+												$elm$html$Html$Events$onClick($author$project$Main$SaveGame)
 											]),
 										_List_fromArray(
 											[
@@ -6203,7 +6512,8 @@ var $author$project$Main$view = function (model) {
 										$elm$html$Html$button,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$type_('button')
+												$elm$html$Html$Attributes$type_('button'),
+												$elm$html$Html$Attributes$disabled(true)
 											]),
 										_List_fromArray(
 											[
@@ -6213,7 +6523,8 @@ var $author$project$Main$view = function (model) {
 										$elm$html$Html$button,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$type_('button')
+												$elm$html$Html$Attributes$type_('button'),
+												$elm$html$Html$Attributes$disabled(true)
 											]),
 										_List_fromArray(
 											[
@@ -6242,7 +6553,9 @@ var $author$project$Main$view = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$type_('text'),
-														$elm$html$Html$Attributes$class('input input-full')
+														$elm$html$Html$Attributes$class('input input-full'),
+														$elm$html$Html$Attributes$value(model.name),
+														$elm$html$Html$Events$onInput($author$project$Main$UpdateName)
 													]),
 												_List_Nil)
 											])),
@@ -6260,7 +6573,9 @@ var $author$project$Main$view = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$type_('text'),
-														$elm$html$Html$Attributes$class('input input-date-long')
+														$elm$html$Html$Attributes$class('input input-date-long'),
+														$elm$html$Html$Attributes$value(model.date),
+														$elm$html$Html$Events$onInput($author$project$Main$UpdateDate)
 													]),
 												_List_Nil)
 											]))
@@ -6287,7 +6602,9 @@ var $author$project$Main$view = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$type_('text'),
-														$elm$html$Html$Attributes$class('input')
+														$elm$html$Html$Attributes$class('input'),
+														$elm$html$Html$Attributes$value(model.whitePlayer),
+														$elm$html$Html$Events$onInput($author$project$Main$UpdateWhitePlayer)
 													]),
 												_List_Nil)
 											])),
@@ -6305,7 +6622,9 @@ var $author$project$Main$view = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$type_('text'),
-														$elm$html$Html$Attributes$class('input')
+														$elm$html$Html$Attributes$class('input'),
+														$elm$html$Html$Attributes$value(model.blackPlayer),
+														$elm$html$Html$Events$onInput($author$project$Main$UpdateBlackPlayer)
 													]),
 												_List_Nil)
 											]))
@@ -6405,17 +6724,17 @@ var $author$project$Main$view = function (model) {
 							$author$project$Goban$currentSituation(model.goban).stones))))
 			]));
 };
-var $author$project$Main$main = $elm$browser$Browser$sandbox(
+var $author$project$Main$main = $elm$browser$Browser$element(
 	{
-		init: {
-			blackPlayer: '',
-			date: '',
-			goban: {moves: _List_Nil, size: $author$project$Main$boardSize},
-			name: '',
-			whitePlayer: ''
+		init: function (_v0) {
+			return _Utils_Tuple2($author$project$Main$init, $elm$core$Platform$Cmd$none);
+		},
+		subscriptions: function (_v1) {
+			return $elm$core$Platform$Sub$none;
 		},
 		update: $author$project$Main$update,
 		view: $author$project$Main$view
 	});
 _Platform_export({'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
+	$elm$json$Json$Decode$succeed(
+		{}))(0)}});}(this));
