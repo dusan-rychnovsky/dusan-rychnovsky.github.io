@@ -5205,14 +5205,90 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Main$CurrentTime = function (a) {
-	return {$: 'CurrentTime', a: a};
-};
-var $author$project$Main$TimeZone = function (a) {
-	return {$: 'TimeZone', a: a};
-};
-var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $author$project$Main$boardSize = 19;
+var $author$project$Game$Game = F5(
+	function (name, whitePlayer, blackPlayer, date, goban) {
+		return {blackPlayer: blackPlayer, date: date, goban: goban, name: name, whitePlayer: whitePlayer};
+	});
+var $author$project$Goban$Goban = F2(
+	function (size, moves) {
+		return {moves: moves, size: size};
+	});
+var $author$project$Goban$Move = F2(
+	function (color, coords) {
+		return {color: color, coords: coords};
+	});
+var $author$project$Goban$Black = {$: 'Black'};
+var $author$project$Goban$White = {$: 'White'};
+var $elm$json$Json$Decode$andThen = _Json_andThen;
+var $elm$json$Json$Decode$fail = _Json_fail;
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $author$project$Persist$decodeColor = A2(
+	$elm$json$Json$Decode$andThen,
+	function (str) {
+		switch (str) {
+			case 'White':
+				return $elm$json$Json$Decode$succeed($author$project$Goban$White);
+			case 'Black':
+				return $elm$json$Json$Decode$succeed($author$project$Goban$Black);
+			default:
+				return $elm$json$Json$Decode$fail('Unknown color: ' + str);
+		}
+	},
+	$elm$json$Json$Decode$string);
+var $elm$json$Json$Decode$int = _Json_decodeInt;
+var $elm$json$Json$Decode$list = _Json_decodeList;
+var $author$project$Persist$decodeCoords = A2(
+	$elm$json$Json$Decode$andThen,
+	function (lst) {
+		if ((lst.b && lst.b.b) && (!lst.b.b.b)) {
+			var row = lst.a;
+			var _v1 = lst.b;
+			var col = _v1.a;
+			return $elm$json$Json$Decode$succeed(
+				_Utils_Tuple2(row, col));
+		} else {
+			return $elm$json$Json$Decode$fail('Coords must be a list of two ints');
+		}
+	},
+	$elm$json$Json$Decode$list($elm$json$Json$Decode$int));
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $author$project$Persist$decodeMove = A3(
+	$elm$json$Json$Decode$map2,
+	$author$project$Goban$Move,
+	A2($elm$json$Json$Decode$field, 'color', $author$project$Persist$decodeColor),
+	A2($elm$json$Json$Decode$field, 'coords', $author$project$Persist$decodeCoords));
+var $author$project$Persist$decodeGoban = A3(
+	$elm$json$Json$Decode$map2,
+	$author$project$Goban$Goban,
+	A2($elm$json$Json$Decode$field, 'size', $elm$json$Json$Decode$int),
+	A2(
+		$elm$json$Json$Decode$field,
+		'moves',
+		$elm$json$Json$Decode$list($author$project$Persist$decodeMove)));
+var $elm$json$Json$Decode$map5 = _Json_map5;
+var $author$project$Persist$decodeGame = A6(
+	$elm$json$Json$Decode$map5,
+	$author$project$Game$Game,
+	A2($elm$json$Json$Decode$field, 'name', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'whitePlayer', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'blackPlayer', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'date', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'goban', $author$project$Persist$decodeGoban));
+var $elm$json$Json$Decode$decodeValue = _Json_run;
+var $author$project$Game$emptyGame = function (boardSize) {
+	return {
+		blackPlayer: '',
+		date: '',
+		goban: {moves: _List_Nil, size: boardSize},
+		name: '',
+		whitePlayer: ''
+	};
+};
+var $author$project$Main$InitTime = F2(
+	function (a, b) {
+		return {$: 'InitTime', a: a, b: b};
+	});
 var $elm$time$Time$Name = function (a) {
 	return {$: 'Name', a: a};
 };
@@ -5230,26 +5306,60 @@ var $elm$time$Time$Posix = function (a) {
 };
 var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
 var $elm$time$Time$now = _Time_now($elm$time$Time$millisToPosix);
-var $author$project$Main$init = function (_v0) {
-	return _Utils_Tuple2(
-		{
-			blackPlayer: '',
-			date: '',
-			goban: {moves: _List_Nil, size: $author$project$Main$boardSize},
-			name: '',
-			posix: $elm$core$Maybe$Nothing,
-			timeZone: $elm$core$Maybe$Nothing,
-			whitePlayer: ''
-		},
-		$elm$core$Platform$Cmd$batch(
-			_List_fromArray(
-				[
-					A2($elm$core$Task$perform, $author$project$Main$CurrentTime, $elm$time$Time$now),
-					A2($elm$core$Task$perform, $author$project$Main$TimeZone, $elm$time$Time$here)
-				])));
+var $elm$core$Tuple$pair = F2(
+	function (a, b) {
+		return _Utils_Tuple2(a, b);
+	});
+var $author$project$Main$triggerInitTime = A2(
+	$elm$core$Task$perform,
+	function (_v0) {
+		var posix = _v0.a;
+		var zone = _v0.b;
+		return A2($author$project$Main$InitTime, posix, zone);
+	},
+	A3($elm$core$Task$map2, $elm$core$Tuple$pair, $elm$time$Time$now, $elm$time$Time$here));
+var $author$project$Main$init = function (flags) {
+	var model = function () {
+		var _v0 = A2($elm$json$Json$Decode$decodeValue, $author$project$Persist$decodeGame, flags);
+		if (_v0.$ === 'Ok') {
+			var game = _v0.a;
+			return game;
+		} else {
+			return $author$project$Game$emptyGame($author$project$Main$boardSize);
+		}
+	}();
+	return _Utils_Tuple2(model, $author$project$Main$triggerInitTime);
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
+var $elm$core$Platform$Cmd$batch = _Platform_batch;
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $author$project$Persist$encodeColor = function (color) {
+	if (color.$ === 'White') {
+		return $elm$json$Json$Encode$string('White');
+	} else {
+		return $elm$json$Json$Encode$string('Black');
+	}
+};
+var $elm$json$Json$Encode$int = _Json_wrap;
+var $elm$json$Json$Encode$list = F2(
+	function (func, entries) {
+		return _Json_wrap(
+			A3(
+				$elm$core$List$foldl,
+				_Json_addEntry(func),
+				_Json_emptyArray(_Utils_Tuple0),
+				entries));
+	});
+var $author$project$Persist$encodeCoords = function (_v0) {
+	var row = _v0.a;
+	var col = _v0.b;
+	return A2(
+		$elm$json$Json$Encode$list,
+		$elm$json$Json$Encode$int,
+		_List_fromArray(
+			[row, col]));
+};
 var $elm$json$Json$Encode$object = function (pairs) {
 	return _Json_wrap(
 		A3(
@@ -5263,7 +5373,52 @@ var $elm$json$Json$Encode$object = function (pairs) {
 			_Json_emptyObject(_Utils_Tuple0),
 			pairs));
 };
-var $elm$json$Json$Encode$string = _Json_wrap;
+var $author$project$Persist$encodeMove = function (move) {
+	return $elm$json$Json$Encode$object(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				'color',
+				$author$project$Persist$encodeColor(move.color)),
+				_Utils_Tuple2(
+				'coords',
+				$author$project$Persist$encodeCoords(move.coords))
+			]));
+};
+var $author$project$Persist$encodeGoban = function (goban) {
+	return $elm$json$Json$Encode$object(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				'size',
+				$elm$json$Json$Encode$int(goban.size)),
+				_Utils_Tuple2(
+				'moves',
+				A2($elm$json$Json$Encode$list, $author$project$Persist$encodeMove, goban.moves))
+			]));
+};
+var $author$project$Persist$encodeGame = function (game) {
+	return $elm$json$Json$Encode$object(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				'name',
+				$elm$json$Json$Encode$string(game.name)),
+				_Utils_Tuple2(
+				'whitePlayer',
+				$elm$json$Json$Encode$string(game.whitePlayer)),
+				_Utils_Tuple2(
+				'blackPlayer',
+				$elm$json$Json$Encode$string(game.blackPlayer)),
+				_Utils_Tuple2(
+				'date',
+				$elm$json$Json$Encode$string(game.date)),
+				_Utils_Tuple2(
+				'goban',
+				$author$project$Persist$encodeGoban(game.goban))
+			]));
+};
+var $author$project$Main$storeState = _Platform_outgoingPort('storeState', $elm$core$Basics$identity);
 var $author$project$Main$downloadFile = _Platform_outgoingPort(
 	'downloadFile',
 	function ($) {
@@ -5278,6 +5433,161 @@ var $author$project$Main$downloadFile = _Platform_outgoingPort(
 					$elm$json$Json$Encode$string($.fileName))
 				]));
 	});
+var $author$project$DateFormat$monthToInt = function (m) {
+	switch (m.$) {
+		case 'Jan':
+			return 1;
+		case 'Feb':
+			return 2;
+		case 'Mar':
+			return 3;
+		case 'Apr':
+			return 4;
+		case 'May':
+			return 5;
+		case 'Jun':
+			return 6;
+		case 'Jul':
+			return 7;
+		case 'Aug':
+			return 8;
+		case 'Sep':
+			return 9;
+		case 'Oct':
+			return 10;
+		case 'Nov':
+			return 11;
+		default:
+			return 12;
+	}
+};
+var $elm$time$Time$flooredDiv = F2(
+	function (numerator, denominator) {
+		return $elm$core$Basics$floor(numerator / denominator);
+	});
+var $elm$time$Time$posixToMillis = function (_v0) {
+	var millis = _v0.a;
+	return millis;
+};
+var $elm$time$Time$toAdjustedMinutesHelp = F3(
+	function (defaultOffset, posixMinutes, eras) {
+		toAdjustedMinutesHelp:
+		while (true) {
+			if (!eras.b) {
+				return posixMinutes + defaultOffset;
+			} else {
+				var era = eras.a;
+				var olderEras = eras.b;
+				if (_Utils_cmp(era.start, posixMinutes) < 0) {
+					return posixMinutes + era.offset;
+				} else {
+					var $temp$defaultOffset = defaultOffset,
+						$temp$posixMinutes = posixMinutes,
+						$temp$eras = olderEras;
+					defaultOffset = $temp$defaultOffset;
+					posixMinutes = $temp$posixMinutes;
+					eras = $temp$eras;
+					continue toAdjustedMinutesHelp;
+				}
+			}
+		}
+	});
+var $elm$time$Time$toAdjustedMinutes = F2(
+	function (_v0, time) {
+		var defaultOffset = _v0.a;
+		var eras = _v0.b;
+		return A3(
+			$elm$time$Time$toAdjustedMinutesHelp,
+			defaultOffset,
+			A2(
+				$elm$time$Time$flooredDiv,
+				$elm$time$Time$posixToMillis(time),
+				60000),
+			eras);
+	});
+var $elm$core$Basics$ge = _Utils_ge;
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $elm$time$Time$toCivil = function (minutes) {
+	var rawDay = A2($elm$time$Time$flooredDiv, minutes, 60 * 24) + 719468;
+	var era = (((rawDay >= 0) ? rawDay : (rawDay - 146096)) / 146097) | 0;
+	var dayOfEra = rawDay - (era * 146097);
+	var yearOfEra = ((((dayOfEra - ((dayOfEra / 1460) | 0)) + ((dayOfEra / 36524) | 0)) - ((dayOfEra / 146096) | 0)) / 365) | 0;
+	var dayOfYear = dayOfEra - (((365 * yearOfEra) + ((yearOfEra / 4) | 0)) - ((yearOfEra / 100) | 0));
+	var mp = (((5 * dayOfYear) + 2) / 153) | 0;
+	var month = mp + ((mp < 10) ? 3 : (-9));
+	var year = yearOfEra + (era * 400);
+	return {
+		day: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
+		month: month,
+		year: year + ((month <= 2) ? 1 : 0)
+	};
+};
+var $elm$time$Time$toDay = F2(
+	function (zone, time) {
+		return $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).day;
+	});
+var $elm$time$Time$Apr = {$: 'Apr'};
+var $elm$time$Time$Aug = {$: 'Aug'};
+var $elm$time$Time$Dec = {$: 'Dec'};
+var $elm$time$Time$Feb = {$: 'Feb'};
+var $elm$time$Time$Jan = {$: 'Jan'};
+var $elm$time$Time$Jul = {$: 'Jul'};
+var $elm$time$Time$Jun = {$: 'Jun'};
+var $elm$time$Time$Mar = {$: 'Mar'};
+var $elm$time$Time$May = {$: 'May'};
+var $elm$time$Time$Nov = {$: 'Nov'};
+var $elm$time$Time$Oct = {$: 'Oct'};
+var $elm$time$Time$Sep = {$: 'Sep'};
+var $elm$time$Time$toMonth = F2(
+	function (zone, time) {
+		var _v0 = $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).month;
+		switch (_v0) {
+			case 1:
+				return $elm$time$Time$Jan;
+			case 2:
+				return $elm$time$Time$Feb;
+			case 3:
+				return $elm$time$Time$Mar;
+			case 4:
+				return $elm$time$Time$Apr;
+			case 5:
+				return $elm$time$Time$May;
+			case 6:
+				return $elm$time$Time$Jun;
+			case 7:
+				return $elm$time$Time$Jul;
+			case 8:
+				return $elm$time$Time$Aug;
+			case 9:
+				return $elm$time$Time$Sep;
+			case 10:
+				return $elm$time$Time$Oct;
+			case 11:
+				return $elm$time$Time$Nov;
+			default:
+				return $elm$time$Time$Dec;
+		}
+	});
+var $elm$time$Time$toYear = F2(
+	function (zone, time) {
+		return $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).year;
+	});
+var $author$project$DateFormat$formatDate = F2(
+	function (posix, zone) {
+		var year = A2($elm$time$Time$toYear, zone, posix);
+		var pad = function (n) {
+			return (n < 10) ? ('0' + $elm$core$String$fromInt(n)) : $elm$core$String$fromInt(n);
+		};
+		var month = $author$project$DateFormat$monthToInt(
+			A2($elm$time$Time$toMonth, zone, posix));
+		var day = A2($elm$time$Time$toDay, zone, posix);
+		return $elm$core$String$fromInt(year) + ('-' + (pad(month) + ('-' + pad(day))));
+	});
 var $author$project$Main$gobanImgSize = 900;
 var $elm$core$List$isEmpty = function (xs) {
 	if (!xs.b) {
@@ -5288,7 +5598,6 @@ var $elm$core$List$isEmpty = function (xs) {
 };
 var $elm$core$Debug$log = _Debug_log;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Goban$Black = {$: 'Black'};
 var $elm$core$List$head = function (list) {
 	if (list.b) {
 		var x = list.a;
@@ -5298,7 +5607,6 @@ var $elm$core$List$head = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
-var $author$project$Goban$White = {$: 'White'};
 var $author$project$Goban$opponent = function (color) {
 	if (color.$ === 'White') {
 		return $author$project$Goban$Black;
@@ -5474,180 +5782,6 @@ var $elm$core$List$take = F2(
 	function (n, list) {
 		return A3($elm$core$List$takeFast, 0, n, list);
 	});
-var $author$project$DateFormat$monthToInt = function (m) {
-	switch (m.$) {
-		case 'Jan':
-			return 1;
-		case 'Feb':
-			return 2;
-		case 'Mar':
-			return 3;
-		case 'Apr':
-			return 4;
-		case 'May':
-			return 5;
-		case 'Jun':
-			return 6;
-		case 'Jul':
-			return 7;
-		case 'Aug':
-			return 8;
-		case 'Sep':
-			return 9;
-		case 'Oct':
-			return 10;
-		case 'Nov':
-			return 11;
-		default:
-			return 12;
-	}
-};
-var $elm$time$Time$flooredDiv = F2(
-	function (numerator, denominator) {
-		return $elm$core$Basics$floor(numerator / denominator);
-	});
-var $elm$time$Time$posixToMillis = function (_v0) {
-	var millis = _v0.a;
-	return millis;
-};
-var $elm$time$Time$toAdjustedMinutesHelp = F3(
-	function (defaultOffset, posixMinutes, eras) {
-		toAdjustedMinutesHelp:
-		while (true) {
-			if (!eras.b) {
-				return posixMinutes + defaultOffset;
-			} else {
-				var era = eras.a;
-				var olderEras = eras.b;
-				if (_Utils_cmp(era.start, posixMinutes) < 0) {
-					return posixMinutes + era.offset;
-				} else {
-					var $temp$defaultOffset = defaultOffset,
-						$temp$posixMinutes = posixMinutes,
-						$temp$eras = olderEras;
-					defaultOffset = $temp$defaultOffset;
-					posixMinutes = $temp$posixMinutes;
-					eras = $temp$eras;
-					continue toAdjustedMinutesHelp;
-				}
-			}
-		}
-	});
-var $elm$time$Time$toAdjustedMinutes = F2(
-	function (_v0, time) {
-		var defaultOffset = _v0.a;
-		var eras = _v0.b;
-		return A3(
-			$elm$time$Time$toAdjustedMinutesHelp,
-			defaultOffset,
-			A2(
-				$elm$time$Time$flooredDiv,
-				$elm$time$Time$posixToMillis(time),
-				60000),
-			eras);
-	});
-var $elm$core$Basics$ge = _Utils_ge;
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
-var $elm$time$Time$toCivil = function (minutes) {
-	var rawDay = A2($elm$time$Time$flooredDiv, minutes, 60 * 24) + 719468;
-	var era = (((rawDay >= 0) ? rawDay : (rawDay - 146096)) / 146097) | 0;
-	var dayOfEra = rawDay - (era * 146097);
-	var yearOfEra = ((((dayOfEra - ((dayOfEra / 1460) | 0)) + ((dayOfEra / 36524) | 0)) - ((dayOfEra / 146096) | 0)) / 365) | 0;
-	var dayOfYear = dayOfEra - (((365 * yearOfEra) + ((yearOfEra / 4) | 0)) - ((yearOfEra / 100) | 0));
-	var mp = (((5 * dayOfYear) + 2) / 153) | 0;
-	var month = mp + ((mp < 10) ? 3 : (-9));
-	var year = yearOfEra + (era * 400);
-	return {
-		day: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
-		month: month,
-		year: year + ((month <= 2) ? 1 : 0)
-	};
-};
-var $elm$time$Time$toDay = F2(
-	function (zone, time) {
-		return $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).day;
-	});
-var $elm$time$Time$Apr = {$: 'Apr'};
-var $elm$time$Time$Aug = {$: 'Aug'};
-var $elm$time$Time$Dec = {$: 'Dec'};
-var $elm$time$Time$Feb = {$: 'Feb'};
-var $elm$time$Time$Jan = {$: 'Jan'};
-var $elm$time$Time$Jul = {$: 'Jul'};
-var $elm$time$Time$Jun = {$: 'Jun'};
-var $elm$time$Time$Mar = {$: 'Mar'};
-var $elm$time$Time$May = {$: 'May'};
-var $elm$time$Time$Nov = {$: 'Nov'};
-var $elm$time$Time$Oct = {$: 'Oct'};
-var $elm$time$Time$Sep = {$: 'Sep'};
-var $elm$time$Time$toMonth = F2(
-	function (zone, time) {
-		var _v0 = $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).month;
-		switch (_v0) {
-			case 1:
-				return $elm$time$Time$Jan;
-			case 2:
-				return $elm$time$Time$Feb;
-			case 3:
-				return $elm$time$Time$Mar;
-			case 4:
-				return $elm$time$Time$Apr;
-			case 5:
-				return $elm$time$Time$May;
-			case 6:
-				return $elm$time$Time$Jun;
-			case 7:
-				return $elm$time$Time$Jul;
-			case 8:
-				return $elm$time$Time$Aug;
-			case 9:
-				return $elm$time$Time$Sep;
-			case 10:
-				return $elm$time$Time$Oct;
-			case 11:
-				return $elm$time$Time$Nov;
-			default:
-				return $elm$time$Time$Dec;
-		}
-	});
-var $elm$time$Time$toYear = F2(
-	function (zone, time) {
-		return $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).year;
-	});
-var $author$project$DateFormat$formatDate = F2(
-	function (posix, zone) {
-		var year = A2($elm$time$Time$toYear, zone, posix);
-		var pad = function (n) {
-			return (n < 10) ? ('0' + $elm$core$String$fromInt(n)) : $elm$core$String$fromInt(n);
-		};
-		var month = $author$project$DateFormat$monthToInt(
-			A2($elm$time$Time$toMonth, zone, posix));
-		var day = A2($elm$time$Time$toDay, zone, posix);
-		return $elm$core$String$fromInt(year) + ('-' + (pad(month) + ('-' + pad(day))));
-	});
-var $elm$core$Basics$neq = _Utils_notEqual;
-var $elm$core$String$trim = _String_trim;
-var $author$project$Game$dateStr = function (game) {
-	if ($elm$core$String$trim(game.date) !== '') {
-		return game.date;
-	} else {
-		var _v0 = _Utils_Tuple2(game.posix, game.timeZone);
-		if ((_v0.a.$ === 'Just') && (_v0.b.$ === 'Just')) {
-			var posix = _v0.a.a;
-			var zone = _v0.b.a;
-			return A2($author$project$DateFormat$formatDate, posix, zone);
-		} else {
-			return '';
-		}
-	}
-};
-var $author$project$Sgf$dateToSgf = function (model) {
-	return $author$project$Game$dateStr(model);
-};
 var $elm$core$String$cons = _String_cons;
 var $elm$core$String$fromChar = function (_char) {
 	return A2($elm$core$String$cons, _char, '');
@@ -5677,30 +5811,22 @@ var $author$project$Sgf$toSgf = function (model) {
 		$elm$core$String$join,
 		'\n',
 		A2($elm$core$List$map, $author$project$Sgf$moveToSgf, model.goban.moves));
-	var gameInfo = ';FF[4]GM[1]AP[gopad:0.1]GN[' + (model.name + (']DT[' + ($author$project$Sgf$dateToSgf(model) + (']PB[' + (model.blackPlayer + (']PW[' + (model.whitePlayer + (']SZ[' + ($elm$core$String$fromInt(model.goban.size) + ']KM[6.5]')))))))));
+	var gameInfo = ';FF[4]GM[1]AP[gopad:0.1]GN[' + (model.name + (']DT[' + (model.date + (']PB[' + (model.blackPlayer + (']PW[' + (model.whitePlayer + (']SZ[' + ($elm$core$String$fromInt(model.goban.size) + ']KM[6.5]')))))))));
 	var content = '(' + (gameInfo + ('\n' + (movesToSgf + '\n)')));
 	return _Utils_Tuple2('game.sgf', content);
 };
+var $elm$core$String$trim = _String_trim;
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
-			case 'CurrentTime':
+			case 'InitTime':
 				var time = msg.a;
+				var zone = msg.b;
+				var newDate = ($elm$core$String$trim(model.date) === '') ? A2($author$project$DateFormat$formatDate, time, zone) : model.date;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{
-							posix: $elm$core$Maybe$Just(time)
-						}),
-					$elm$core$Platform$Cmd$none);
-			case 'TimeZone':
-				var zone = msg.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							timeZone: $elm$core$Maybe$Just(zone)
-						}),
+						{date: newDate}),
 					$elm$core$Platform$Cmd$none);
 			case 'GobanClicked':
 				var _v1 = msg.a;
@@ -5759,7 +5885,7 @@ var $author$project$Main$update = F2(
 						model,
 						{blackPlayer: player}),
 					$elm$core$Platform$Cmd$none);
-			default:
+			case 'SaveGame':
 				var _v2 = $author$project$Sgf$toSgf(model);
 				var fileName = _v2.a;
 				var fileContent = _v2.b;
@@ -5767,11 +5893,32 @@ var $author$project$Main$update = F2(
 					model,
 					$author$project$Main$downloadFile(
 						{fileContent: fileContent, fileName: fileName}));
+			default:
+				return _Utils_Tuple2(
+					$author$project$Game$emptyGame($author$project$Main$boardSize),
+					$author$project$Main$triggerInitTime);
 		}
 	});
+var $author$project$Main$updateAndStoreState = F2(
+	function (msg, oldModel) {
+		var _v0 = A2($author$project$Main$update, msg, oldModel);
+		var newModel = _v0.a;
+		var cmds = _v0.b;
+		return _Utils_Tuple2(
+			newModel,
+			$elm$core$Platform$Cmd$batch(
+				_List_fromArray(
+					[
+						$author$project$Main$storeState(
+						$author$project$Persist$encodeGame(newModel)),
+						cmds
+					])));
+	});
+var $elm$json$Json$Decode$value = _Json_decodeValue;
 var $author$project$Main$GobanClicked = function (a) {
 	return {$: 'GobanClicked', a: a};
 };
+var $author$project$Main$NewGame = {$: 'NewGame'};
 var $author$project$Main$SaveGame = {$: 'SaveGame'};
 var $author$project$Main$UndoMove = {$: 'UndoMove'};
 var $author$project$Main$UpdateBlackPlayer = function (a) {
@@ -6631,12 +6778,10 @@ var $elm$html$Html$Attributes$boolProperty = F2(
 	});
 var $elm$html$Html$Attributes$disabled = $elm$html$Html$Attributes$boolProperty('disabled');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$html$Html$form = _VirtualDom_node('form');
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$input = _VirtualDom_node('input');
-var $elm$json$Json$Decode$int = _Json_decodeInt;
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
@@ -6672,7 +6817,6 @@ var $elm$json$Json$Decode$at = F2(
 	function (fields, decoder) {
 		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
 	});
-var $elm$json$Json$Decode$string = _Json_decodeString;
 var $elm$html$Html$Events$targetValue = A2(
 	$elm$json$Json$Decode$at,
 	_List_fromArray(
@@ -6792,7 +6936,7 @@ var $author$project$Main$view = function (model) {
 										_List_fromArray(
 											[
 												$elm$html$Html$Attributes$type_('button'),
-												$elm$html$Html$Attributes$disabled(true)
+												$elm$html$Html$Events$onClick($author$project$Main$NewGame)
 											]),
 										_List_fromArray(
 											[
@@ -6842,8 +6986,7 @@ var $author$project$Main$view = function (model) {
 													[
 														$elm$html$Html$Attributes$type_('text'),
 														$elm$html$Html$Attributes$class('input input-date-long'),
-														$elm$html$Html$Attributes$value(
-														$author$project$Game$dateStr(model)),
+														$elm$html$Html$Attributes$value(model.date),
 														$elm$html$Html$Events$onInput($author$project$Main$UpdateDate)
 													]),
 												_List_Nil)
@@ -6923,7 +7066,7 @@ var $author$project$Main$view = function (model) {
 								[
 									$elm$html$Html$Attributes$src('public/goban.png'),
 									$elm$html$Html$Attributes$class('goban-img'),
-									$elm$html$Html$Attributes$alt('Goban board'),
+									$elm$html$Html$Attributes$alt('Goban.'),
 									A2(
 									$elm$html$Html$Attributes$style,
 									'width',
@@ -6999,8 +7142,7 @@ var $author$project$Main$main = $elm$browser$Browser$element(
 		subscriptions: function (_v0) {
 			return $elm$core$Platform$Sub$none;
 		},
-		update: $author$project$Main$update,
+		update: $author$project$Main$updateAndStoreState,
 		view: $author$project$Main$view
 	});
-_Platform_export({'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
+_Platform_export({'Main':{'init':$author$project$Main$main($elm$json$Json$Decode$value)(0)}});}(this));
