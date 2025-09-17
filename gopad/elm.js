@@ -5244,19 +5244,19 @@ var $elm$core$Task$perform = F2(
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Main$boardSize = 19;
 var $author$project$Game$Game = F5(
-	function (name, whitePlayer, blackPlayer, date, goban) {
-		return {blackPlayer: blackPlayer, date: date, goban: goban, name: name, whitePlayer: whitePlayer};
+	function (date, blackPlayer, whitePlayer, location, goban) {
+		return {blackPlayer: blackPlayer, date: date, goban: goban, location: location, whitePlayer: whitePlayer};
 	});
-var $author$project$Goban$Goban = F2(
+var $author$project$Goban$Types$Goban = F2(
 	function (size, moves) {
 		return {moves: moves, size: size};
 	});
-var $author$project$Goban$Move = F2(
+var $author$project$Goban$Types$Move = F2(
 	function (color, coords) {
 		return {color: color, coords: coords};
 	});
-var $author$project$Goban$Black = {$: 'Black'};
-var $author$project$Goban$White = {$: 'White'};
+var $author$project$Goban$Types$Black = {$: 'Black'};
+var $author$project$Goban$Types$White = {$: 'White'};
 var $elm$json$Json$Decode$andThen = _Json_andThen;
 var $elm$json$Json$Decode$fail = _Json_fail;
 var $elm$json$Json$Decode$string = _Json_decodeString;
@@ -5265,9 +5265,9 @@ var $author$project$Persist$decodeColor = A2(
 	function (str) {
 		switch (str) {
 			case 'White':
-				return $elm$json$Json$Decode$succeed($author$project$Goban$White);
+				return $elm$json$Json$Decode$succeed($author$project$Goban$Types$White);
 			case 'Black':
-				return $elm$json$Json$Decode$succeed($author$project$Goban$Black);
+				return $elm$json$Json$Decode$succeed($author$project$Goban$Types$Black);
 			default:
 				return $elm$json$Json$Decode$fail('Unknown color: ' + str);
 		}
@@ -5292,7 +5292,7 @@ var $author$project$Persist$decodeCoords = A2(
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $author$project$Persist$decodeMove = A3(
 	$elm$json$Json$Decode$map2,
-	$author$project$Goban$Move,
+	$author$project$Goban$Types$Move,
 	A2($elm$json$Json$Decode$field, 'color', $author$project$Persist$decodeColor),
 	A2($elm$json$Json$Decode$field, 'coords', $author$project$Persist$decodeCoords));
 var $elm$core$Array$fromListHelp = F3(
@@ -5332,7 +5332,7 @@ var $elm$core$Array$fromList = function (list) {
 };
 var $author$project$Persist$decodeGoban = A3(
 	$elm$json$Json$Decode$map2,
-	$author$project$Goban$Goban,
+	$author$project$Goban$Types$Goban,
 	A2($elm$json$Json$Decode$field, 'size', $elm$json$Json$Decode$int),
 	A2(
 		$elm$json$Json$Decode$field,
@@ -5345,10 +5345,10 @@ var $elm$json$Json$Decode$map5 = _Json_map5;
 var $author$project$Persist$decodeGame = A6(
 	$elm$json$Json$Decode$map5,
 	$author$project$Game$Game,
-	A2($elm$json$Json$Decode$field, 'name', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'whitePlayer', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'blackPlayer', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'date', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'blackPlayer', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'whitePlayer', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'location', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'goban', $author$project$Persist$decodeGoban));
 var $elm$json$Json$Decode$decodeValue = _Json_run;
 var $author$project$Goban$empty = function (size) {
@@ -5359,7 +5359,7 @@ var $author$project$Game$emptyGame = function (boardSize) {
 		blackPlayer: '',
 		date: '',
 		goban: $author$project$Goban$empty(boardSize),
-		name: '',
+		location: '',
 		whitePlayer: ''
 	};
 };
@@ -5483,17 +5483,17 @@ var $author$project$Persist$encodeGame = function (game) {
 		_List_fromArray(
 			[
 				_Utils_Tuple2(
-				'name',
-				$elm$json$Json$Encode$string(game.name)),
-				_Utils_Tuple2(
-				'whitePlayer',
-				$elm$json$Json$Encode$string(game.whitePlayer)),
+				'date',
+				$elm$json$Json$Encode$string(game.date)),
 				_Utils_Tuple2(
 				'blackPlayer',
 				$elm$json$Json$Encode$string(game.blackPlayer)),
 				_Utils_Tuple2(
-				'date',
-				$elm$json$Json$Encode$string(game.date)),
+				'whitePlayer',
+				$elm$json$Json$Encode$string(game.whitePlayer)),
+				_Utils_Tuple2(
+				'location',
+				$elm$json$Json$Encode$string(game.location)),
 				_Utils_Tuple2(
 				'goban',
 				$author$project$Persist$encodeGoban(game.goban))
@@ -5717,23 +5717,23 @@ var $elm$core$Array$length = function (_v0) {
 	var len = _v0.a;
 	return len;
 };
-var $author$project$Goban$opponent = function (color) {
+var $author$project$Goban$Internal$opponent = function (color) {
 	if (color.$ === 'White') {
-		return $author$project$Goban$Black;
+		return $author$project$Goban$Types$Black;
 	} else {
-		return $author$project$Goban$White;
+		return $author$project$Goban$Types$White;
 	}
 };
-var $author$project$Goban$currentPlayer = function (goban) {
+var $author$project$Goban$Internal$currentPlayer = function (goban) {
 	var _v0 = A2(
 		$elm$core$Array$get,
 		$elm$core$Array$length(goban.moves) - 1,
 		goban.moves);
 	if (_v0.$ === 'Just') {
 		var lastMove = _v0.a;
-		return $author$project$Goban$opponent(lastMove.color);
+		return $author$project$Goban$Internal$opponent(lastMove.color);
 	} else {
-		return $author$project$Goban$Black;
+		return $author$project$Goban$Types$Black;
 	}
 };
 var $elm$core$Elm$JsArray$push = _JsArray_push;
@@ -5818,7 +5818,7 @@ var $elm$core$Array$push = F2(
 var $author$project$Goban$placeStone = F2(
 	function (goban, coords) {
 		var newMove = {
-			color: $author$project$Goban$currentPlayer(goban),
+			color: $author$project$Goban$Internal$currentPlayer(goban),
 			coords: coords
 		};
 		return _Utils_update(
@@ -5830,13 +5830,13 @@ var $author$project$Goban$placeStone = F2(
 var $author$project$Goban$gobanImg = {linePx: 5.0, paddingPx: 60.0, sizePx: 2000.0, squarePx: 99.0};
 var $elm$core$Basics$round = _Basics_round;
 var $author$project$Goban$posToCoords = F4(
-	function (goban, posX, posY, imgSize) {
+	function (gobanSize, posX, posY, imgSize) {
 		var step = $author$project$Goban$gobanImg.squarePx + $author$project$Goban$gobanImg.linePx;
 		var scale = $author$project$Goban$gobanImg.sizePx / imgSize;
 		var x = posX * scale;
 		var y = posY * scale;
 		var clamp = function (v) {
-			return (v < 0) ? 0 : ((_Utils_cmp(v, goban.size - 1) > 0) ? (goban.size - 1) : v);
+			return (v < 0) ? 0 : ((_Utils_cmp(v, gobanSize - 1) > 0) ? (gobanSize - 1) : v);
 		};
 		var col = clamp(
 			$elm$core$Basics$round((x - $author$project$Goban$gobanImg.paddingPx) / step));
@@ -5844,6 +5844,40 @@ var $author$project$Goban$posToCoords = F4(
 			$elm$core$Basics$round((y - $author$project$Goban$gobanImg.paddingPx) / step));
 		return _Utils_Tuple2(row, col);
 	});
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm$core$Basics$neq = _Utils_notEqual;
+var $elm$core$String$trim = _String_trim;
+var $author$project$StringUtils$joinTrimmed = F2(
+	function (delimiter, strings) {
+		return $elm$core$String$trim(
+			A2(
+				$elm$core$String$join,
+				delimiter,
+				A2(
+					$elm$core$List$filter,
+					function (s) {
+						return s !== '';
+					},
+					A2($elm$core$List$map, $elm$core$String$trim, strings))));
+	});
+var $author$project$Sgf$fileName = function (game) {
+	var name = A2(
+		$author$project$StringUtils$joinTrimmed,
+		'-',
+		_List_fromArray(
+			[game.date, game.blackPlayer, game.whitePlayer, game.location]));
+	return (name === '') ? 'game.sgf' : (name + '.sgf');
+};
 var $elm$core$Elm$JsArray$map = _JsArray_map;
 var $elm$core$Array$map = F2(
 	function (func, _v0) {
@@ -5893,17 +5927,25 @@ var $author$project$Sgf$moveToSgf = function (move) {
 	var col = _v0.b;
 	return ';' + (colorCode(move.color) + ('[' + (coordsCode(col) + (coordsCode(row) + ']'))));
 };
-var $author$project$Sgf$toSgf = function (model) {
+var $author$project$Game$name = function (game) {
+	return A2(
+		$author$project$StringUtils$joinTrimmed,
+		' ',
+		_List_fromArray(
+			[game.date, game.blackPlayer, game.whitePlayer, game.location]));
+};
+var $author$project$Sgf$toSgf = function (game) {
 	var movesToSgf = A2(
 		$elm$core$String$join,
 		'\n',
 		$elm$core$Array$toList(
-			A2($elm$core$Array$map, $author$project$Sgf$moveToSgf, model.goban.moves)));
-	var gameInfo = ';FF[4]GM[1]AP[gopad:0.1]GN[' + (model.name + (']DT[' + (model.date + (']PB[' + (model.blackPlayer + (']PW[' + (model.whitePlayer + (']SZ[' + ($elm$core$String$fromInt(model.goban.size) + ']KM[6.5]')))))))));
+			A2($elm$core$Array$map, $author$project$Sgf$moveToSgf, game.goban.moves)));
+	var gameInfo = ';FF[4]GM[1]AP[gopad:0.1]GN[' + ($author$project$Game$name(game) + (']DT[' + (game.date + (']PB[' + (game.blackPlayer + (']PW[' + (game.whitePlayer + (']SZ[' + ($elm$core$String$fromInt(game.goban.size) + ']KM[6.5]')))))))));
 	var content = '(' + (gameInfo + ('\n' + (movesToSgf + '\n)')));
-	return _Utils_Tuple2('game.sgf', content);
+	return _Utils_Tuple2(
+		$author$project$Sgf$fileName(game),
+		content);
 };
-var $elm$core$String$trim = _String_trim;
 var $elm$core$Elm$JsArray$appendN = _JsArray_appendN;
 var $elm$core$Elm$JsArray$slice = _JsArray_slice;
 var $elm$core$Array$appendHelpBuilder = F2(
@@ -6154,7 +6196,7 @@ var $author$project$Main$update = F2(
 				var _v1 = msg.a;
 				var posX = _v1.a;
 				var posY = _v1.b;
-				var coords = A4($author$project$Goban$posToCoords, model.goban, posX, posY, $author$project$Main$gobanImgSize);
+				var coords = A4($author$project$Goban$posToCoords, model.goban.size, posX, posY, $author$project$Main$gobanImgSize);
 				var newGoban = A2($author$project$Goban$placeStone, model.goban, coords);
 				return _Utils_Tuple2(
 					A2(
@@ -6172,19 +6214,19 @@ var $author$project$Main$update = F2(
 							goban: $author$project$Goban$undoMove(model.goban)
 						}),
 					$elm$core$Platform$Cmd$none);
-			case 'UpdateName':
-				var name = msg.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{name: name}),
-					$elm$core$Platform$Cmd$none);
 			case 'UpdateDate':
 				var date = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{date: date}),
+					$elm$core$Platform$Cmd$none);
+			case 'UpdateBlackPlayer':
+				var player = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{blackPlayer: player}),
 					$elm$core$Platform$Cmd$none);
 			case 'UpdateWhitePlayer':
 				var player = msg.a;
@@ -6193,12 +6235,12 @@ var $author$project$Main$update = F2(
 						model,
 						{whitePlayer: player}),
 					$elm$core$Platform$Cmd$none);
-			case 'UpdateBlackPlayer':
-				var player = msg.a;
+			case 'UpdateLocation':
+				var location = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{blackPlayer: player}),
+						{location: location}),
 					$elm$core$Platform$Cmd$none);
 			case 'SaveGame':
 				var _v2 = $author$project$Sgf$toSgf(model);
@@ -6242,8 +6284,8 @@ var $author$project$Main$UpdateBlackPlayer = function (a) {
 var $author$project$Main$UpdateDate = function (a) {
 	return {$: 'UpdateDate', a: a};
 };
-var $author$project$Main$UpdateName = function (a) {
-	return {$: 'UpdateName', a: a};
+var $author$project$Main$UpdateLocation = function (a) {
+	return {$: 'UpdateLocation', a: a};
 };
 var $author$project$Main$UpdateWhitePlayer = function (a) {
 	return {$: 'UpdateWhitePlayer', a: a};
@@ -6258,8 +6300,8 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
-var $author$project$Goban$coordsToPos = F3(
-	function (goban, _v0, imgSize) {
+var $author$project$Goban$coordsToPos = F2(
+	function (_v0, imgSize) {
 		var row = _v0.a;
 		var col = _v0.b;
 		var step = $author$project$Goban$gobanImg.squarePx + $author$project$Goban$gobanImg.linePx;
@@ -6306,17 +6348,6 @@ var $elm$core$Set$foldl = F3(
 				}),
 			initialState,
 			dict);
-	});
-var $elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
 	});
 var $elm$core$Set$Set_elm_builtin = function (a) {
 	return {$: 'Set_elm_builtin', a: a};
@@ -6442,7 +6473,7 @@ var $elm$core$Set$insert = F2(
 var $elm$core$Set$fromList = function (list) {
 	return A3($elm$core$List$foldl, $elm$core$Set$insert, $elm$core$Set$empty, list);
 };
-var $author$project$Goban$getAdjacentPoints = F2(
+var $author$project$Goban$Internal$getAdjacentPoints = F2(
 	function (gobanSize, _v0) {
 		var row = _v0.a;
 		var col = _v0.b;
@@ -6508,20 +6539,20 @@ var $elm$core$Set$member = F2(
 		var dict = _v0.a;
 		return A2($elm$core$Dict$member, key, dict);
 	});
-var $author$project$Goban$isAdjacent = F3(
+var $author$project$Goban$Internal$isAdjacent = F3(
 	function (gobanSize, first, second) {
 		return A2(
 			$elm$core$Set$member,
 			second,
-			A2($author$project$Goban$getAdjacentPoints, gobanSize, first));
+			A2($author$project$Goban$Internal$getAdjacentPoints, gobanSize, first));
 	});
-var $author$project$Goban$belongsTo = F3(
+var $author$project$Goban$Internal$belongsTo = F3(
 	function (gobanSize, group, coords) {
 		return A3(
 			$elm$core$Set$foldl,
 			F2(
 				function (c, acc) {
-					return acc || A3($author$project$Goban$isAdjacent, gobanSize, c, coords);
+					return acc || A3($author$project$Goban$Internal$isAdjacent, gobanSize, c, coords);
 				}),
 			false,
 			group);
@@ -6563,14 +6594,14 @@ var $elm$core$Set$union = F2(
 		return $elm$core$Set$Set_elm_builtin(
 			A2($elm$core$Dict$union, dict1, dict2));
 	});
-var $author$project$Goban$allGroups = F2(
+var $author$project$Goban$Internal$allGroups = F2(
 	function (situation, color) {
 		var addStone = F2(
 			function (coords, groups) {
 				var _v1 = A2(
 					$elm$core$List$partition,
 					function (group) {
-						return A3($author$project$Goban$belongsTo, situation.gobanSize, group, coords);
+						return A3($author$project$Goban$Internal$belongsTo, situation.gobanSize, group, coords);
 					},
 					groups);
 				var adjacentGroups = _v1.a;
@@ -6660,18 +6691,18 @@ var $elm$core$Set$size = function (_v0) {
 	var dict = _v0.a;
 	return $elm$core$Dict$size(dict);
 };
-var $author$project$Goban$stoneAt = F2(
+var $author$project$Goban$Internal$stoneAt = F2(
 	function (situation, coords) {
 		return A2($elm$core$Dict$get, coords, situation.stones);
 	});
-var $author$project$Goban$numLiberties = F2(
+var $author$project$Goban$Internal$numLiberties = F2(
 	function (situation, group) {
 		return $elm$core$Set$size(
 			A2(
 				$elm$core$Set$filter,
 				function (pt) {
 					return _Utils_eq(
-						A2($author$project$Goban$stoneAt, situation, pt),
+						A2($author$project$Goban$Internal$stoneAt, situation, pt),
 						$elm$core$Maybe$Nothing);
 				},
 				A3(
@@ -6681,14 +6712,14 @@ var $author$project$Goban$numLiberties = F2(
 							return A2(
 								$elm$core$Set$union,
 								acc,
-								A2($author$project$Goban$getAdjacentPoints, situation.gobanSize, coords));
+								A2($author$project$Goban$Internal$getAdjacentPoints, situation.gobanSize, coords));
 						}),
 					$elm$core$Set$empty,
 					group)));
 	});
-var $author$project$Goban$isAlive = F2(
+var $author$project$Goban$Internal$isAlive = F2(
 	function (situation, group) {
-		return A2($author$project$Goban$numLiberties, situation, group) > 0;
+		return A2($author$project$Goban$Internal$numLiberties, situation, group) > 0;
 	});
 var $elm$core$Basics$not = _Basics_not;
 var $elm$core$Dict$getMin = function (dict) {
@@ -7053,7 +7084,7 @@ var $elm$core$Dict$remove = F2(
 			return x;
 		}
 	});
-var $author$project$Goban$applyMove = F2(
+var $author$project$Goban$Internal$applyMove = F2(
 	function (move, situation) {
 		var newSituation = _Utils_update(
 			situation,
@@ -7061,13 +7092,13 @@ var $author$project$Goban$applyMove = F2(
 				stones: A3($elm$core$Dict$insert, move.coords, move.color, situation.stones)
 			});
 		var opponentsGroups = A2(
-			$author$project$Goban$allGroups,
+			$author$project$Goban$Internal$allGroups,
 			newSituation,
-			$author$project$Goban$opponent(move.color));
+			$author$project$Goban$Internal$opponent(move.color));
 		var capturedGroups = A2(
 			$elm$core$List$filter,
 			function (group) {
-				return !A2($author$project$Goban$isAlive, newSituation, group);
+				return !A2($author$project$Goban$Internal$isAlive, newSituation, group);
 			},
 			opponentsGroups);
 		var stonesToRemove = A2($elm$core$List$concatMap, $elm$core$Set$toList, capturedGroups);
@@ -7100,7 +7131,7 @@ var $elm$core$Array$foldl = F3(
 var $author$project$Goban$currentSituation = function (goban) {
 	return A3(
 		$elm$core$Array$foldl,
-		$author$project$Goban$applyMove,
+		$author$project$Goban$Internal$applyMove,
 		{gobanSize: goban.size, stones: $elm$core$Dict$empty},
 		goban.moves);
 };
@@ -7351,26 +7382,6 @@ var $author$project$Main$view = function (model) {
 										$elm$html$Html$label,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('label label-game')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Game Name'),
-												A2(
-												$elm$html$Html$input,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$type_('text'),
-														$elm$html$Html$Attributes$class('input input-full'),
-														$elm$html$Html$Attributes$value(model.name),
-														$elm$html$Html$Events$onInput($author$project$Main$UpdateName)
-													]),
-												_List_Nil)
-											])),
-										A2(
-										$elm$html$Html$label,
-										_List_fromArray(
-											[
 												$elm$html$Html$Attributes$class('label label-date')
 											]),
 										_List_fromArray(
@@ -7381,36 +7392,47 @@ var $author$project$Main$view = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$type_('text'),
-														$elm$html$Html$Attributes$class('input input-date-long'),
+														$elm$html$Html$Attributes$class('input input-date'),
 														$elm$html$Html$Attributes$value(model.date),
 														$elm$html$Html$Events$onInput($author$project$Main$UpdateDate)
 													]),
 												_List_Nil)
-											]))
-									])),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('form-row')
-									]),
-								_List_fromArray(
-									[
+											])),
 										A2(
 										$elm$html$Html$label,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('label')
+												$elm$html$Html$Attributes$class('label label-black')
 											]),
 										_List_fromArray(
 											[
-												$elm$html$Html$text('White Player'),
+												$elm$html$Html$text('Black'),
 												A2(
 												$elm$html$Html$input,
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$type_('text'),
-														$elm$html$Html$Attributes$class('input'),
+														$elm$html$Html$Attributes$class('input input-black'),
+														$elm$html$Html$Attributes$value(model.blackPlayer),
+														$elm$html$Html$Events$onInput($author$project$Main$UpdateBlackPlayer)
+													]),
+												_List_Nil)
+											])),
+										A2(
+										$elm$html$Html$label,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('label label-white')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('White'),
+												A2(
+												$elm$html$Html$input,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$type_('text'),
+														$elm$html$Html$Attributes$class('input input-white'),
 														$elm$html$Html$Attributes$value(model.whitePlayer),
 														$elm$html$Html$Events$onInput($author$project$Main$UpdateWhitePlayer)
 													]),
@@ -7420,19 +7442,19 @@ var $author$project$Main$view = function (model) {
 										$elm$html$Html$label,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('label')
+												$elm$html$Html$Attributes$class('label label-location')
 											]),
 										_List_fromArray(
 											[
-												$elm$html$Html$text('Black Player'),
+												$elm$html$Html$text('Location'),
 												A2(
 												$elm$html$Html$input,
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$type_('text'),
-														$elm$html$Html$Attributes$class('input'),
-														$elm$html$Html$Attributes$value(model.blackPlayer),
-														$elm$html$Html$Events$onInput($author$project$Main$UpdateBlackPlayer)
+														$elm$html$Html$Attributes$class('input input-location'),
+														$elm$html$Html$Attributes$value(model.location),
+														$elm$html$Html$Events$onInput($author$project$Main$UpdateLocation)
 													]),
 												_List_Nil)
 											]))
@@ -7506,7 +7528,7 @@ var $author$project$Main$view = function (model) {
 											return 'public/white-stone.png';
 										}
 									}();
-									var _v1 = A3($author$project$Goban$coordsToPos, model.goban, coords, $author$project$Main$gobanImgSize);
+									var _v1 = A2($author$project$Goban$coordsToPos, coords, $author$project$Main$gobanImgSize);
 									var posX = _v1.a;
 									var posY = _v1.b;
 									return A2(
