@@ -5243,10 +5243,11 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Main$boardSize = 19;
-var $author$project$Game$Game = F5(
-	function (date, blackPlayer, whitePlayer, location, goban) {
-		return {blackPlayer: blackPlayer, date: date, goban: goban, location: location, whitePlayer: whitePlayer};
+var $author$project$Game$Game = F6(
+	function (date, blackPlayer, whitePlayer, location, placingHandicapMode, goban) {
+		return {blackPlayer: blackPlayer, date: date, goban: goban, location: location, placingHandicapMode: placingHandicapMode, whitePlayer: whitePlayer};
 	});
+var $elm$json$Json$Decode$bool = _Json_decodeBool;
 var $author$project$Goban$Types$Goban = F2(
 	function (size, moves) {
 		return {moves: moves, size: size};
@@ -5341,14 +5342,15 @@ var $author$project$Persist$decodeGoban = A3(
 			$elm$json$Json$Decode$map,
 			$elm$core$Array$fromList,
 			$elm$json$Json$Decode$list($author$project$Persist$decodeMove))));
-var $elm$json$Json$Decode$map5 = _Json_map5;
-var $author$project$Persist$decodeGame = A6(
-	$elm$json$Json$Decode$map5,
+var $elm$json$Json$Decode$map6 = _Json_map6;
+var $author$project$Persist$decodeGame = A7(
+	$elm$json$Json$Decode$map6,
 	$author$project$Game$Game,
 	A2($elm$json$Json$Decode$field, 'date', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'blackPlayer', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'whitePlayer', $elm$json$Json$Decode$string),
 	A2($elm$json$Json$Decode$field, 'location', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'placingHandicapMode', $elm$json$Json$Decode$bool),
 	A2($elm$json$Json$Decode$field, 'goban', $author$project$Persist$decodeGoban));
 var $elm$json$Json$Decode$decodeValue = _Json_run;
 var $author$project$Goban$empty = function (size) {
@@ -5360,6 +5362,7 @@ var $author$project$Game$emptyGame = function (boardSize) {
 		date: '',
 		goban: $author$project$Goban$empty(boardSize),
 		location: '',
+		placingHandicapMode: false,
 		whitePlayer: ''
 	};
 };
@@ -5411,6 +5414,7 @@ var $author$project$Main$init = function (flags) {
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
+var $elm$json$Json$Encode$bool = _Json_wrap;
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $author$project$Persist$encodeColor = function (color) {
 	if (color.$ === 'White') {
@@ -5494,6 +5498,9 @@ var $author$project$Persist$encodeGame = function (game) {
 				_Utils_Tuple2(
 				'location',
 				$elm$json$Json$Encode$string(game.location)),
+				_Utils_Tuple2(
+				'placingHandicapMode',
+				$elm$json$Json$Encode$bool(game.placingHandicapMode)),
 				_Utils_Tuple2(
 				'goban',
 				$author$project$Persist$encodeGoban(game.goban))
@@ -5670,74 +5677,14 @@ var $author$project$DateFormat$formatDate = F2(
 		return $elm$core$String$fromInt(year) + ('-' + (pad(month) + ('-' + pad(day))));
 	});
 var $author$project$Main$gobanImgSize = 695;
-var $elm$core$Debug$log = _Debug_log;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $elm$core$Basics$not = _Basics_not;
+var $elm$core$Elm$JsArray$push = _JsArray_push;
 var $elm$core$Bitwise$and = _Bitwise_and;
 var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
 var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
-var $elm$core$Elm$JsArray$unsafeGet = _JsArray_unsafeGet;
-var $elm$core$Array$getHelp = F3(
-	function (shift, index, tree) {
-		getHelp:
-		while (true) {
-			var pos = $elm$core$Array$bitMask & (index >>> shift);
-			var _v0 = A2($elm$core$Elm$JsArray$unsafeGet, pos, tree);
-			if (_v0.$ === 'SubTree') {
-				var subTree = _v0.a;
-				var $temp$shift = shift - $elm$core$Array$shiftStep,
-					$temp$index = index,
-					$temp$tree = subTree;
-				shift = $temp$shift;
-				index = $temp$index;
-				tree = $temp$tree;
-				continue getHelp;
-			} else {
-				var values = _v0.a;
-				return A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, values);
-			}
-		}
-	});
-var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
-var $elm$core$Array$tailIndex = function (len) {
-	return (len >>> 5) << 5;
-};
-var $elm$core$Array$get = F2(
-	function (index, _v0) {
-		var len = _v0.a;
-		var startShift = _v0.b;
-		var tree = _v0.c;
-		var tail = _v0.d;
-		return ((index < 0) || (_Utils_cmp(index, len) > -1)) ? $elm$core$Maybe$Nothing : ((_Utils_cmp(
-			index,
-			$elm$core$Array$tailIndex(len)) > -1) ? $elm$core$Maybe$Just(
-			A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, tail)) : $elm$core$Maybe$Just(
-			A3($elm$core$Array$getHelp, startShift, index, tree)));
-	});
-var $elm$core$Array$length = function (_v0) {
-	var len = _v0.a;
-	return len;
-};
-var $author$project$Goban$Internal$opponent = function (color) {
-	if (color.$ === 'White') {
-		return $author$project$Goban$Types$Black;
-	} else {
-		return $author$project$Goban$Types$White;
-	}
-};
-var $author$project$Goban$Internal$currentPlayer = function (goban) {
-	var _v0 = A2(
-		$elm$core$Array$get,
-		$elm$core$Array$length(goban.moves) - 1,
-		goban.moves);
-	if (_v0.$ === 'Just') {
-		var lastMove = _v0.a;
-		return $author$project$Goban$Internal$opponent(lastMove.color);
-	} else {
-		return $author$project$Goban$Types$Black;
-	}
-};
-var $elm$core$Elm$JsArray$push = _JsArray_push;
 var $elm$core$Elm$JsArray$singleton = _JsArray_singleton;
+var $elm$core$Elm$JsArray$unsafeGet = _JsArray_unsafeGet;
 var $elm$core$Elm$JsArray$unsafeSet = _JsArray_unsafeSet;
 var $elm$core$Array$insertTailInTree = F4(
 	function (shift, index, tail, tree) {
@@ -5774,6 +5721,7 @@ var $elm$core$Array$insertTailInTree = F4(
 			}
 		}
 	});
+var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
 var $elm$core$Array$unsafeReplaceTail = F2(
 	function (newTail, _v0) {
 		var len = _v0.a;
@@ -5815,6 +5763,74 @@ var $elm$core$Array$push = F2(
 			A2($elm$core$Elm$JsArray$push, a, tail),
 			array);
 	});
+var $author$project$Goban$placeHandicapStone = F2(
+	function (goban, coords) {
+		var newMove = {color: $author$project$Goban$Types$Black, coords: coords};
+		return _Utils_update(
+			goban,
+			{
+				moves: A2($elm$core$Array$push, newMove, goban.moves)
+			});
+	});
+var $elm$core$Array$getHelp = F3(
+	function (shift, index, tree) {
+		getHelp:
+		while (true) {
+			var pos = $elm$core$Array$bitMask & (index >>> shift);
+			var _v0 = A2($elm$core$Elm$JsArray$unsafeGet, pos, tree);
+			if (_v0.$ === 'SubTree') {
+				var subTree = _v0.a;
+				var $temp$shift = shift - $elm$core$Array$shiftStep,
+					$temp$index = index,
+					$temp$tree = subTree;
+				shift = $temp$shift;
+				index = $temp$index;
+				tree = $temp$tree;
+				continue getHelp;
+			} else {
+				var values = _v0.a;
+				return A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, values);
+			}
+		}
+	});
+var $elm$core$Array$tailIndex = function (len) {
+	return (len >>> 5) << 5;
+};
+var $elm$core$Array$get = F2(
+	function (index, _v0) {
+		var len = _v0.a;
+		var startShift = _v0.b;
+		var tree = _v0.c;
+		var tail = _v0.d;
+		return ((index < 0) || (_Utils_cmp(index, len) > -1)) ? $elm$core$Maybe$Nothing : ((_Utils_cmp(
+			index,
+			$elm$core$Array$tailIndex(len)) > -1) ? $elm$core$Maybe$Just(
+			A2($elm$core$Elm$JsArray$unsafeGet, $elm$core$Array$bitMask & index, tail)) : $elm$core$Maybe$Just(
+			A3($elm$core$Array$getHelp, startShift, index, tree)));
+	});
+var $elm$core$Array$length = function (_v0) {
+	var len = _v0.a;
+	return len;
+};
+var $author$project$Goban$Internal$opponent = function (color) {
+	if (color.$ === 'White') {
+		return $author$project$Goban$Types$Black;
+	} else {
+		return $author$project$Goban$Types$White;
+	}
+};
+var $author$project$Goban$Internal$currentPlayer = function (goban) {
+	var _v0 = A2(
+		$elm$core$Array$get,
+		$elm$core$Array$length(goban.moves) - 1,
+		goban.moves);
+	if (_v0.$ === 'Just') {
+		var lastMove = _v0.a;
+		return $author$project$Goban$Internal$opponent(lastMove.color);
+	} else {
+		return $author$project$Goban$Types$Black;
+	}
+};
 var $author$project$Goban$placeStone = F2(
 	function (goban, coords) {
 		var newMove = {
@@ -6197,14 +6213,11 @@ var $author$project$Main$update = F2(
 				var posX = _v1.a;
 				var posY = _v1.b;
 				var coords = A4($author$project$Goban$posToCoords, model.goban.size, posX, posY, $author$project$Main$gobanImgSize);
-				var newGoban = A2($author$project$Goban$placeStone, model.goban, coords);
+				var newGoban = model.placingHandicapMode ? A2($author$project$Goban$placeHandicapStone, model.goban, coords) : A2($author$project$Goban$placeStone, model.goban, coords);
 				return _Utils_Tuple2(
-					A2(
-						$elm$core$Debug$log,
-						'Model',
-						_Utils_update(
-							model,
-							{goban: newGoban})),
+					_Utils_update(
+						model,
+						{goban: newGoban}),
 					$elm$core$Platform$Cmd$none);
 			case 'UndoMove':
 				return _Utils_Tuple2(
@@ -6250,10 +6263,16 @@ var $author$project$Main$update = F2(
 					model,
 					$author$project$Main$downloadFile(
 						{fileContent: fileContent, fileName: fileName}));
-			default:
+			case 'NewGame':
 				return _Utils_Tuple2(
 					$author$project$Game$emptyGame($author$project$Main$boardSize),
 					$author$project$Main$triggerInitTime);
+			default:
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{placingHandicapMode: !model.placingHandicapMode}),
+					$elm$core$Platform$Cmd$none);
 		}
 	});
 var $author$project$Main$updateAndStoreState = F2(
@@ -6277,6 +6296,7 @@ var $author$project$Main$GobanClicked = function (a) {
 };
 var $author$project$Main$NewGame = {$: 'NewGame'};
 var $author$project$Main$SaveGame = {$: 'SaveGame'};
+var $author$project$Main$ToggleHandicap = {$: 'ToggleHandicap'};
 var $author$project$Main$UndoMove = {$: 'UndoMove'};
 var $author$project$Main$UpdateBlackPlayer = function (a) {
 	return {$: 'UpdateBlackPlayer', a: a};
@@ -6721,7 +6741,6 @@ var $author$project$Goban$Internal$isAlive = F2(
 	function (situation, group) {
 		return A2($author$project$Goban$Internal$numLiberties, situation, group) > 0;
 	});
-var $elm$core$Basics$not = _Basics_not;
 var $elm$core$Dict$getMin = function (dict) {
 	getMin:
 	while (true) {
@@ -7135,7 +7154,6 @@ var $author$project$Goban$currentSituation = function (goban) {
 		{gobanSize: goban.size, stones: $elm$core$Dict$empty},
 		goban.moves);
 };
-var $elm$json$Json$Encode$bool = _Json_wrap;
 var $elm$html$Html$Attributes$boolProperty = F2(
 	function (key, bool) {
 		return A2(
@@ -7191,8 +7209,8 @@ var $author$project$Main$gameHistoryContent = function (goban) {
 		$elm$core$Array$toList(goban.moves));
 	return 'GAME:\n-----' + ($elm$core$List$isEmpty(moves) ? '' : ('\n' + A2($elm$core$String$join, '\n', moves)));
 };
-var $author$project$Main$gameHistoryTextAreaSize = {height: $author$project$Main$gobanImgSize, width: 100};
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $author$project$Main$handicapImgHeight = 35;
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$core$Array$isEmpty = function (_v0) {
@@ -7251,7 +7269,8 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			$elm$html$Html$Events$alwaysStop,
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
-var $author$project$Main$pageWidth = ($author$project$Main$gobanImgSize + 5) + $author$project$Main$gameHistoryTextAreaSize.width;
+var $author$project$Main$rightPaneSize = {height: $author$project$Main$gobanImgSize, width: 100};
+var $author$project$Main$pageWidth = ($author$project$Main$gobanImgSize + 5) + $author$project$Main$rightPaneSize.width;
 var $elm$html$Html$Attributes$readonly = $elm$html$Html$Attributes$boolProperty('readOnly');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
@@ -7465,7 +7484,7 @@ var $author$project$Main$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('game-history-container')
+						$elm$html$Html$Attributes$class('game-container')
 					]),
 				_List_fromArray(
 					[
@@ -7561,23 +7580,49 @@ var $author$project$Main$view = function (model) {
 								$elm$core$Dict$toList(
 									$author$project$Goban$currentSituation(model.goban).stones)))),
 						A2(
-						$elm$html$Html$textarea,
+						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('game-history-textarea'),
-								A2(
-								$elm$html$Html$Attributes$style,
-								'height',
-								$elm$core$String$fromInt($author$project$Main$gameHistoryTextAreaSize.height) + 'px'),
-								A2(
-								$elm$html$Html$Attributes$style,
-								'width',
-								$elm$core$String$fromInt($author$project$Main$gameHistoryTextAreaSize.width) + 'px'),
-								$elm$html$Html$Attributes$readonly(true),
-								$elm$html$Html$Attributes$value(
-								$author$project$Main$gameHistoryContent(model.goban))
+								$elm$html$Html$Attributes$class('right-pane')
 							]),
-						_List_Nil)
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$type_('button'),
+										$elm$html$Html$Attributes$class(
+										model.placingHandicapMode ? 'handicap-button toggled' : 'handicap-button'),
+										A2(
+										$elm$html$Html$Attributes$style,
+										'width',
+										$elm$core$String$fromInt($author$project$Main$rightPaneSize.width) + 'px'),
+										$elm$html$Html$Events$onClick($author$project$Main$ToggleHandicap)
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Handicap')
+									])),
+								A2(
+								$elm$html$Html$textarea,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('game-history-textarea'),
+										A2(
+										$elm$html$Html$Attributes$style,
+										'height',
+										$elm$core$String$fromInt($author$project$Main$rightPaneSize.height - $author$project$Main$handicapImgHeight) + 'px'),
+										A2(
+										$elm$html$Html$Attributes$style,
+										'width',
+										$elm$core$String$fromInt($author$project$Main$rightPaneSize.width) + 'px'),
+										$elm$html$Html$Attributes$readonly(true),
+										$elm$html$Html$Attributes$value(
+										$author$project$Main$gameHistoryContent(model.goban))
+									]),
+								_List_Nil)
+							]))
 					]))
 			]));
 };
