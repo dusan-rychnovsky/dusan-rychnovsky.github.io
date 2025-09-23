@@ -1,11 +1,11 @@
-template: ../template.html
+template: ../../template.html
 title: Hra Go
 crumbs:
   - label: Domů
     url: /
-  - label: Zdroje
-    url: '#'
   - label: Go
+    url: ../index.html
+  - label: Zdroje
     url: '#'
 sections:
   - title: Go klub Můstek

@@ -1,11 +1,11 @@
-template: ../template.html
+template: ../../template.html
 title: Čaj
 crumbs:
   - label: Domů
     url: /
-  - label: Zdroje
-    url: '#'
   - label: Čaj
+    url: '#'
+  - label: Zdroje
     url: '#'
 sections:
   - title: Mei Leaf
