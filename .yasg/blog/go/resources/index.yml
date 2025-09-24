@@ -1,4 +1,5 @@
 template: ../../template.html
+css-href: ../../static/css/resources.css
 title: Hra Go
 crumbs:
   - label: Domů
@@ -7,6 +8,8 @@ crumbs:
     url: ../index.html
   - label: Zdroje
     url: '#'
+intro:
+  - 'Mé oblíbené zdroje informací:'
 sections:
   - title: Go klub Můstek
     labels: CZ. Klub.

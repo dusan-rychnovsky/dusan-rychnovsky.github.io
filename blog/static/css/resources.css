@@ -1,3 +1,7 @@
+html {
+  overflow-y: scroll;
+}
+
 p, li {
   text-align: justify;
 }
@@ -18,11 +22,6 @@ p, li {
   flex-direction: column;
   align-items: center;
 }
-.header-subtitle {
-  width: 100%;
-  text-align: left;
-  margin-bottom: 0.5rem;
-}
 .main-title {
   font-size: 4.5rem;
   font-weight: 700;
@@ -33,9 +32,8 @@ p, li {
 }
 
 .source-item {
-  margin-bottom: 40px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
+  padding: 20px 0px;
+  border-top: 1px solid #eee;
 }
 .source-item:last-child {
   border-bottom: none;
@@ -45,7 +43,6 @@ p, li {
 .source-image {
   width: 200px;
   height: auto;
-  margin-bottom: 20px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -61,6 +58,10 @@ h3 {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
   color: inherit;
+}
+
+ul {
+  margin-bottom: 0px;
 }
 
 .resource-link {

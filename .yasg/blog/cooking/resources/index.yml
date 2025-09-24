@@ -1,4 +1,5 @@
 template: ../../template.html
+css-href: ../../static/css/resources.css
 title: Vaření
 crumbs:
   - label: Domů
@@ -7,6 +8,8 @@ crumbs:
     url: '#'
   - label: Zdroje
     url: '#'
+intro:
+  - 'Mé oblíbené zdroje informací:'
 sections:
   - title: 'Tamar Adler - An Everlasting Meal'
     labels: ENG. Kniha.

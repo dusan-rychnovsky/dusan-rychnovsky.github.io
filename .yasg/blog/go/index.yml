@@ -1,0 +1,47 @@
+template: ../template.html
+css-href: ../static/css/resources.css
+title: Hra Go
+crumbs:
+  - label: Domů
+    url: /
+  - label: Go
+    url: '#'
+intro:
+  - |
+    Hra Go je můj relativně nový, zato velmi oblíbený koníček. Nejvíc mě baví hrát osobně s přáteli,
+    ať už doma u stolu, nebo venku v přírodě. Ideálně, když se hra spojí s konvičkou výborného
+    činského čaje, což je má další velká vášeň.
+  - Pokud by Vás bavilo si se mnou někdy zahrát, určitě se mi ozvěte.
+  - 'Pár užitečných odkazů:'
+sections:
+  - title: GoPad
+    labels: ENG. Aplikace.
+    img: img/gopad.png
+    paragraphs:
+      - |
+        Webová aplikace pro zaznamenávání vašich partií. Určeno primárně pro tablet. Aplikaci otevřete
+        na svém tabletu, který pak položíte na stůl vedle své desky goban. Během hry zaznamenáváte jednotlivé
+        tahy. Po skončení partie si můžete vyexportovat soubor ve formátu *SGF*, který lze otevřít
+        na všech platformách, jako je *OGS*, nebo *KataGo*. Hru si tak můžete kdykoliv
+        zpětně zanalyzovat.
+      - |
+        Aplikace využívá technologii *local storage*, takže se nemusíte bát, že o hru přijdete, pokud se Vám
+        omylem podaří zavřít okno prohlížeče, nebo se Vám restartuje tablet.
+    links:
+      - label: Aplikace
+        text: GoPad
+        url: https://dusanrychnovsky.cz/gopad
+      - label: GitHub
+        text: GoPad
+        url: https://github.com/dusan-rychnovsky/gopad
+  - title: Oblíbené zdroje informací
+    labels: CZ. Blog.
+    img: img/go-resources.png
+    paragraphs:
+      - |
+        Rozcestník na mé oblíbené zdroje informací o hře Go. Jedná se převážně o YouTube kanály
+        se spoustou skvělých výukových videí.
+    links:
+      - label: Blog
+        text: Zdroje informací o hře Go
+        url: ./resources/index.html
