@@ -5838,7 +5838,7 @@ var $author$project$Goban$placeStone = F2(
 				moves: A2($elm$core$Array$push, newMove, goban.moves)
 			});
 	});
-var $author$project$Goban$gobanImg = {linePx: 5.0, paddingPx: 60.0, sizePx: 2000.0, squarePx: 99.0};
+var $author$project$Goban$gobanImg = {linePx: 2.0, paddingPx: 30.0, sizePx: 695.0, squarePx: 34.0};
 var $elm$core$Basics$round = _Basics_round;
 var $author$project$Goban$posToCoords = F4(
 	function (gobanSize, posX, posY, imgSize) {
