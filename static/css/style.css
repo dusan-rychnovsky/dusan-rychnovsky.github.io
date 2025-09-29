@@ -179,25 +179,48 @@ body.offcanvas-open .site-wrap {
   transform: translateX(-240px);
 }
 
-.offcanvas-toggle {
+.menu-button {
   position: fixed;
   z-index: 89;
+  top: 20px;
+  background-color: white;
+  border: 1px black solid;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.menu-button:hover {
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+.offcanvas-toggle {
   right: 20px;
   text-transform: uppercase;
   letter-spacing: .1em;
   font-size: 13px;
-  top: 20px;
   color: #000;
-  background-color: white;
   padding: 5px 10px;
-  border: 1px black solid;
-  border-radius: 8px;
   font-weight: bold;
 }
 
 .offcanvas-toggle:hover {
   color: #000;
-  opacity: .7;
+}
+
+.language-switch {
+  right: 90px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.language-switch img {
+  width: 29px;
+  height: 20px;
+  border-radius: 2px;
 }
 
 .offcanvas_menu {
