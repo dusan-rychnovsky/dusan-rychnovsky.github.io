@@ -81,11 +81,37 @@ sections:
     labels: ENG. YouTube.
     img: img/farmhouse-on-boone.jpg
     paragraphs:
-      - TODO
+      - |
+        *Lisa Bass* sdílí inspiraci pro jednoduchý, venkovský životní styl. Důraz klade na soběstačnost
+        a zároveň praktičnost. Na svém YouTube kanále se primárně zaměřuje na vaření a pečení
+        ze základních surovin a zejména na kváskové pečivo. Je matkou devíti dětí, proto na něm najdete
+        spoustu inspirace, jak vařit pro velkou rodinu.
     links:
       - label: YouTube
         text: Farmhouse on Boone
         url: https://www.youtube.com/c/FarmhouseonBoone
       - label: Blog
-        text: Farmhouseonboone.com
+        text: Farmhouse on Boone
         url: https://farmhouseonboone.com/
+  - title: Latifs Inspired
+    labels: ENG. YouTube.
+    img: img/latifs-inspired.jpg
+    paragraphs:
+      - |
+        *Latif* je šéfkuchařem indické restaurace ve Velké Británii. Jeho YouTube kanál je plný detailních
+        videoreceptů na vynikající jídla především z indické kuchyně, ale i z dalších asijských zemí.
+    links:
+      - label: YouTube
+        text: Latifs Inspired
+        url: https://www.youtube.com/@LatifsInspired
+  - title: Kuchyně Lidlu
+    labels: CZ. YouTube.
+    img: img/kuchyne-lidlu.jpg
+    paragraphs:
+      - |
+        YouTube kanál plný praktických videoreceptů i návodů, které prezentují známí šefkuchaři - především
+        *Roman Paulus* a *Marcel Ihnačák*.
+    links:
+      - label: YouTube
+        text: Kuchyně Lidlu
+        url: https://www.youtube.com/@CZkuchynelidlu
