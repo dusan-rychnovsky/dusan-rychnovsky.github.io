@@ -1,0 +1,40 @@
+template: ../template.html
+css-href: ../static/css/resources.css
+title: Čaj
+crumbs:
+  - label: Domů
+    url: /
+  - label: Čaj
+    url: '#'
+intro:
+  - |
+    Čaj je téma, které mě posledních pár let velmi zajímá. Důvodů je hned několik. Čaj nabízí bohatou škálu chutí a vůní
+    a mě baví rozvíjet svou schopnost je rozpoznávat a ocenit jejich jemné rozdíly. V dnešní uspěchané a ustarané době
+    mi prospívá meditativní povaha přípravy čaje a jeho hluboké propojení s východními kulturami. V neposlední řadě komunita,
+    která kolem čaje existuje, je opravdu skvělá a mě velmi baví trávit s těmito lidmi čas.
+  - 'Pár užitečných odkazů:'
+sections:
+  - title: My Tea Collection
+    labels: ENG. Aplikace.
+    img: img/myteacollection.png
+    paragraphs:
+      - |
+        Webová aplikace pro evidenci vaší čajové sbírky. Udržujte si sami pro sebe, i navzájem se svými přáteli,
+        přehled o tom, které čaje vlastníte. Můžete také s kýmkoliv sdílet odkaz na konkrétní čaj, s veškerými jeho detaily.
+    links:
+      - label: Aplikace
+        text: My Tea Collection
+        url: https://mytea.dusanrychnovsky.cz
+      - label: GitHub
+        text: My Tea Collection
+        url: https://github.com/dusan-rychnovsky/my-tea-collection
+  - title: Oblíbené zdroje informací
+    labels: CZ. Blog.
+    img: img/tea-resources.png
+    paragraphs:
+      - |
+        Rozcestník na mé oblíbené zdroje informací o čaji - knihy, podcasty, filmy, ...
+    links:
+      - label: Blog
+        text: Zdroje informací o čaji
+        url: ./resources/index.html
