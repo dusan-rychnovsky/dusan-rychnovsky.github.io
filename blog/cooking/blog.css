@@ -38,23 +38,34 @@ html, body {
 }
 
 .sidebar h2 {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  margin: 1.5rem 0 0.5rem;
+  font-size: 1rem;
+  color: var(--text);
+  margin: 1.75rem 0 0.5rem;
   font-weight: bold;
   border: none;
   padding: 0;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .sidebar h2:first-child {
   margin-top: 0;
 }
 
+.sidebar h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 1rem 0 0.4rem 0.5rem;
+  font-weight: bold;
+  border: none;
+  padding: 0;
+}
+
 .sidebar ul {
   list-style: none;
-  margin: 0;
+  margin: 0 0 0 0.5rem;
   padding: 0;
 }
 
