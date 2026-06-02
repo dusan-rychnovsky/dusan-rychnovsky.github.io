@@ -69,6 +69,15 @@ html, body {
   padding: 0;
 }
 
+.sidebar-content > ul:first-child {
+  margin-left: 0;
+}
+
+.sidebar-content > ul:first-child > li > a {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .sidebar li {
   margin-bottom: 0.35rem;
 }
@@ -241,6 +250,169 @@ a:hover {
 em.ref {
   color: var(--muted);
   font-style: italic;
+}
+
+/* Homepage */
+.home {
+  max-width: 720px;
+}
+
+.home .intro {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  padding: 2rem 2rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.home .intro h1 {
+  margin-top: 0;
+}
+
+.snippets {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.snippet {
+  display: flex;
+  gap: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  padding: 1.25rem;
+  align-items: flex-start;
+}
+
+.snippet-thumb {
+  flex-shrink: 0;
+  border-bottom: none;
+  display: block;
+}
+
+.snippet-thumb img {
+  display: block;
+  width: 180px;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 4px;
+  background: var(--accent-soft);
+}
+
+.snippet-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.snippet-title {
+  font-size: 1.3rem;
+  line-height: 1.3;
+  margin: 0 0 0.5rem;
+  color: var(--text);
+  font-weight: bold;
+  border: none;
+  padding: 0;
+}
+
+.snippet-title a {
+  color: var(--text);
+  border-bottom: none;
+}
+
+.snippet-title a:hover {
+  color: var(--accent);
+}
+
+.snippet-perex {
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+  font-style: italic;
+  text-align: left;
+  hyphens: none;
+}
+
+.tags {
+  list-style: none;
+  margin: 0 0 0.6rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tags li {
+  margin: 0;
+}
+
+.tags a {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: none;
+  letter-spacing: 0.02em;
+}
+
+.tags a:hover {
+  background: var(--accent);
+  color: var(--surface);
+}
+
+.tags-cooking a {
+  background: #fbeed1;
+  color: #8a5a00;
+}
+
+.tags-cooking a:hover {
+  background: #d99a1f;
+  color: #ffffff;
+}
+
+.snippet-date {
+  display: block;
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-align: left;
+  hyphens: none;
+}
+
+.snippet-date-label {
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .snippet {
+    flex-direction: column;
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+  }
+  .snippet-thumb {
+    width: 100%;
+  }
+  .snippet-thumb img {
+    width: 100%;
+    height: auto;
+  }
+  .snippet-body {
+    width: 100%;
+  }
+  .snippet-date,
+  .snippet-perex {
+    text-align: center;
+  }
+  .tags {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 1080px) {
