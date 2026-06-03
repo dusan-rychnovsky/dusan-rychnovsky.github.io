@@ -161,7 +161,7 @@ p {
 }
 
 p.lead {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   color: var(--muted);
   font-style: italic;
 }
