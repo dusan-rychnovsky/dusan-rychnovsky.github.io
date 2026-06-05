@@ -133,6 +133,43 @@ html, body {
   }
 }
 
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: -1rem 0 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.breadcrumbs a {
+  color: var(--muted);
+  border-bottom: none;
+  transition: color 0.15s;
+}
+
+.breadcrumbs a:hover {
+  color: var(--accent);
+}
+
+.breadcrumb-sep {
+  color: var(--muted);
+  font-size: 0.95em;
+  user-select: none;
+}
+
+.breadcrumbs [aria-current="page"] {
+  color: var(--text);
+}
+
+.intro .breadcrumbs {
+  margin-top: -0.5rem;
+}
+
 article {
   max-width: 720px;
   margin: 0;
@@ -146,10 +183,10 @@ article {
 h1 {
   font-size: 2.2rem;
   line-height: 1.2;
-  margin: 0 0 1.5rem;
+  margin: 0 0 2rem;
   color: var(--text);
   border-bottom: 3px solid var(--accent);
-  padding-bottom: 0.75rem;
+  padding-bottom: 1rem;
 }
 
 .article-figure {
@@ -494,5 +531,7 @@ em.ref {
   body { font-size: 17px; }
   .layout { padding: 0 1rem; margin: 1rem auto; }
   article { padding: 1.5rem 1.25rem; }
+  .home .intro { padding: 1.5rem 1.25rem; }
+  .breadcrumbs { margin-top: -0.75rem; }
   h1 { font-size: 1.7rem; }
 }
