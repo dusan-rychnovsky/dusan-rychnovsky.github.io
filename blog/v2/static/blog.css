@@ -162,10 +162,6 @@ html, body {
   user-select: none;
 }
 
-.breadcrumbs [aria-current="page"] {
-  color: var(--text);
-}
-
 .intro .breadcrumbs {
   margin-top: -0.5rem;
 }
