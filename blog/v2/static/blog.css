@@ -447,6 +447,16 @@ em.ref {
   color: #ffffff;
 }
 
+.tags-go a {
+  background: #e8e6e1;
+  color: #474440;
+}
+
+.tags-go a:hover {
+  background: #474440;
+  color: #ffffff;
+}
+
 .snippet-date {
   display: block;
   margin: 0 0 0.5rem;
@@ -551,6 +561,11 @@ em.ref {
   padding: 0.15rem 0.55rem;
   border-radius: 999px;
   letter-spacing: 0.02em;
+}
+
+.badges.badges-go li {
+  background: #e8e6e1;
+  color: #474440;
 }
 
 .resource-desc {
