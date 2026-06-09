@@ -63,6 +63,7 @@ html, body {
   padding: 0;
 }
 
+.sidebar h2 a,
 .sidebar h3 a {
   color: inherit;
   display: inline-block;
@@ -73,6 +74,8 @@ html, body {
   transition: background 0.15s, color 0.15s;
 }
 
+.sidebar h2 a:hover,
+.sidebar h2 a.active,
 .sidebar h3 a:hover,
 .sidebar h3 a.active {
   background: var(--accent-soft);
