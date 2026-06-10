@@ -378,6 +378,14 @@ em.ref {
   background: var(--accent-soft);
 }
 
+.snippet-thumb.snippet-thumb-portrait img {
+  width: auto;
+  max-width: 180px;
+  max-height: 260px;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
 .snippet-body {
   flex: 1;
   min-width: 0;
