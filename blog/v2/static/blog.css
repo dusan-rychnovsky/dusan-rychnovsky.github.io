@@ -460,6 +460,16 @@ em.ref {
   color: #ffffff;
 }
 
+.tags-tea a {
+  background: #e6efdd;
+  color: #41703a;
+}
+
+.tags-tea a:hover {
+  background: #4f7a3f;
+  color: #ffffff;
+}
+
 .snippet-date {
   display: block;
   margin: 0 0 0.5rem;
@@ -571,6 +581,11 @@ em.ref {
   color: #474440;
 }
 
+.badges.badges-tea li {
+  background: #e6efdd;
+  color: #41703a;
+}
+
 .resource-desc {
   margin: 0 0 0.75rem;
   text-align: justify;
@@ -597,6 +612,15 @@ em.ref {
   color: var(--muted);
   font-weight: bold;
   margin-right: 0.3rem;
+}
+
+.resource-sublabel {
+  margin: 0.85rem 0 0.3rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--muted);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0.02em;
 }
 
 @media (max-width: 600px) {
