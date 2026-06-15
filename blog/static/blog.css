@@ -506,6 +506,10 @@ em.ref {
     width: 100%;
     height: auto;
   }
+  .snippet-thumb.snippet-thumb-portrait img {
+    margin-left: auto;
+    margin-right: auto;
+  }
   .snippet-body {
     width: 100%;
   }
