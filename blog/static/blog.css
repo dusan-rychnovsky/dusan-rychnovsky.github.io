@@ -1,4 +1,19 @@
+@charset "UTF-8";
+
+/* ============================================================
+   Blog — shared stylesheet (hand-authored, no build step).
+
+   1. Design tokens        7. Callouts
+   2. Base & reset         8. Lists & links
+   3. Layout               9. Pills (tags & badges)
+   4. Sidebar             10. Homepage (intro + snippets)
+   5. Breadcrumbs         11. Resource listings
+   6. Article             12. Responsive
+   ============================================================ */
+
+/* 1. Design tokens */
 :root {
+  /* Base palette */
   --bg: #faf8f4;
   --surface: #ffffff;
   --text: #2c2c2c;
@@ -6,8 +21,35 @@
   --border: #e5e1d8;
   --accent: #3a6ea5;
   --accent-soft: #eaf1f8;
+
+  /* Callouts (aside note & book card) */
+  --callout-bg: #f1ede4;
+  --callout-fg: #4a4a4a;
+
+  /* Section accents for pills (tags & badges):
+     -soft = pill background, base = text, -strong = hover background */
+  --cooking-soft: #fbeed1;
+  --cooking: #8a5a00;
+  --cooking-strong: #d99a1f;
+
+  --finance-soft: #dceceb;
+  --finance: #1d6a64;
+  --finance-strong: #1d6a64;
+
+  --go-soft: #e8e6e1;
+  --go: #474440;
+  --go-strong: #474440;
+
+  --tea-soft: #e6efdd;
+  --tea: #41703a;
+  --tea-strong: #4f7a3f;
+
+  /* Typography */
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+/* 2. Base & reset */
 * { box-sizing: border-box; }
 
 html, body {
@@ -15,11 +57,12 @@ html, body {
   padding: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif);
   font-size: 17px;
   line-height: 1.7;
 }
 
+/* 3. Layout */
 .layout {
   display: grid;
   grid-template-columns: 240px minmax(0, 720px);
@@ -30,6 +73,7 @@ html, body {
   align-items: start;
 }
 
+/* 4. Sidebar navigation */
 .sidebar {
   position: sticky;
   top: 2rem;
@@ -141,6 +185,7 @@ html, body {
   }
 }
 
+/* 5. Breadcrumbs */
 .breadcrumbs {
   display: flex;
   flex-wrap: wrap;
@@ -174,6 +219,7 @@ html, body {
   margin-top: -0.5rem;
 }
 
+/* 6. Article — headings, figure & prose */
 article {
   max-width: 720px;
   margin: 0;
@@ -203,6 +249,10 @@ h1 {
   background: var(--accent-soft);
 }
 
+.article-figure-narrow {
+  max-width: 350px;
+}
+
 h2 {
   font-size: 1.5rem;
   line-height: 1.3;
@@ -223,14 +273,19 @@ p.lead {
   font-style: italic;
 }
 
-p.aside {
-  background: #f1ede4;
-  border-left: 3px solid var(--accent);
-  padding: 0.9rem 1.1rem;
+/* 7. Callouts — aside note (p.aside) & book card (.book-card) share a frame */
+p.aside,
+.book-card {
   margin: 1.5rem 0 1.5rem 1.5rem;
-  color: #4a4a4a;
-  font-size: 0.97rem;
+  padding: 0.9rem 1.1rem;
+  border-left: 3px solid var(--accent);
   border-radius: 0 4px 4px 0;
+  background: var(--callout-bg);
+  color: var(--callout-fg);
+}
+
+p.aside {
+  font-size: 0.97rem;
 }
 
 p.list-label {
@@ -247,15 +302,9 @@ p.list-label + ul {
 
 .book-card {
   display: flex;
-  gap: 1rem;
-  background: #f1ede4;
-  border-left: 3px solid var(--accent);
-  padding: 0.9rem 1.1rem;
-  margin: 1.5rem 0 1.5rem 1.5rem;
-  color: #4a4a4a;
-  font-size: 0.95rem;
-  border-radius: 0 4px 4px 0;
   align-items: flex-start;
+  gap: 1rem;
+  font-size: 0.95rem;
 }
 
 .book-card img {
@@ -303,6 +352,7 @@ p.list-label + ul {
   .book-card img { width: 110px; }
 }
 
+/* 8. Lists & links */
 ul li {
   margin-bottom: 0.4rem;
 }
@@ -327,7 +377,58 @@ em.ref {
   font-style: italic;
 }
 
-/* Homepage */
+/* 9. Pills — tags are links (with hover); badges are static labels.
+   Both share one pill shape; section colors come from the tokens above. */
+.tags,
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 0.6rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li,
+.badges li {
+  margin: 0;
+}
+
+.tags a,
+.badges li {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.tags a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.tags-cooking a,
+.badges-cooking li { background: var(--cooking-soft); color: var(--cooking); }
+.tags-cooking a:hover { background: var(--cooking-strong); color: #fff; }
+
+.tags-finance a,
+.badges-finance li { background: var(--finance-soft); color: var(--finance); }
+.tags-finance a:hover { background: var(--finance-strong); color: #fff; }
+
+.tags-go a,
+.badges-go li { background: var(--go-soft); color: var(--go); }
+.tags-go a:hover { background: var(--go-strong); color: #fff; }
+
+.tags-tea a,
+.badges-tea li { background: var(--tea-soft); color: var(--tea); }
+.tags-tea a:hover { background: var(--tea-strong); color: #fff; }
+
+/* 10. Homepage — intro & snippets */
 .home {
   max-width: 720px;
 }
@@ -418,72 +519,12 @@ em.ref {
   hyphens: none;
 }
 
-.tags {
-  list-style: none;
-  margin: 0 0 0.6rem;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.tags li {
-  margin: 0;
-}
-
-.tags a {
-  display: inline-block;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-size: 0.8rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  padding: 0.15rem 0.55rem;
-  border-radius: 999px;
-  border: none;
-  letter-spacing: 0.02em;
-}
-
-.tags a:hover {
-  background: var(--accent);
-  color: var(--surface);
-}
-
-.tags-cooking a {
-  background: #fbeed1;
-  color: #8a5a00;
-}
-
-.tags-cooking a:hover {
-  background: #d99a1f;
-  color: #ffffff;
-}
-
-.tags-go a {
-  background: #e8e6e1;
-  color: #474440;
-}
-
-.tags-go a:hover {
-  background: #474440;
-  color: #ffffff;
-}
-
-.tags-tea a {
-  background: #e6efdd;
-  color: #41703a;
-}
-
-.tags-tea a:hover {
-  background: #4f7a3f;
-  color: #ffffff;
-}
-
 .snippet-date {
   display: block;
   margin: 0 0 0.5rem;
   font-size: 0.85rem;
   color: var(--muted);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
   text-align: left;
   hyphens: none;
 }
@@ -522,7 +563,7 @@ em.ref {
   }
 }
 
-/* Resources listing */
+/* 11. Resource listings */
 .resources {
   display: flex;
   flex-direction: column;
@@ -568,36 +609,6 @@ em.ref {
   padding: 0;
 }
 
-.badges {
-  list-style: none;
-  margin: 0 0 0.6rem;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.badges li {
-  margin: 0;
-  background: #fbeed1;
-  color: #8a5a00;
-  font-size: 0.8rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  padding: 0.15rem 0.55rem;
-  border-radius: 999px;
-  letter-spacing: 0.02em;
-}
-
-.badges.badges-go li {
-  background: #e8e6e1;
-  color: #474440;
-}
-
-.badges.badges-tea li {
-  background: #e6efdd;
-  color: #41703a;
-}
-
 .resource-desc {
   margin: 0 0 0.75rem;
   text-align: justify;
@@ -609,7 +620,7 @@ em.ref {
   margin: 0;
   padding: 0;
   font-size: 0.9rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
 }
 
 .resource-links li {
@@ -631,7 +642,7 @@ em.ref {
   font-size: 0.85rem;
   font-weight: bold;
   color: var(--muted);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
   letter-spacing: 0.02em;
 }
 
@@ -656,6 +667,7 @@ em.ref {
   }
 }
 
+/* 12. Responsive — layout & small-screen tweaks */
 @media (max-width: 1080px) {
   .layout {
     grid-template-columns: 1fr;
