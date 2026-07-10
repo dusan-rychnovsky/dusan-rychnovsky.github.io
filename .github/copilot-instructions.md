@@ -51,7 +51,10 @@ When asked to create a new article, complete **all** of the following:
 
 3. **Update the sidemenu in _every_ existing blog page**, not just the new one. The
    `<details class="sidebar">` block is duplicated across all blog HTML files and must be
-   kept identical (aside from which link has `class="active"`). Discover the full set
+   kept identical (aside from which link is marked `aria-current="page"`). It is a
+   nested `<ul class="sidebar-menu">`: top-level section labels use `.sidebar-section`
+   and sub-section labels `.sidebar-subsection` (each a `<span>`, or an `<a>` when the
+   section has its own landing page). Discover the full set
    with a search for the sidebar markup rather than assuming a fixed list — at time of
    writing it spans these files:
    - [`blog/index.html`](../blog/index.html)

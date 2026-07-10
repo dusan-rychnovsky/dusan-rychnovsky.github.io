@@ -81,93 +81,65 @@ html, body {
   line-height: 1.5;
 }
 
-.sidebar h2 {
-  font-size: 1rem;
-  color: var(--text);
-  margin: 1.75rem 0 0.5rem;
-  font-weight: bold;
-  border: none;
-  padding: 0;
-  letter-spacing: normal;
-  text-transform: none;
-}
-
-.sidebar h2:first-child {
-  margin-top: 0;
-}
-
-.sidebar h3 {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  margin: 1rem 0 0.4rem 0.5rem;
-  font-weight: bold;
-  border: none;
-  padding: 0;
-}
-
-.sidebar h2 a,
-.sidebar h3 a {
-  color: inherit;
-  display: inline-block;
-  margin-left: -0.4rem;
-  padding: 0.1rem 0.4rem;
-  border-radius: 4px;
-  border-bottom: none;
-  transition: background 0.15s, color 0.15s;
-}
-
-.sidebar h2 a:hover,
-.sidebar h2 a.active,
-.sidebar h3 a:hover,
-.sidebar h3 a.active {
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-
-.sidebar ul {
+/* Nested-list menu — a plain multi-level <ul>; nesting conveys hierarchy */
+.sidebar-menu,
+.sidebar-menu ul {
   list-style: none;
-  margin: 0 0 0 0.5rem;
+  margin: 0;
   padding: 0;
 }
 
-.sidebar-content > ul:first-child {
-  margin-left: 0;
+.sidebar-menu ul {
+  padding-left: 0.75rem;
 }
 
-.sidebar-content > ul:first-child > li > a {
-  padding-left: 0;
-  padding-right: 0;
+.sidebar-menu li {
+  margin: 0.15rem 0;
 }
 
-.sidebar-content > ul.sidebar-standalone {
-  margin-left: 0;
-  margin-top: 1rem;
-}
-
-.sidebar li {
-  margin-bottom: 0.35rem;
-}
-
-.sidebar a {
-  border-bottom: none;
-  color: var(--text);
+/* Links — leaf articles and linked section / sub-section labels */
+.sidebar-menu a {
   display: block;
   padding: 0.25rem 0.5rem;
+  border-bottom: none;
   border-radius: 4px;
+  color: var(--text);
   transition: background 0.15s, color 0.15s;
 }
 
-.sidebar a:hover {
+.sidebar-menu a:hover,
+.sidebar-menu a[aria-current="page"] {
   background: var(--accent-soft);
   color: var(--accent);
 }
 
-.sidebar a.active {
-  background: var(--accent-soft);
-  color: var(--accent);
+.sidebar-menu a[aria-current="page"] {
   font-weight: bold;
+}
+
+/* Section & sub-section labels — a plain <span>, or an <a> when the
+   section has its own landing page (scoped under .sidebar-menu so the
+   label colour wins over the generic .sidebar-menu a rule above) */
+.sidebar-menu .sidebar-section,
+.sidebar-menu .sidebar-subsection {
+  display: block;
+  padding: 0.25rem 0.5rem;
+}
+
+.sidebar-menu .sidebar-section {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text);
+}
+
+.sidebar-menu .sidebar-subsection {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .sidebar > summary {
