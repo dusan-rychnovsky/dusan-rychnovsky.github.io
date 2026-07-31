@@ -44,6 +44,10 @@
   --tea: #41703a;
   --tea-strong: #4f7a3f;
 
+  --swe-soft: #e8e4f4;
+  --swe: #574b9e;
+  --swe-strong: #574b9e;
+
   /* Typography */
   --font-serif: Georgia, "Times New Roman", serif;
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -77,6 +81,8 @@ html, body {
 .sidebar {
   position: sticky;
   top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
   font-size: 0.95rem;
   line-height: 1.5;
 }
@@ -225,6 +231,19 @@ h1 {
   max-width: 350px;
 }
 
+/* Plain in-article image — natural size, centered, softly framed */
+.article-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  padding: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
 h2 {
   font-size: 1.5rem;
   line-height: 1.3;
@@ -245,8 +264,55 @@ p.lead {
   font-style: italic;
 }
 
-/* 7. Callouts — aside note (p.aside) & book card (.book-card) share a frame */
-p.aside,
+article pre {
+  margin: 1.5rem 0;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #f5f3ee;
+  color: #34312d;
+  font-family: Consolas, "Liberation Mono", monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+article pre code {
+  font: inherit;
+}
+
+/* Inline code — the HTML equivalent of markdown `backticks` */
+article :not(pre) > code {
+  padding: 0.12em 0.4em;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #f5f3ee;
+  color: #34312d;
+  font-family: Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+}
+
+.syntax-keyword {
+  color: #9b3154;
+  font-weight: bold;
+}
+
+.syntax-type {
+  color: #006a73;
+}
+
+.syntax-function {
+  color: #7a5a00;
+}
+
+.syntax-comment {
+  color: #746f67;
+  font-style: italic;
+}
+
+/* 7. Callouts — aside note (.aside) & book card (.book-card) share a frame */
+.aside,
 .book-card {
   margin: 1.5rem 0 1.5rem 1.5rem;
   padding: 0.9rem 1.1rem;
@@ -256,8 +322,18 @@ p.aside,
   color: var(--callout-fg);
 }
 
-p.aside {
+.aside {
   font-size: 0.97rem;
+}
+
+/* Multi-paragraph aside (a container <aside class="aside"> with <p> children):
+   let the callout padding own the outer spacing, space paragraphs between */
+.aside p {
+  margin: 0;
+}
+
+.aside p + p {
+  margin-top: 0.8rem;
 }
 
 p.list-label {
@@ -269,7 +345,7 @@ p.list-label + ul {
 }
 
 @media (max-width: 600px) {
-  p.aside { margin-left: 0; }
+  .aside { margin-left: 0; }
 }
 
 .book-card {
@@ -399,6 +475,10 @@ em.ref {
 .tags-tea a,
 .badges-tea li { background: var(--tea-soft); color: var(--tea); }
 .tags-tea a:hover { background: var(--tea-strong); color: #fff; }
+
+.tags-swe a,
+.badges-swe li { background: var(--swe-soft); color: var(--swe); }
+.tags-swe a:hover { background: var(--swe-strong); color: #fff; }
 
 /* 10. Homepage — intro & snippets */
 .home {
@@ -648,6 +728,8 @@ em.ref {
   }
   .sidebar {
     position: static;
+    max-height: none;
+    overflow: visible;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 6px;

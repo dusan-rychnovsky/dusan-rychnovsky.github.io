@@ -1,0 +1,48 @@
+flowchart TB
+    Owner1(["fa:fa-user Owner"])
+    DataSet1[["<strong><big>DataSet</big></strong>"]]
+    Scope1A("Scope")
+    Scope1B("Scope")
+    Node1A(["Node"])
+    Node1B(["Node"])
+    Node1C(["Node"])
+    Node1D(["Node"])
+    Node1E(["Node"])
+    Node1F(["Node"])
+    Node1G(["Node"])
+    Node1H(["Node"])
+
+    Owner2(["fa:fa-user Owner"])
+    DataSet2[["<strong><big>DataSet</big></strong>"]]
+    Scope2A("Scope")
+    Node2A(["Node"])
+    Node2B(["Node"])
+    Node2C(["Node"])
+    Node2D(["Node"])
+    Node2E(["Node"])
+
+    Owner1-->DataSet1
+    DataSet1-->Scope1A
+    Scope1A-->Node1A
+    Node1A-->Node1B
+    Node1A-->Node1C
+    Node1C-->Node1D-->Node1E
+    Node1D-->Node1F
+    Node1D-->Node1G
+    DataSet1-->Scope1B
+    Scope1B-->Node1D
+
+    Owner2-->DataSet2
+    DataSet2-->Scope2A
+    Scope2A-->Node2A--->Node2B
+    Node2B-->Node2C
+    Node2B-->Node2D
+
+    Node1A-->Node1H-->Node2A
+    Node2A-->Node2E-->Node1A
+
+    classDef blue fill:lightblue;
+    class Owner1 blue;
+
+    classDef green fill:lightsalmon;
+    class Owner2 green;

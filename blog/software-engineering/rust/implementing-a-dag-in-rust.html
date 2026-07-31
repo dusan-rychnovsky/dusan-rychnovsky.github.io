@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Implementing a DAG in Rust</title>
+<meta name="description" content="In Rust, at first glance, the ownership mechanism looks logical and simple - every value must always have exactly one owner. When the owner goes out of scope, the values it owns are automatically dropped. A value can be borrowed either through a mutable reference, of which there can be at most one at a time, or through immutable references, of which there can be more than one. In other words, there can either be a single writer or multiple readers of every value. That all makes sense and is clear in simple cases. Well, it turns out this mechanism can get pretty tricky with recursive data structures.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Implementing a DAG in Rust">
+<meta property="og:description" content="In Rust, at first glance, the ownership mechanism looks logical and simple - every value must always have exactly one owner. When the owner goes out of scope, the values it owns are automatically dropped. A value can be borrowed either through a mutable reference, of which there can be at most one at a time, or through immutable references, of which there can be more than one. In other words, there can either be a single writer or multiple readers of every value. That all makes sense and is clear in simple cases. Well, it turns out this mechanism can get pretty tricky with recursive data structures.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Implementing a DAG in Rust">
+<meta name="twitter:description" content="In Rust, at first glance, the ownership mechanism looks logical and simple - every value must always have exactly one owner. When the owner goes out of scope, the values it owns are automatically dropped. A value can be borrowed either through a mutable reference, of which there can be at most one at a time, or through immutable references, of which there can be more than one. In other words, there can either be a single writer or multiple readers of every value. That all makes sense and is clear in simple cases. Well, it turns out this mechanism can get pretty tricky with recursive data structures.">
+<link rel="stylesheet" href="../../static/blog.css">
+</head>
+<body>
+<div class="layout">
+<details class="sidebar" aria-label="Seznam článků">
+  <summary>Další články</summary>
+  <div class="sidebar-content">
+    <ul class="sidebar-menu">
+      <li><a href="../../index.html">Vítejte</a></li>
+      <li>
+        <span class="sidebar-section">Vaření</span>
+        <ul>
+          <li><a href="../../cooking/resources/index.html">Oblíbené zdroje</a></li>
+          <li>
+            <span class="sidebar-subsection">Recepty</span>
+            <ul>
+              <li><a href="../../cooking/recipes/kroupove-misky.html">Kroupové misky</a></li>
+              <li><a href="../../cooking/recipes/vlocky-fermentovane-pres-noc.html">Vločky přes noc</a></li>
+            </ul>
+          </li>
+          <li>
+            <span class="sidebar-subsection">Techniky</span>
+            <ul>
+              <li><a href="../../cooking/techniques/jak-varim-kroupy.html">Jak vařím kroupy</a></li>
+              <li><a href="../../cooking/techniques/jak-varim-hnedou-ryzi.html">Jak vařím hnědou rýži</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <span class="sidebar-section">Finance</span>
+        <ul>
+          <li>
+            <a class="sidebar-subsection" href="../../finance/mmm/index.html">Moudrost MMM</a>
+            <ul>
+              <li><a href="../../finance/mmm/smesne-jednoducha-matematika.html">Směšně jednoduchá matematika finanční nezávislosti</a></li>
+              <li><a href="../../finance/mmm/klauni-za-volantem.html">Klauni za volantem</a></li>
+              <li><a href="../../finance/mmm/jist-zdrave-neznamena-jist-draze.html">Jíst zdravě neznamená jíst draze</a></li>
+              <li><a href="../../finance/mmm/svaly-misto-motoru.html">Svaly místo motoru</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="sidebar-section" href="../../go/index.html">Go</a>
+        <ul>
+          <li><a href="../../go/resources/index.html">Oblíbené zdroje</a></li>
+          <li><a href="../../go/gopad/index.html">GoPad</a></li>
+        </ul>
+      </li>
+      <li>
+        <a class="sidebar-section" href="../../tea/index.html">Čaj</a>
+        <ul>
+          <li><a href="../../tea/resources/index.html">Oblíbené zdroje</a></li>
+          <li><a href="../../tea/myteacollection.html">My Tea Collection</a></li>
+        </ul>
+      </li>
+      <li>
+        <span class="sidebar-section">Software Engineering</span>
+        <ul>
+          <li>
+            <span class="sidebar-subsection">Rust</span>
+            <ul>
+              <li><a href="../../software-engineering/rust/implementing-a-dag-in-rust.html" aria-current="page">Implementing a DAG in Rust</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</details>
+<article>
+  <nav class="breadcrumbs" aria-label="Drobečková navigace">
+    <a href="../../index.html">Domů</a>
+    <span class="breadcrumb-sep">›</span>
+    <span>Software Engineering</span>
+    <span class="breadcrumb-sep">›</span>
+    <span>Rust</span>
+  </nav>
+  <h1>Implementing a DAG in Rust</h1>
+  <p class="aside">For the past few months, I've been playing with Rust. As I'm completely new to the language, there's much to learn and explore. I plan to make notes on this blog whenever I discover something useful.</p>
+  <p class="lead">In Rust, at first glance, the <strong>ownership mechanism</strong> looks logical and simple - every value must always have exactly one owner. When the owner goes out of scope, the values it owns are automatically dropped. A value can be borrowed either through a mutable reference, of which there can be at most one at a time, or through immutable references, of which there can be more than one. In other words, there can either be a single writer or multiple readers of every value. That all makes sense and is clear in simple cases. Well, it turns out this mechanism can get pretty tricky with recursive data structures.</p>
+  <p>In my case, I needed to implement a <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph" target="_blank">DAG</a> (directed acyclic graph) whose different roots can have different owners. So, something like this:</p>
+  <img class="article-image" src="implementing-a-dag-in-rust-dataset.png" alt="DAG diagram">
+  <p>Notice how each <code>Node</code> can have more than one parent. Which is what makes this case problematic, because a parent <code>Node</code> needs to sometimes act as an owner, and sometimes only have a reference.</p>
+  <p>I tried a couple of different approaches. In the end, the only one that worked was using <code>Rc&lt;T&gt;</code>.</p>
+  <aside class="aside">
+    <p><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html" target="_blank">Rc</a> is a <strong>single-threaded reference counting smart pointer</strong> implementation from Rust standard library. You can clone an <code>Rc&lt;T></code> to create a new reference to the same value and increment its reference count. Conversely, when the <code>Rc&lt;T></code> is dropped, the reference count is decremented. Once it reaches zero, the value itself is automatically dropped too. This is what allows the value to be shared without a clear owner.</p>
+    <p>Specifically, you can use <code>Rc&lt;T&gt;::new(value: T)</code> to create the first reference and then <code>Rc::clone(&amp;self)</code> to create additional references.</p>
+  </aside>
+  <p>In my case the data structure looked like this:</p>
+  <pre><code><span class="syntax-keyword">use</span> std::rc::<span class="syntax-type">Rc</span>;
+
+<span class="syntax-keyword">pub enum</span> <span class="syntax-type">Node</span> {
+  Seq(<span class="syntax-type">Vec</span>&lt;<span class="syntax-type">Rc</span>&lt;<span class="syntax-type">Node</span>>>),
+  <span class="syntax-comment">// ...</span>
+}
+
+<span class="syntax-keyword">pub struct</span> <span class="syntax-type">Scope</span> {
+  root: <span class="syntax-type">Rc</span>&lt;<span class="syntax-type">Node</span>>,
+  <span class="syntax-comment">// ...</span>
+}
+
+<span class="syntax-keyword">pub struct</span> <span class="syntax-type">DataSet</span> {
+  scopes: <span class="syntax-type">Vec</span>&lt;<span class="syntax-type">Scope</span>>,
+  <span class="syntax-comment">// ...</span>
+}</code></pre>
+
+  <p>Which allowed me to create <code>Scopes</code> using a new <code>Node</code> like this:</p>
+  <pre><code><span class="syntax-keyword">let</span> scope = <span class="syntax-type">Scope</span> {
+  root: <span class="syntax-type">Rc</span>::<span class="syntax-function">new</span>(<span class="syntax-type">Node</span>::<span class="syntax-function">Seq</span>(...)),
+  <span class="syntax-comment">// ...</span>
+};</code></pre>
+
+  <p>Or using an existing <code>Node</code> like this:</p>
+  <pre><code><span class="syntax-keyword">let</span> scope = <span class="syntax-type">Scope</span> {
+  root: <span class="syntax-type">Rc</span>::<span class="syntax-function">clone</span>(&amp;node),
+  <span class="syntax-comment">// ...</span>
+};</code></pre>
+
+  <p>If you want to see more details, you can check the full implementation in my <a href="https://github.com/dusan-rychnovsky/yet-another-site-generator" target="_blank">Yet Another (Static) Site Generator</a> repository on GitHub.</p>
+</article>
+</div>
+<script data-goatcounter="https://dusanrychnovsky-cz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
