@@ -77,8 +77,11 @@ When asked to create a new article, complete **all** of the following:
      e.g. `<time datetime="2026-06-09">9.&nbsp;6.&nbsp;2026</time>` (Czech format,
      non-breaking spaces).
    - Thumbnail points at the article's generated image.
-   - Tags reuse the section's tag color class (e.g. `tags-cooking`, `tags-finance`,
-     `tags-go`); add a new `tags-<section>` rule to the stylesheet for a new section.
+   - The category color lives on each **pill**, not the list: put `pill-<section>`
+     on the tag's `<a>` (or a badge's `<li>`), so one `<ul class="tags">` can mix
+     tags from different sections. Add a new `.tags a.pill-<section>` /
+     `.badges li.pill-<section>` rule (plus its `:hover`) to the stylesheet for a new
+     section.
 
 5. **Generate the snippet image.** Each article has its own image that must be
    **visually very pleasing** and **clearly reflect what the article is about**. It does

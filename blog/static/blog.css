@@ -460,25 +460,27 @@ em.ref {
   color: #fff;
 }
 
-.tags-cooking a,
-.badges-cooking li { background: var(--cooking-soft); color: var(--cooking); }
-.tags-cooking a:hover { background: var(--cooking-strong); color: #fff; }
+/* Category color goes on each pill — put pill-<section> on a tag's <a> or a
+   badge's <li> so a single list can mix tags from different sections. */
+.tags a.pill-cooking,
+.badges li.pill-cooking { background: var(--cooking-soft); color: var(--cooking); }
+.tags a.pill-cooking:hover { background: var(--cooking-strong); color: #fff; }
 
-.tags-finance a,
-.badges-finance li { background: var(--finance-soft); color: var(--finance); }
-.tags-finance a:hover { background: var(--finance-strong); color: #fff; }
+.tags a.pill-finance,
+.badges li.pill-finance { background: var(--finance-soft); color: var(--finance); }
+.tags a.pill-finance:hover { background: var(--finance-strong); color: #fff; }
 
-.tags-go a,
-.badges-go li { background: var(--go-soft); color: var(--go); }
-.tags-go a:hover { background: var(--go-strong); color: #fff; }
+.tags a.pill-go,
+.badges li.pill-go { background: var(--go-soft); color: var(--go); }
+.tags a.pill-go:hover { background: var(--go-strong); color: #fff; }
 
-.tags-tea a,
-.badges-tea li { background: var(--tea-soft); color: var(--tea); }
-.tags-tea a:hover { background: var(--tea-strong); color: #fff; }
+.tags a.pill-tea,
+.badges li.pill-tea { background: var(--tea-soft); color: var(--tea); }
+.tags a.pill-tea:hover { background: var(--tea-strong); color: #fff; }
 
-.tags-swe a,
-.badges-swe li { background: var(--swe-soft); color: var(--swe); }
-.tags-swe a:hover { background: var(--swe-strong); color: #fff; }
+.tags a.pill-swe,
+.badges li.pill-swe { background: var(--swe-soft); color: var(--swe); }
+.tags a.pill-swe:hover { background: var(--swe-strong); color: #fff; }
 
 /* 10. Homepage — intro & snippets */
 .home {
