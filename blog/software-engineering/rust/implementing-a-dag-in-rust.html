@@ -98,8 +98,8 @@
   <p>Notice how each <code>Node</code> can have more than one parent. Which is what makes this case problematic, because a parent <code>Node</code> needs to sometimes act as an owner, and sometimes only have a reference.</p>
   <p>I tried a couple of different approaches. In the end, the only one that worked was using <code>Rc&lt;T&gt;</code>.</p>
   <aside class="aside">
-    <p><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html" target="_blank">Rc</a> is a <strong>single-threaded reference counting smart pointer</strong> implementation from Rust standard library. You can clone an <code>Rc&lt;T></code> to create a new reference to the same value and increment its reference count. Conversely, when the <code>Rc&lt;T></code> is dropped, the reference count is decremented. Once it reaches zero, the value itself is automatically dropped too. This is what allows the value to be shared without a clear owner.</p>
-    <p>Specifically, you can use <code>Rc&lt;T&gt;::new(value: T)</code> to create the first reference and then <code>Rc::clone(&amp;self)</code> to create additional references.</p>
+    <p><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html" target="_blank">Rc&lt;T&gt;</a> is a <strong>single-threaded reference counting smart pointer</strong> implementation from Rust standard library. You can clone an <code>Rc&lt;T></code> to create a new reference to the same value and increment its reference count. Conversely, when the <code>Rc&lt;T></code> is dropped, the reference count is decremented. Once it reaches zero, the value itself is automatically dropped too. This is what allows the value to be shared without a clear owner.</p>
+    <p>Specifically, you can use <code>Rc&lt;T&gt;::new(value: T)</code> to create first reference and then <code>Rc::clone(&amp;self)</code> to create additional references.</p>
   </aside>
   <p>In my case the data structure looked like this:</p>
   <pre><code><span class="syntax-keyword">use</span> std::rc::<span class="syntax-type">Rc</span>;
