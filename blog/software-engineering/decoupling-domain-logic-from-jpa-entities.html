@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decoupling Domain Logic from JPA Entities</title>
+<meta name="description" content="In Software engineering, naming concepts properly is hard. And so is structuring a codebase. Recently I spent some time thinking about this while extending one of my hobby projects and I changed my long-held opinions. Let me briefly explain why.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Decoupling Domain Logic from JPA Entities">
+<meta property="og:description" content="In Software engineering, naming concepts properly is hard. And so is structuring a codebase. Recently I spent some time thinking about this while extending one of my hobby projects and I changed my long-held opinions. Let me briefly explain why.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Decoupling Domain Logic from JPA Entities">
+<meta name="twitter:description" content="In Software engineering, naming concepts properly is hard. And so is structuring a codebase. Recently I spent some time thinking about this while extending one of my hobby projects and I changed my long-held opinions. Let me briefly explain why.">
+<link rel="stylesheet" href="../static/blog.css">
+</head>
+<body>
+<div class="layout">
+<details class="sidebar" aria-label="Seznam článků">
+	<summary>Další články</summary>
+	<div class="sidebar-content">
+		<ul class="sidebar-menu">
+			<li><a href="../index.html">Vítejte</a></li>
+			<li>
+				<span class="sidebar-section">Vaření</span>
+				<ul>
+					<li><a href="../cooking/resources/index.html">Oblíbené zdroje</a></li>
+					<li>
+						<span class="sidebar-subsection">Recepty</span>
+						<ul>
+							<li><a href="../cooking/recipes/kroupove-misky.html">Kroupové misky</a></li>
+							<li><a href="../cooking/recipes/vlocky-fermentovane-pres-noc.html">Vločky přes noc</a></li>
+						</ul>
+					</li>
+					<li>
+						<span class="sidebar-subsection">Techniky</span>
+						<ul>
+							<li><a href="../cooking/techniques/jak-varim-kroupy.html">Jak vařím kroupy</a></li>
+							<li><a href="../cooking/techniques/jak-varim-hnedou-ryzi.html">Jak vařím hnědou rýži</a></li>
+							<li><a href="../cooking/techniques/zeleninove-nate.html">Zeleninové natě</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<span class="sidebar-section">Finance</span>
+				<ul>
+					<li>
+						<a class="sidebar-subsection" href="../finance/mmm/index.html">Moudrost MMM</a>
+						<ul>
+							<li><a href="../finance/mmm/smesne-jednoducha-matematika.html">Směšně jednoduchá matematika finanční nezávislosti</a></li>
+							<li><a href="../finance/mmm/klauni-za-volantem.html">Klauni za volantem</a></li>
+							<li><a href="../finance/mmm/jist-zdrave-neznamena-jist-draze.html">Jíst zdravě neznamená jíst draze</a></li>
+							<li><a href="../finance/mmm/svaly-misto-motoru.html">Svaly místo motoru</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a class="sidebar-section" href="../go/index.html">Go</a>
+				<ul>
+					<li><a href="../go/resources/index.html">Oblíbené zdroje</a></li>
+					<li><a href="../go/gopad/index.html">GoPad</a></li>
+				</ul>
+			</li>
+			<li>
+				<a class="sidebar-section" href="../tea/index.html">Čaj</a>
+				<ul>
+					<li><a href="../tea/resources/index.html">Oblíbené zdroje</a></li>
+					<li><a href="../tea/myteacollection.html">My Tea Collection</a></li>
+				</ul>
+			</li>
+			<li>
+				<a class="sidebar-section" href="index.html">Software Engineering</a>
+				<ul>
+					<li><a href="decoupling-domain-logic-from-jpa-entities.html" aria-current="page">Decoupling Domain Logic from JPA Entities</a></li>
+					<li>
+						<span class="sidebar-subsection">Rust</span>
+						<ul>
+							<li><a href="rust/implementing-a-dag-in-rust.html">Implementing a DAG in Rust</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</details>
+<article>
+	<nav class="breadcrumbs" aria-label="Drobečková navigace">
+		<a href="../index.html">Domů</a>
+		<span class="breadcrumb-sep">›</span>
+		<a href="index.html">Software Engineering</a>
+	</nav>
+	<h1>Decoupling Domain Logic from JPA Entities</h1>
+	<p class="lead">In Software engineering, naming concepts properly is hard. And so is structuring a codebase. Recently I spent some time thinking about this while extending one of my hobby projects and I changed my long-held opinions. Let me briefly explain why.</p>
+  <h2>Example #1: Syntactically Structured Code</h2>
+  <p>This is what I usually find in a typical project at work (obviously simplified for illustration purposes):</p>
+  <pre>
+  📁 <strong>SegmentationService</strong>
+  ├── 📁 Controllers
+  │   ├── 📄 SegmentController.cs
+  │   └── 📄 SegmentMembersController.cs
+  ├── 📁 DataAccess
+  │   └── 📄 SqlClient.cs
+  ├── 📁 Exceptions
+  │   ├── 📄 AuthenticationException.cs
+  │   ├── 📄 ColumnNotFoundException.cs
+  │   ├── 📄 ColumnTruncatedException.cs
+  │   └── 📄 ...
+  ├── 📁 Extensions
+  │   ├── 📄 ExceptionExtensions.cs
+  │   ├── 📄 IEnumerableExtensions.cs
+  │   └── 📄 ...
+  ├── 📁 Services
+  │   └── 📁 SegmentService
+  │       └── 📄 SegmentService.cs
+  │   └── 📁 SegmentMembersService
+  │       ├── 📄 MembersGroup.cs
+  │       └── 📄 SegmentMembersService.cs
+  ├── 📁 Storage
+  │   └── 📄 DataLakeClient.cs
+  ...</pre>
+  <p>Notice how <strong>files are grouped according to syntactic constructs</strong> they implement - controllers together with other controllers, services with services. Every single exception in one package! Data access code randomly split into two places, <code>DataAccess</code> and <code>Storage</code>.</p>
+	<p>I am strongly convinced that <strong>this is not okay</strong>! This kind of layout doesn't help newcomers understand what the service does. Even in this trivial example, it takes some mental effort to notice that it implements two basic areas of functionality: segment lifecycle and segment members management. It also makes future changes awkward. Whether you're fixing a bug or introducing a new feature, your work will likely be scoped to segment lifecycle, segment members management, or an entirely new area. Regardless, you'll have to touch many files scattered throughout the codebase.</p>
+  <p>Let me remind you of an old piece of wisdom: <strong>code that changes together belongs together</strong>. Isolating changes reduces how much context our human brains need to hold at once.</p>
+  <p>I have always advocated this approach instead:</p>
+  <pre>
+  📁 <strong>SegmentationService</strong>
+  ├── 📁 Segment
+  │   ├── 📄 SegmentController.cs
+  │   ├── 📄 SegmentService.cs
+  │   ├── 📄 SegmentRepository.cs
+  │   ├── 📄 SegmentStaleException.cs
+  │   └── 📄 ...
+  ├── 📁 SegmentMembers
+  │   ├── 📄 SegmentMembersController.cs
+  │   ├── 📄 SegmentMembersService.cs
+  │   ├── 📄 SegmentMembersRepository.cs
+  │   ├── 📄 TooManyMembersException.cs
+  │   └── 📄 ...
+  ...</pre>
+  <h2>Example #2: Fat Entities</h2>
+	<p>Let's take a look at another example, this time taken from my hobby project <a href="https://github.com/dusan-rychnovsky/my-tea-collection" target="_blank">My Tea Collection</a>. It's a web application that allows to keep track of your tea collection. Naturally, its use cases revolve around tea.</p>
+  <p>Faithful to my principles, this is how I originally structured the repository:</p>
+  <pre>
+  📁 <strong>MyTeaCollection</strong>
+  ├── 📁 Tea
+  │   ├── 📄 TeaController.java
+  │   ├── 📄 TeaEntity.java
+  │   ├── 📄 TeaRepository.java
+  │   └── 📄 ...
+  ...</pre>
+	<p>To avoid code duplication, I placed all tea-related behavior in <code>TeaEntity</code>, alongside its persistence annotations, and even referenced the class directly from views. I know this is an anti-pattern, but initially it seemed like less of a problem compared with maintaining several versions of the same class and its attributes.</p>
+  <p>As I was adding new features, at some point it became clear that <code>TeaEntity</code> class was becoming overly convoluted, it was getting more and more difficult to choose persistence annotations to satisfy all scenarios, etc.</p>
+  <p>In a way, this solution was an opposite extreme to the problematic codebase from the previous example. Before the problem was too little cohesion, now it was too much coupling.</p>
+  <h2>DDD and CQRS</h2>
+  <p>Incidentally, it was at this same time that I was re-reading my copy of <a href="https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215" target="_blank">Domain Driven Design</a> by Eric Evans - a great book full of timeless wisdom, which I highly recommend. It was clear that a <strong>separate domain layer</strong> had to be extracted from the persistence entities, even if that meant a parallel class hierarchy.</p>
+  <aside class="book-card">
+    <a href="https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215" target="_blank" rel="noopener">
+      <img src="eric-evans-domain-driven-design.jpg" alt="Domain Driven Design">
+    </a>
+    <div class="book-card-body">
+      <div class="book-card-title">Domain Driven Design</div>
+      <div class="book-card-author">Eric Evans</div>
+      <p class="book-card-desc">Software design thought leader and founder of Domain Language, Eric Evans, provides a systematic approach to domain-driven design, presenting an extensive set of design best practices, experience-based techniques, and fundamental principles that facilitate the development of software projects facing complex domains.</p>
+      <a class="book-card-link" href="https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215" target="_blank" rel="noopener">Amazon.com →</a>
+    </div>
+  </aside>
+  <p>However, that was only part of the puzzle - I still needed to deal with those complex persistence annotations. I was also wondering how to model different views of the same domain concept - think a view that renders a list of teas, each with only basic info, versus a detailed view of a single tea with all its properties.</p>
+  <p>After a discussion with Github Copilot I realized that, even though I would normally think of it only for <a href="https://martinfowler.com/eaaDev/EventSourcing.html" target="_blank">Event Driven</a> scenarios, <a href="https://martinfowler.com/bliki/CQRS.html" target="_blank">CQRS</a> (Command Query Responsibility Segregation) is a natural fit here. Specifically, <strong>only use the domain layer on the write path</strong>, to validate business rules and make sure data stored in the database are always consistent. <strong>On the read path, query the database directly and use simple view models</strong>, denormalized to best fit each scenario.</p>
+  <p>This is the architecture that I would have:</p>
+  <img class="article-image" src="read-path-write-path.png" alt="Read Path vs Write path" />
+  <p>And this is the corresponding packaging structure:</p>
+  <pre>
+  📁 <strong>MyTeaCollection</strong>
+  ├── 📁 Web
+  │   └── 📄 TeaController.java
+  ├── 📁 Application
+  │   ├── 📄 AddTeaCommand.java
+  │   └── 📄 AddTea.java
+  ├── 📁 Domain
+  │   └── 📄 Tea.java
+  ├── 📁 Persistence
+  │   ├── 📄 TeaEntity.java
+  │   └── 📄 TeaRepository.java
+  ├── 📁 Query
+  │   └── 📄 TeaQueryRepository.java
+  └── 📁 View
+      ├── 📄 TeaSummary.java
+      └── 📄 TeaDetail.java</pre>
+  <p>I think it's clear that this design is much more verbose - that is the cost I had to pay for a clear separation of concerns.</p>
+  <h2>Model-Oriented versus UseCase-Oriented Layers</h2>
+  <p>At this point you might be thinking - this is starting to look a lot similar to the introductory example - classes are grouped according to their role, rather than related functionality. In my opinion, the current situation is still better - at least you can clearly see the architecture layers. But, after new features are implemented and more and more classes added to each layer, those flat packages do become hard to navigate.</p>
+  <p>This is where I realized that <strong>it's very easy to split some layers by use case, while for other layers it is natural to stay compact</strong>. Those are layers which represent a model of the system of some sort, such as the domain model, or persistence schema of the database.</p>
+  <p>So my final package structure for this project, after implementing a new feature where users can now author tasting notes for teas, currently looks like this:</p>
+  <pre>
+  📁 <strong>MyTeaCollection</strong>
+  ├── 📁 Domain
+  │   ├── 📄 Tea.java
+  │   └── 📄 TastingNote.java
+  ├── 📁 Persistence
+  │   ├── 📄 TeaEntity.java
+  │   ├── 📄 TeaRepository.java
+  │   ├── 📄 TastingNoteEntity.java
+  │   └── 📄 TastingNoteRepository.java
+  ├── 📁 Tea
+  │   ├── 📁 Web
+  │   │   └── 📄 TeaController.java
+  │   ├── 📁 Application
+  │   │   ├── 📄 AddTeaCommand.java
+  │   │   └── 📄 AddTea.java
+  │   └── 📁 Query
+  │       ├── 📄 TeaQueryRepository.java
+  │       ├── 📄 TeaSummary.java
+  │       └── 📄 TeaDetail.java
+  └── 📁 TastingNotes
+      ├── 📁 Web
+      │   └──📄 TastingNotesController.java
+      └── 📁 Application
+          ├──📄 AddTastingNoteCommand.java
+          └──📄 AddTastingNote.java</pre>
+  <h2>Conclusion</h2>
+  <p>In this article I tried to demonstrate how I currently like to structure this kind of software - web applications, micro-services, etc. And explain the thoughts behind this system. Please reach out and let me know what you think. Does my reasoning make sense? Did you spot any issues I didn't think of? How do you like to structure your code?</p>
+</article>
+</div>
+<script data-goatcounter="https://dusanrychnovsky-cz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

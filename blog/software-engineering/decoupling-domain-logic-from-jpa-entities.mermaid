@@ -1,0 +1,40 @@
+flowchart LR
+    subgraph Write["<b><u>WRITE PATH</u></b>"]
+        DB1[(Database)]
+        subgraph Web
+            TeaController
+        end
+        subgraph Application
+            AddTea
+        end
+        subgraph Domain
+            Tea
+        end
+        subgraph Persistence
+            TeaEntity
+            Tea
+        end
+    end
+
+    subgraph Read["<b><u>READ PATH</u></b>"]
+        DB2[(Database)]
+        subgraph Query
+            TeaQueryRepository
+        end
+        subgraph View
+            TeaSummary
+            TeaDetail
+        end
+    end    
+
+    TeaController --"AddTeaCommand"--> AddTea --> Tea --> TeaEntity --> DB1
+
+    DB2 --> TeaQueryRepository --> TeaSummary
+    TeaQueryRepository --> TeaDetail
+
+    classDef readPath fill:lightblue;
+    class Write readPath;
+
+    classDef writePath fill:yellowgreen;
+    class Read writePath;
+    
