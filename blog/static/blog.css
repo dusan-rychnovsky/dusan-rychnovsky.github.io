@@ -252,6 +252,17 @@ h2 {
   font-weight: normal;
 }
 
+article h3 {
+  margin: 1.75rem 0 0.65rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: normal;
+  line-height: 1.4;
+}
+
 p {
   margin: 0 0 1.2rem;
   text-align: justify;
