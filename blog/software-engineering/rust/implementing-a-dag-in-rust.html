@@ -12,6 +12,8 @@
 <meta name="twitter:title" content="Implementing a DAG in Rust">
 <meta name="twitter:description" content="In Rust, at first glance, the ownership mechanism looks logical and simple - every value must always have exactly one owner. When the owner goes out of scope, the values it owns are automatically dropped. A value can be borrowed either through a mutable reference, of which there can be at most one at a time, or through immutable references, of which there can be more than one. In other words, there can either be a single writer or multiple readers of every value. That all makes sense and is clear in simple cases. Well, it turns out this mechanism can get pretty tricky with recursive data structures.">
 <link rel="stylesheet" href="../../static/blog.css">
+<link rel="alternate" type="application/rss+xml" title="Všechny články" href="/blog/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Software Engineering" href="/blog/feed-software-engineering.xml">
 </head>
 <body>
 <div class="layout">

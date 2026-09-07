@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dušan Rychnovský - Blog</title>
+    <link>https://dusanrychnovsky.cz/blog/</link>
+    <description>Osobní blog o vaření, financích, hře Go, čaji a softwarovém inženýrství.</description>
+    <language>cs</language>
+    <lastBuildDate>Sun, 06 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://dusanrychnovsky.cz/blog/feed.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>Pro(pre)biotický tvaroh</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/recipes/proprebioticky-tvaroh.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/recipes/proprebioticky-tvaroh.html</guid>
+      <pubDate>Sun, 06 Sep 2026 00:00:00 GMT</pubDate>
+      <description>Tento recept je inspirován rozhovorem Dr. Rangana Chatterjee s Prof. Timem Spectorem v podcastu Feel Better, Live More. Prof. Spector v něm vysvětluje, že pro optimální zdraví našeho střevního mikrobiomu je důležité jíst 30 různých druhů rostlin týdně.</description>
+      <category>Vaření</category>
+      <category>Recepty</category>
+    </item>
+    <item>
+      <title>Předpečená zelenina</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/techniques/predpecena-zelenina.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/techniques/predpecena-zelenina.html</guid>
+      <pubDate>Thu, 03 Sep 2026 00:00:00 GMT</pubDate>
+      <description>Zeleninu není třeba vařit vždy čerstvou. My ji nakupujeme jednou týdně, rovnou ji předpečeme a během týdne pak už jen používáme k dotvoření rychlých jídel.</description>
+      <category>Vaření</category>
+      <category>Techniky</category>
+    </item>
+    <item>
+      <title>Decoupling Domain Logic from JPA Entities</title>
+      <link>https://dusanrychnovsky.cz/blog/software-engineering/decoupling-domain-logic-from-jpa-entities.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/software-engineering/decoupling-domain-logic-from-jpa-entities.html</guid>
+      <pubDate>Sat, 15 Aug 2026 00:00:00 GMT</pubDate>
+      <description>In software engineering, naming concepts properly is hard. And so is structuring a codebase. Recently I spent some time thinking about this while extending one of my hobby projects and I changed my long-held opinions.</description>
+      <category>Software Engineering</category>
+      <category>Java</category>
+      <category>JPA</category>
+    </item>
+    <item>
+      <title>Zeleninové natě</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/techniques/zeleninove-nate.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/techniques/zeleninove-nate.html</guid>
+      <pubDate>Sun, 09 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Zeleninové natě, pokud jsou mladé, čerstvé a nejsou chemicky ošetřené, v žádném případě nevyhazuju. Jsou plné vitamínů a minerálních látek a když se vhodně uvaří, i skvěle chutnají.</description>
+      <category>Vaření</category>
+      <category>Techniky</category>
+    </item>
+    <item>
+      <title>Implementing a DAG in Rust</title>
+      <link>https://dusanrychnovsky.cz/blog/software-engineering/rust/implementing-a-dag-in-rust.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/software-engineering/rust/implementing-a-dag-in-rust.html</guid>
+      <pubDate>Fri, 31 Jul 2026 00:00:00 GMT</pubDate>
+      <description>In Rust, at first glance, the ownership mechanism looks logical and simple. It turns out this mechanism can get pretty tricky with recursive data structures.</description>
+      <category>Software Engineering</category>
+      <category>Rust</category>
+    </item>
+    <item>
+      <title>Svaly místo motoru</title>
+      <link>https://dusanrychnovsky.cz/blog/finance/mmm/svaly-misto-motoru.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/finance/mmm/svaly-misto-motoru.html</guid>
+      <pubDate>Thu, 23 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Způsob, jakým žije Mr. Money Mustache, nejen šetří peněženku, ale především utužuje zdraví a dlouhodobou spokojenost. Pokud chceme i v pokročilém věku zůstat pohybliví, fyzická námaha je nezbytná.</description>
+      <category>Finance</category>
+      <category>Moudrost MMM</category>
+    </item>
+    <item>
+      <title>Jíst zdravě neznamená jíst draze</title>
+      <link>https://dusanrychnovsky.cz/blog/finance/mmm/jist-zdrave-neznamena-jist-draze.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/finance/mmm/jist-zdrave-neznamena-jist-draze.html</guid>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Stejně jako u dojíždění autem platí, že správné stravovací návyky šetří nejen vaši peněženku, ale i zdraví.</description>
+      <category>Finance</category>
+      <category>Moudrost MMM</category>
+      <category>Vaření</category>
+    </item>
+    <item>
+      <title>Jak vařím hnědou rýži</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/techniques/jak-varim-hnedou-ryzi.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/techniques/jak-varim-hnedou-ryzi.html</guid>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Hnědá celozrnná rýže je díky nízkému stupni zpracování oproti klasické bílé rýži nutričně bohatší. Je ale potřeba použít o trochu více vody a déle ji vařit.</description>
+      <category>Vaření</category>
+      <category>Techniky</category>
+    </item>
+    <item>
+      <title>Vločky fermentované přes noc</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/recipes/vlocky-fermentovane-pres-noc.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/recipes/vlocky-fermentovane-pres-noc.html</guid>
+      <pubDate>Sun, 21 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Vločky fermentované přes noc jsou snídaně, která je nenáročná na přípravu a přitom velmi zdravá.</description>
+      <category>Vaření</category>
+      <category>Recepty</category>
+    </item>
+    <item>
+      <title>My Tea Collection</title>
+      <link>https://dusanrychnovsky.cz/blog/tea/myteacollection.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/tea/myteacollection.html</guid>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Webová aplikace pro evidenci vaší čajové sbírky. Udržujte si přehled o tom, které čaje vlastníte, a sdílejte je s přáteli.</description>
+      <category>Čaj</category>
+      <category>Aplikace</category>
+      <category>Software Engineering</category>
+      <category>Java</category>
+      <category>Spring</category>
+    </item>
+    <item>
+      <title>Oblíbené zdroje informací o čaji</title>
+      <link>https://dusanrychnovsky.cz/blog/tea/resources/</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/tea/resources/</guid>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Mé oblíbené zdroje informací o čaji: obchody, YouTube kanály, podcasty, knihy a filmy, které mě na čajové cestě nejvíce ovlivnily.</description>
+      <category>Čaj</category>
+      <category>Zdroje</category>
+    </item>
+    <item>
+      <title>GoPad</title>
+      <link>https://dusanrychnovsky.cz/blog/go/gopad/</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/go/gopad/</guid>
+      <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Webová aplikace pro zaznamenávání vašich partií hry Go. Určeno primárně pro tablet.</description>
+      <category>Go</category>
+      <category>Aplikace</category>
+      <category>Software Engineering</category>
+      <category>Elm</category>
+    </item>
+    <item>
+      <title>Oblíbené zdroje informací o hře Go</title>
+      <link>https://dusanrychnovsky.cz/blog/go/resources/</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/go/resources/</guid>
+      <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Mé oblíbené zdroje informací o hře Go.</description>
+      <category>Go</category>
+      <category>Zdroje</category>
+    </item>
+    <item>
+      <title>Oblíbené zdroje informací o vaření</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/resources/</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/resources/</guid>
+      <pubDate>Mon, 08 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Mé oblíbené zdroje informací o vaření: knihy, YouTube kanály a blogy, které ovlivnily způsob, jakým o vaření přemýšlím.</description>
+      <category>Vaření</category>
+      <category>Zdroje</category>
+    </item>
+    <item>
+      <title>Klauni za volantem - Jak vás auto okrádá o roky svobody</title>
+      <link>https://dusanrychnovsky.cz/blog/finance/mmm/klauni-za-volantem.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/finance/mmm/klauni-za-volantem.html</guid>
+      <pubDate>Thu, 04 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Auto je prostředek sloužící k občasné přepravě na dlouhé vzdálenosti. Rozhodně neslouží k ježdění do obchodu, s dětmi do školy nebo do práce.</description>
+      <category>Finance</category>
+      <category>Moudrost MMM</category>
+    </item>
+    <item>
+      <title>Směšně jednoduchá matematika finanční nezávislosti</title>
+      <link>https://dusanrychnovsky.cz/blog/finance/mmm/smesne-jednoducha-matematika.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/finance/mmm/smesne-jednoducha-matematika.html</guid>
+      <pubDate>Wed, 03 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Možnost přestat chodit do práce a žít po zbytek života z úspor nezávisí ani tak na výši příjmu, ale na takzvané savings rate, míře úspor.</description>
+      <category>Finance</category>
+      <category>Moudrost MMM</category>
+    </item>
+    <item>
+      <title>Jak vařím kroupy</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/techniques/jak-varim-kroupy.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/techniques/jak-varim-kroupy.html</guid>
+      <pubDate>Mon, 01 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Kroupy jsou skvělá surovina: zdravá a přitom levná, vhodná jako základ pro spoustu různých pokrmů.</description>
+      <category>Vaření</category>
+      <category>Techniky</category>
+    </item>
+    <item>
+      <title>Kroupové misky</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/recipes/kroupove-misky.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/recipes/kroupove-misky.html</guid>
+      <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
+      <description>Jestli mi něco šetří v kuchyni čas, peníze a zdraví, tak je to koncept misek s kroupovým základem.</description>
+      <category>Vaření</category>
+      <category>Recepty</category>
+    </item>
+  </channel>
+</rss>

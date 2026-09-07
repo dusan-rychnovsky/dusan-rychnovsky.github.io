@@ -83,7 +83,16 @@ When asked to create a new article, complete **all** of the following:
      `.badges li.pill-<section>` rule (plus its `:hover`) to the stylesheet for a new
      section.
 
-5. **Generate the snippet image.** Each article has its own image that must be
+5. **Update the RSS feeds.** Add the article newest-first to
+  [`blog/feed.xml`](../blog/feed.xml) and to every applicable major-category feed
+  (`feed-vareni.xml`, `feed-finance.xml`, `feed-go.xml`, `feed-caj.xml`, or
+  `feed-software-engineering.xml`). An article with multiple major-category pills
+  belongs in each corresponding feed. Use an absolute production URL for `<link>`
+  and the permalink `<guid>`, an RFC 822 `<pubDate>`, and update each affected
+  channel's `<lastBuildDate>`. Every new page must retain RSS autodiscovery links in
+  its `<head>` for the complete feed and its section feed.
+
+6. **Generate the snippet image.** Each article has its own image that must be
    **visually very pleasing** and **clearly reflect what the article is about**. It does
    **not** need to be consistent with other articles' images — be creative per article —
    **unless** the article is a continuation in a series, in which case match that
@@ -95,6 +104,6 @@ When asked to create a new article, complete **all** of the following:
      in a throwaway temp directory and clean it up afterwards so no generator code or
      `node_modules` lands in the repo — only the final image is committed.
 
-6. **Verify** the result by opening the new article and the homepage in the browser and
-   checking the layout, the active sidebar entry, and the snippet/thumbnail render
-   correctly.
+7. **Verify** the result by opening the new article and the homepage in the browser,
+  checking the layout, the active sidebar entry, and the snippet/thumbnail render
+  correctly, and parsing every affected RSS feed as XML.

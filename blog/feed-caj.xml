@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dušan Rychnovský - Blog</title>
+    <link>https://dusanrychnovsky.cz/blog/tea/</link>
+    <description>Články o čaji a čajové kultuře.</description>
+    <language>cs</language>
+    <lastBuildDate>Wed, 10 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://dusanrychnovsky.cz/blog/feed-caj.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>My Tea Collection</title>
+      <link>https://dusanrychnovsky.cz/blog/tea/myteacollection.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/tea/myteacollection.html</guid>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Webová aplikace pro evidenci a sdílení vaší čajové sbírky.</description>
+      <category>Čaj</category>
+      <category>Software Engineering</category>
+    </item>
+    <item>
+      <title>Oblíbené zdroje informací o čaji</title>
+      <link>https://dusanrychnovsky.cz/blog/tea/resources/</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/tea/resources/</guid>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Obchody, YouTube kanály, podcasty, knihy a filmy, které mě na čajové cestě nejvíce ovlivnily.</description>
+      <category>Čaj</category>
+    </item>
+  </channel>
+</rss>

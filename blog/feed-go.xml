@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dušan Rychnovský - Blog</title>
+    <link>https://dusanrychnovsky.cz/blog/go/</link>
+    <description>Články o deskové hře Go.</description>
+    <language>cs</language>
+    <lastBuildDate>Tue, 09 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://dusanrychnovsky.cz/blog/feed-go.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>GoPad</title>
+      <link>https://dusanrychnovsky.cz/blog/go/gopad/</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/go/gopad/</guid>
+      <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Webová aplikace pro zaznamenávání vašich partií hry Go.</description>
+      <category>Go</category>
+      <category>Software Engineering</category>
+    </item>
+    <item>
+      <title>Oblíbené zdroje informací o hře Go</title>
+      <link>https://dusanrychnovsky.cz/blog/go/resources/</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/go/resources/</guid>
+      <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Mé oblíbené zdroje informací o hře Go.</description>
+      <category>Go</category>
+    </item>
+  </channel>
+</rss>
