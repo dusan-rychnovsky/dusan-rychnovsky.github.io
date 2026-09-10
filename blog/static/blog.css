@@ -134,6 +134,7 @@ html, body {
 
 .sidebar-menu .sidebar-section {
   margin-top: 1.25rem;
+  font-family: var(--font-sans);
   font-size: 1rem;
   font-weight: bold;
   color: var(--text);
@@ -141,10 +142,10 @@ html, body {
 
 .sidebar-menu .sidebar-subsection {
   margin-top: 0.75rem;
-  font-size: 0.8rem;
-  font-weight: bold;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: normal;
   color: var(--muted);
 }
 
