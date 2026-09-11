@@ -70,13 +70,20 @@ When asked to create a new article, complete **all** of the following:
    New top-level sections are added at the root level of the sidebar (e.g. **Go** sits
    under **Finance**). Mind the relative path depth (`../../` vs none) per file.
 
-4. **Add a snippet to [`blog/index.html`](../blog/index.html).** Snippets are
-   listed **newest first**, so a new article goes at the **top** of `.snippets`. Use the
-   existing `<article class="snippet">` markup:
+4. **Add the article to every applicable listing.** Always add a snippet to
+  [`blog/index.html`](../blog/index.html). Also add it to the listing for every parent
+  category or subcategory that already has an `index.html` with a `.snippets` list.
+  Do not create missing category indexes solely for this purpose. For example, an
+  article under `blog/finance/mmm/` belongs in both the main blog listing and
+  `blog/finance/mmm/index.html`. Snippets are listed **newest first**, so add the new
+  article at the **top** of each applicable `.snippets` list. Use the existing
+  `<article class="snippet">` markup and adjust relative links for each listing:
    - **Date published = today**, in both the `datetime` attribute and the visible text,
      e.g. `<time datetime="2026-06-09">9.&nbsp;6.&nbsp;2026</time>` (Czech format,
      non-breaking spaces).
-   - Thumbnail points at the article's generated image.
+   - Unless the user specifies otherwise, use a `placehold.co` thumbnail whose text is
+     the article title, URL-encoded as needed. Use the article title for the image's
+     `alt` text as well.
    - The category color lives on each **pill**, not the list: put `pill-<section>`
      on the tag's `<a>` (or a badge's `<li>`), so one `<ul class="tags">` can mix
      tags from different sections. Add a new `.tags a.pill-<section>` /
@@ -92,17 +99,9 @@ When asked to create a new article, complete **all** of the following:
   channel's `<lastBuildDate>`. Every new page must retain RSS autodiscovery links in
   its `<head>` for the complete feed and its section feed.
 
-6. **Generate the snippet image.** Each article has its own image that must be
-   **visually very pleasing** and **clearly reflect what the article is about**. It does
-   **not** need to be consistent with other articles' images — be creative per article —
-   **unless** the article is a continuation in a series, in which case match that
-   series' visual style.
-   - Tooling note: this machine has **Node.js** (no Python / ImageMagick). Images so far
-     were drawn programmatically with Node + `@napi-rs/canvas`, rendered at a high
-     resolution and downscaled (supersampling) for crisp output, then written as a
-     `.jpg` next to the article (e.g. `blog/go/resources/index.jpg`). Do the drawing
-     in a throwaway temp directory and clean it up afterwards so no generator code or
-     `node_modules` lands in the repo — only the final image is committed.
+6. **Use a placeholder snippet image by default.** Unless the user specifies otherwise,
+   use a `https://placehold.co/240x160?text=...` image generated from the article title.
+   URL-encode the title and insert line breaks where useful for readability.
 
 7. **Verify** the result by opening the new article and the homepage in the browser,
   checking the layout, the active sidebar entry, and the snippet/thumbnail render
