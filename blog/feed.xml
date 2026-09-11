@@ -5,9 +5,18 @@
     <link>https://dusanrychnovsky.cz/blog/</link>
     <description>Osobní blog o vaření, financích, hře Go, čaji a softwarovém inženýrství.</description>
     <language>cs</language>
-    <lastBuildDate>Sun, 06 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://dusanrychnovsky.cz/blog/feed.xml" rel="self" type="application/rss+xml" />
 
+    <item>
+      <title>Jak se stravujeme na dovolené</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/techniques/jak-se-stravujeme-na-dovolene.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/techniques/jak-se-stravujeme-na-dovolene.html</guid>
+      <pubDate>Fri, 11 Sep 2026 00:00:00 GMT</pubDate>
+      <description>Nedávno jsme se vrátili z letní dovolené, kde jsme potkali nové přátele. Řeč přišla i na to, kam chodíme obědvat. Popsali jsme jim, jakým způsobem se stravujeme, což je docela překvapilo.</description>
+      <category>Vaření</category>
+      <category>Techniky</category>
+    </item>
     <item>
       <title>Pro(pre)biotický tvaroh</title>
       <link>https://dusanrychnovsky.cz/blog/cooking/recipes/proprebioticky-tvaroh.html</link>
