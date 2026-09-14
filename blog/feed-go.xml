@@ -13,16 +13,16 @@
       <link>https://dusanrychnovsky.cz/blog/go/gopad/</link>
       <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/go/gopad/</guid>
       <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
-      <description>Webová aplikace pro zaznamenávání vašich partií hry Go.</description>
+      <description>Webová aplikace pro zaznamenávání vašich partií hry Go. Určeno primárně pro tablet.</description>
       <category>Go</category>
       <category>Software Engineering</category>
     </item>
     <item>
-      <title>Oblíbené zdroje informací o hře Go</title>
+      <title>Zdroje informací o hře Go</title>
       <link>https://dusanrychnovsky.cz/blog/go/resources/</link>
       <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/go/resources/</guid>
       <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
-      <description>Mé oblíbené zdroje informací o hře Go.</description>
+      <description>Mé oblíbené zdroje informací na téma hry Go – kluby, YouTube kanály a knihy.</description>
       <category>Go</category>
     </item>
   </channel>

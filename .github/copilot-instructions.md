@@ -94,7 +94,11 @@ When asked to create a new article, complete **all** of the following:
   [`blog/feed.xml`](../blog/feed.xml) and to every applicable major-category feed
   (`feed-vareni.xml`, `feed-finance.xml`, `feed-go.xml`, `feed-caj.xml`, or
   `feed-software-engineering.xml`). An article with multiple major-category pills
-  belongs in each corresponding feed. Use an absolute production URL for `<link>`
+  belongs in each corresponding feed. Copy each item's `<title>` and `<description>`
+  exactly from the article's `og:title` and `og:description` metadata, with only the
+  escaping required for valid XML. Never invent, summarize, shorten, paraphrase, or
+  otherwise rewrite feed text. Verify the values match exactly in the global feed
+  and every applicable category feed. Use an absolute production URL for `<link>`
   and the permalink `<guid>`, an RFC 822 `<pubDate>`, and update each affected
   channel's `<lastBuildDate>`. Every new page must retain RSS autodiscovery links in
   its `<head>` for the complete feed and its section feed.

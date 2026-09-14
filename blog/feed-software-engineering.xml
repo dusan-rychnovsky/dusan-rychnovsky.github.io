@@ -13,7 +13,7 @@
       <link>https://dusanrychnovsky.cz/blog/software-engineering/decoupling-domain-logic-from-jpa-entities.html</link>
       <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/software-engineering/decoupling-domain-logic-from-jpa-entities.html</guid>
       <pubDate>Sat, 15 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Thoughts on naming concepts and structuring a codebase while keeping domain logic separate from JPA entities.</description>
+      <description>In Software engineering, naming concepts properly is hard. And so is structuring a codebase. Recently I spent some time thinking about this while extending one of my hobby projects and I changed my long-held opinions. Let me briefly explain why.</description>
       <category>Software Engineering</category>
     </item>
     <item>
@@ -21,7 +21,7 @@
       <link>https://dusanrychnovsky.cz/blog/software-engineering/rust/implementing-a-dag-in-rust.html</link>
       <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/software-engineering/rust/implementing-a-dag-in-rust.html</guid>
       <pubDate>Fri, 31 Jul 2026 00:00:00 GMT</pubDate>
-      <description>How Rust's ownership mechanism interacts with recursive data structures.</description>
+      <description>In Rust, at first glance, the ownership mechanism looks logical and simple - every value must always have exactly one owner. When the owner goes out of scope, the values it owns are automatically dropped. A value can be borrowed either through a mutable reference, of which there can be at most one at a time, or through immutable references, of which there can be more than one. In other words, there can either be a single writer or multiple readers of every value. That all makes sense and is clear in simple cases. Well, it turns out this mechanism can get pretty tricky with recursive data structures.</description>
       <category>Software Engineering</category>
     </item>
     <item>
@@ -29,7 +29,7 @@
       <link>https://dusanrychnovsky.cz/blog/tea/myteacollection.html</link>
       <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/tea/myteacollection.html</guid>
       <pubDate>Wed, 10 Jun 2026 00:00:00 GMT</pubDate>
-      <description>Webová aplikace pro evidenci a sdílení vaší čajové sbírky.</description>
+      <description>Webová aplikace pro evidenci vaší čajové sbírky. Udržujte si přehled o tom, které čaje vlastníte, a sdílejte je s přáteli.</description>
       <category>Software Engineering</category>
       <category>Čaj</category>
     </item>
@@ -38,7 +38,7 @@
       <link>https://dusanrychnovsky.cz/blog/go/gopad/</link>
       <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/go/gopad/</guid>
       <pubDate>Tue, 09 Jun 2026 00:00:00 GMT</pubDate>
-      <description>Webová aplikace pro zaznamenávání vašich partií hry Go.</description>
+      <description>Webová aplikace pro zaznamenávání vašich partií hry Go. Určeno primárně pro tablet.</description>
       <category>Software Engineering</category>
       <category>Go</category>
     </item>
