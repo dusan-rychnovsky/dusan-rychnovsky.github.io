@@ -5,9 +5,17 @@
     <link>https://dusanrychnovsky.cz/blog/</link>
     <description>Články o vaření, receptech a kuchyňských technikách.</description>
     <language>cs</language>
-    <lastBuildDate>Fri, 11 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://dusanrychnovsky.cz/blog/feed-vareni.xml" rel="self" type="application/rss+xml" />
 
+    <item>
+      <title>Recepty podle ročních období</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/recipes/recepty-podle-rocnich-obdobi.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/recipes/recepty-podle-rocnich-obdobi.html</guid>
+      <pubDate>Sat, 26 Sep 2026 00:00:00 GMT</pubDate>
+      <description>Jíst zdravě pro mě znamená především vařit z kvalitních, lokálních surovin, v souladu se střídajícími se ročními obdobími. Lokální, sezónní zelenina a ovoce jsou zdravé a chutné a seženete je čerstvé a levné.</description>
+      <category>Vaření</category>
+    </item>
     <item>
       <title>Jak se stravujeme na dovolené</title>
       <link>https://dusanrychnovsky.cz/blog/cooking/techniques/jak-se-stravujeme-na-dovolene.html</link>
