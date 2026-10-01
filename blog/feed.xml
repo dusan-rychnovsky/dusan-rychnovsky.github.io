@@ -5,9 +5,18 @@
     <link>https://dusanrychnovsky.cz/blog/</link>
     <description>Osobní blog o vaření, financích, hře Go, čaji a softwarovém inženýrství.</description>
     <language>cs</language>
-    <lastBuildDate>Sat, 26 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://dusanrychnovsky.cz/blog/feed.xml" rel="self" type="application/rss+xml" />
 
+    <item>
+      <title>Kuře</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/techniques/kure.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/techniques/kure.html</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
+      <description>Kuře je skvělá surovina - levná, chutná, zdravá a všestranná. Abychom ho ale využili naplno, musíme vybírat kuřata kvalitní a vědět, jak je beze zbytku zpracovat.</description>
+      <category>Vaření</category>
+      <category>Techniky</category>
+    </item>
     <item>
       <title>Recepty podle ročních období</title>
       <link>https://dusanrychnovsky.cz/blog/cooking/recipes/recepty-podle-rocnich-obdobi.html</link>
