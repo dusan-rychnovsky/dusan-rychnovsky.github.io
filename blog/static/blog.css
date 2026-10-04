@@ -232,6 +232,80 @@ h1 {
   max-width: 350px;
 }
 
+.article-media {
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+}
+
+.article-media-narrow {
+  max-width: 350px;
+}
+
+.article-media .article-figure,
+.article-media .article-image {
+  margin: 0 auto;
+}
+
+.article-media figcaption,
+.article-table figcaption {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.article-table figcaption {
+  max-width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.article-table {
+  max-width: 560px;
+  margin: 1.5rem auto;
+}
+
+.article-table-scroll {
+  overflow-x: auto;
+}
+
+.article-table table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+}
+
+.article-table th,
+.article-table td {
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.article-table thead th,
+.article-table tfoot th,
+.article-table tfoot td,
+.article-table tbody th {
+  font-weight: bold;
+}
+
+.article-table thead th {
+  background: var(--accent-soft);
+}
+
+.article-table tbody th {
+  text-align: right;
+}
+
+.article-table tfoot th,
+.article-table tfoot td {
+  border-top: 2px solid var(--accent);
+}
+
 /* Plain in-article image — natural size, centered, softly framed */
 .article-image {
   display: block;

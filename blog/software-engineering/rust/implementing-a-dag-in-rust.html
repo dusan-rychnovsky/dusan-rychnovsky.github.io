@@ -103,7 +103,9 @@
   <p class="aside">For the past few months, I've been playing with Rust. As I'm completely new to the language, there's much to learn and explore. I plan to make notes on this blog whenever I discover something useful.</p>
   <p class="lead">In Rust, at first glance, the <strong>ownership mechanism</strong> looks logical and simple - every value must always have exactly one owner. When the owner goes out of scope, the values it owns are automatically dropped. A value can be borrowed either through a mutable reference, of which there can be at most one at a time, or through immutable references, of which there can be more than one. In other words, there can either be a single writer or multiple readers of every value. That all makes sense and is clear in simple cases. Well, it turns out this mechanism can get pretty tricky with recursive data structures.</p>
   <p>In my case, I needed to implement a <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph" target="_blank">DAG</a> (directed acyclic graph) whose different roots can have different owners. So, something like this:</p>
-  <img class="article-image" src="implementing-a-dag-in-rust-dataset.png" alt="DAG diagram">
+  <figure class="article-media">
+    <img class="article-image" src="implementing-a-dag-in-rust-dataset.png" alt="DAG diagram">
+  </figure>
   <p>Notice how each <code>Node</code> can have more than one parent. Which is what makes this case problematic, because a parent <code>Node</code> needs to sometimes act as an owner, and sometimes only have a reference.</p>
   <p>I tried a couple of different approaches. In the end, the only one that worked was using <code>Rc&lt;T&gt;</code>.</p>
   <aside class="aside">

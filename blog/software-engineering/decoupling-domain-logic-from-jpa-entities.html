@@ -175,7 +175,9 @@
   <p>However, that was only part of the puzzle - I still needed to deal with those complex persistence annotations. I was also wondering how to model different views of the same domain concept - think a view that renders a list of teas, each with only basic info, versus a detailed view of a single tea with all its properties.</p>
   <p>After a discussion with Github Copilot I realized that, even though I would normally think of it only for <a href="https://martinfowler.com/eaaDev/EventSourcing.html" target="_blank">Event Driven</a> scenarios, <a href="https://martinfowler.com/bliki/CQRS.html" target="_blank">CQRS</a> (Command Query Responsibility Segregation) is a natural fit here. Specifically, <strong>only use the domain layer on the write path</strong>, to validate business rules and make sure data stored in the database are always consistent. <strong>On the read path, query the database directly and use simple view models</strong>, denormalized to best fit each scenario.</p>
   <p>This is the architecture that I would have:</p>
-  <img class="article-image" src="read-path-write-path.png" alt="Read Path vs Write path" />
+  <figure class="article-media">
+    <img class="article-image" src="read-path-write-path.png" alt="Read Path vs Write path" />
+  </figure>
   <p>And this is the corresponding packaging structure:</p>
   <pre>
   📁 <strong>MyTeaCollection</strong>
