@@ -306,6 +306,36 @@ h1 {
   border-top: 2px solid var(--accent);
 }
 
+.article-gallery {
+  max-width: 520px;
+  margin: 1.5rem auto;
+}
+
+.article-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.article-gallery-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--accent-soft);
+}
+
+.article-gallery figcaption {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
 /* Plain in-article image — natural size, centered, softly framed */
 .article-image {
   display: block;

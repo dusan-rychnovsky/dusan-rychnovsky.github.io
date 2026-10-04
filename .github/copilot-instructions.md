@@ -68,7 +68,9 @@ When asked to create a new article, complete **all** of the following:
    - `blog/go/resources/index.html`
 
    New top-level sections are added at the root level of the sidebar (e.g. **Go** sits
-   under **Finance**). Mind the relative path depth (`../../` vs none) per file.
+   under **Finance**). Within an existing section or subsection, append the new
+   article link at the **end** of that section's list. Mind the relative path depth
+   (`../../` vs none) per file.
 
 4. **Add the article to every applicable listing.** Always add a snippet to
   [`blog/index.html`](../blog/index.html). Also add it to the listing for every parent
