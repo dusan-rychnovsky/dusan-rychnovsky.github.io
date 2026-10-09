@@ -5,9 +5,17 @@
     <link>https://dusanrychnovsky.cz/blog/tea/</link>
     <description>Články o čaji a čajové kultuře.</description>
     <language>cs</language>
-    <lastBuildDate>Wed, 10 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://dusanrychnovsky.cz/blog/feed-caj.xml" rel="self" type="application/rss+xml" />
 
+    <item>
+      <title>Oblíbená čajová místa</title>
+      <link>https://dusanrychnovsky.cz/blog/tea/oblibena-cajova-mista.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/tea/oblibena-cajova-mista.html</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+      <description>V tomto článku vám prozradím svá oblíbená místa venku v přírodě, kde se dá pohodlně usadit a vypít si čaj. Ať už o samotě, nebo v malé skupince. Jedná se převážně o místa v Praze a blízkém okolí. Všeobecně z nich je krásný výhled a jsou, v rámci možností, klidná a ne příliš frekventovaná.</description>
+      <category>Čaj</category>
+    </item>
     <item>
       <title>My Tea Collection</title>
       <link>https://dusanrychnovsky.cz/blog/tea/myteacollection.html</link>

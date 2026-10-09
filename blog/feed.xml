@@ -5,9 +5,17 @@
     <link>https://dusanrychnovsky.cz/blog/</link>
     <description>Osobní blog o vaření, financích, hře Go, čaji a softwarovém inženýrství.</description>
     <language>cs</language>
-    <lastBuildDate>Sun, 04 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://dusanrychnovsky.cz/blog/feed.xml" rel="self" type="application/rss+xml" />
 
+    <item>
+      <title>Oblíbená čajová místa</title>
+      <link>https://dusanrychnovsky.cz/blog/tea/oblibena-cajova-mista.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/tea/oblibena-cajova-mista.html</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+      <description>V tomto článku vám prozradím svá oblíbená místa venku v přírodě, kde se dá pohodlně usadit a vypít si čaj. Ať už o samotě, nebo v malé skupince. Jedná se převážně o místa v Praze a blízkém okolí. Všeobecně z nich je krásný výhled a jsou, v rámci možností, klidná a ne příliš frekventovaná.</description>
+      <category>Čaj</category>
+    </item>
     <item>
       <title>Pečená kuřecí křidýlka</title>
       <link>https://dusanrychnovsky.cz/blog/cooking/recipes/pecena-kureci-kridylka.html</link>

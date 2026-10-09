@@ -198,6 +198,209 @@ html, body {
   margin-top: -0.5rem;
 }
 
+/* Photo-led tea place entries and their accessible lightbox */
+.tea-places .lead {
+  margin-bottom: 1.25rem;
+}
+
+.tea-place {
+  margin-top: 2rem;
+}
+
+.tea-place h2 {
+  margin: 0 0 0.8rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+.tea-place-location {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.tea-place-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.tea-place-copy p:first-child {
+  margin-top: 0;
+}
+
+.tea-place-copy p {
+  margin-bottom: 0.75rem;
+}
+
+.tea-place-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.tea-gallery {
+  min-width: 0;
+  margin: 0;
+}
+
+.tea-gallery button {
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  cursor: zoom-in;
+}
+
+.tea-gallery-feature {
+  position: relative;
+  width: 100%;
+}
+
+.tea-gallery-feature img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.tea-gallery-hint {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  background: rgba(35, 43, 32, 0.78);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.tea-gallery-feature:hover .tea-gallery-hint,
+.tea-gallery-feature:focus-visible .tea-gallery-hint {
+  opacity: 1;
+}
+
+.tea-gallery-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.tea-gallery-thumbnails img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.tea-gallery-thumbnails button:hover img,
+.tea-gallery-thumbnails button:focus-visible img {
+  opacity: 0.82;
+  transform: scale(1.04);
+}
+
+.tea-gallery-viewer {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  width: min(96vw, 1200px);
+  max-width: none;
+  max-height: 94vh;
+  padding: 3rem 1.25rem 1rem;
+  overflow: visible;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: #171a17;
+  color: #fff;
+}
+
+.tea-gallery-viewer:not([open]) {
+  display: none;
+}
+
+.tea-gallery-viewer[open] {
+  animation: tea-viewer-appear 0.18s ease-out;
+}
+
+.tea-gallery-viewer::backdrop {
+  background: rgba(12, 15, 12, 0.88);
+  backdrop-filter: blur(3px);
+}
+
+.tea-gallery-viewer figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.tea-viewer-image {
+  display: block;
+  max-width: 100%;
+  max-height: 78vh;
+  margin: 0 auto;
+  object-fit: contain;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.tea-viewer-caption {
+  margin-top: 0.55rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.tea-viewer-close,
+.tea-viewer-nav {
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.tea-viewer-close:hover,
+.tea-viewer-nav:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.tea-viewer-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.tea-viewer-nav {
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+@keyframes tea-viewer-appear {
+  from { opacity: 0; transform: scale(0.985); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 /* 6. Article — headings, figure & prose */
 article {
   max-width: 720px;
@@ -904,4 +1107,15 @@ article > :last-child {
   .home .intro { padding: 1.25rem; }
   .breadcrumbs { margin-top: -0.75rem; }
   h1 { font-size: 1.7rem; }
+  .tea-place-layout { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+  .tea-gallery-viewer {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.45rem;
+    width: 100vw;
+    max-height: 100vh;
+    padding: 3rem 0.5rem 0.75rem;
+    border-radius: 0;
+  }
+  .tea-viewer-nav { width: 2.25rem; height: 2.25rem; font-size: 1.6rem; }
+  .tea-viewer-image { max-height: 76vh; }
 }
