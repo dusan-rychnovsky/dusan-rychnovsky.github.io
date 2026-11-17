@@ -5,9 +5,19 @@
     <link>https://dusanrychnovsky.cz/blog/</link>
     <description>Osobní blog o vaření, financích, hře Go, čaji a softwarovém inženýrství.</description>
     <language>cs</language>
-    <lastBuildDate>Fri, 09 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://dusanrychnovsky.cz/blog/feed.xml" rel="self" type="application/rss+xml" />
 
+    <item>
+      <title>Miso polévky</title>
+      <link>https://dusanrychnovsky.cz/blog/cooking/recipes/miso-polevky.html</link>
+      <guid isPermaLink="true">https://dusanrychnovsky.cz/blog/cooking/recipes/miso-polevky.html</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Napadlo by vás snídat polévku? V našich končinách to není zrovna běžné a mnohým z nás může taková představa připadat zarážející. Přitom je to skvělá volba, zvlášť v chladných a sychravých měsících. Horký vývar po ránu prohřeje a dodá sílu, což je přesně to, co naše imunita potřebuje.</description>
+      <enclosure url="https://dusanrychnovsky.cz/blog/cooking/recipes/miso-polevky.jpg" length="721859" type="image/jpeg" />
+      <category>Vaření</category>
+      <category>Recepty</category>
+    </item>
     <item>
       <title>Oblíbená čajová místa</title>
       <link>https://dusanrychnovsky.cz/blog/tea/oblibena-cajova-mista.html</link>
